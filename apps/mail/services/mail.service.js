@@ -19,7 +19,7 @@ const emails = [
         subject: 'Love you!',
         body: 'Would love to meet',
         isRead: false,
-        sentAt: 1551133930524,
+        sentAt: null,
         removedAt: null,
         from: 'pooo@momo.com',
         to: 'user@appsus.com'
@@ -29,9 +29,19 @@ const emails = [
         subject: 'Call me!',
         body: 'Hi! how are you?',
         isRead: true,
-        sentAt: 1551133930194,
+        sentAt: null,
         removedAt: null,
         from: 'comc@momo.com',
+        to: 'user@appsus.com'
+    },
+    {
+        id: 'e104',
+        subject: 'Call me!',
+        body: 'Hi!!!!',
+        isRead: true,
+        sentAt: 1551133930194,
+        removedAt: 1551133930194,
+        from: 'user@appsus.com',
         to: 'user@appsus.com'
     },
 ]
@@ -47,7 +57,8 @@ export const mailService = {
     query,
     get,
     remove,
-    getFilterFromParams
+    getFilterFromParams,
+    update
 }
 
 // function query(filterBy) {
@@ -60,15 +71,17 @@ export const mailService = {
 //         })
 // }
 function query(filterBy) {
+    console.log('filterBy:', filterBy)
     return storageService.query(MAIL_KEY)
         .then(mails => {
             if (filterBy.stat) {
-                if (filterBy.stat === 'inbox') mails.filter(mail =>
-                    mail.removedAt === null && mail.from !== loggedInUser.email)
-                else if (filterBy.stat === 'sent') mails.filter(mail =>
-                    mail.from !== loggedInUser.email)
-                else if (filterBy.stat === 'trash') mails.filter(mail => mail.removedAt)
-                else if (filterBy.stat === 'draft') mails.filter(mail => mail.sentAt)
+                console.log('filterBy.stat:', filterBy.stat)
+                if (filterBy.stat === 'inbox') mails = mails.filter(mail =>
+                    mail.removedAt === null && mail.to === loggedInUser.email)
+                else if (filterBy.stat === 'sent') mails = mails.filter(mail =>
+                    mail.from === loggedInUser.email)
+                else if (filterBy.stat === 'trash') mails = mails.filter(mail => mail.removedAt)
+                else if (filterBy.stat === 'draft') mails = mails.filter(mail => mail.sentAt)
             }
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i')
@@ -80,6 +93,7 @@ function query(filterBy) {
             // if (filterBy.isStared !== undefined) {
             //     filterBy.isStared ? mails.filter(mail => mail.isStared) : mails.filter(mail => !mail.isStared)
             // }
+            console.log('mails:', mails)
             return mails
         })
 }
@@ -103,6 +117,10 @@ function get(mailId) {
 function remove(mail) {
     const UpdatedMail = { ...mail, removedAt: Date.now() }
     return storageService.put(MAIL_KEY, UpdatedMail)
+}
+
+function update(mail) {
+    return storageService.put(MAIL_KEY, mail)
 }
 
 const criteria = {

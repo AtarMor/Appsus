@@ -14,7 +14,7 @@ export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
     // const [filterBy, setFilterBy] = useState({ txt: '', stat: '' })
-
+// console.log('filterBy:', filterBy)
 
     useEffect(() => {
         setSearchParams(filterBy)
@@ -32,14 +32,15 @@ export function MailIndex() {
             })
     }
 
+    const {stat, txt} = filterBy
     if (!mails) return <div>loading...</div>
     return <section className="email-index">
         <MailFilterTop
-            filterBy={filterBy}
+            filterBy={{txt}}
             onSetFilter={onSetFilter} />
 
         <MailFilterSide
-            filterBy={filterBy}
+            filterBy={{stat}}
             onSetFilter={onSetFilter} />
 
         <MailList

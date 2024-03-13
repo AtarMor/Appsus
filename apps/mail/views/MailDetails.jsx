@@ -19,7 +19,11 @@ export function MailDetails() {
     function loadMail() {
         setIsLoading(true)
         mailService.get(params.mailId)
-            .then(mail => setMail(mail))
+            .then(mail => { 
+                const readMail = {...mail, isRead: true}
+                setMail(readMail) 
+                mailService.update(readMail)
+            })
             .catch(err => {
                 console.log('Had issues loading mail', err)
                 navigate('/mail')
