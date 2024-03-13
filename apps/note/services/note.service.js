@@ -62,6 +62,7 @@ function query(filterBy = getDefaultFilter()) {
                 const regex = new RegExp(filterBy.type, 'i')
                 notes = notes.filter(note => regex.test(note.type))
             }
+            notes.sort((a, b) => (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0))
             return notes
         })
 }
@@ -98,12 +99,11 @@ function getEmptyNote(type = '', info = {}) {
 //TODO filter stuff
 function getDefaultFilter() {
     //TODO add more
-    return { type: '' }
+    return { type: '', check: '' }
 }
 
 function getFilterFromParams(searchParams = {}) {
     const defaultFilter = getDefaultFilter()
-    console.log('filter from params activated')
     return {
         type: searchParams.get('type') || defaultFilter.type,
         //TODO add more
@@ -136,6 +136,7 @@ function _createNote(type = 'NoteTxt', info = { txt: 'Defaultest of notes' }) {
 
     return note
 }
+
 
 function _setNextPrevId(note) {
     return storageService.query(NOTE_KEY).then((notes) => {

@@ -7,6 +7,7 @@ import { NoteList } from "../cmps/NoteList.jsx"
 import { NoteFilter } from "../cmps/NoteFIlter.jsx"
 
 import { noteService } from "../services/note.service.js"
+import { NoteSubFilter } from "../cmps/NoteSubFilter.jsx"
 
 
 export function NoteIndex() {
@@ -27,6 +28,9 @@ export function NoteIndex() {
         noteService.query(filterBy)
             .then((notes) => {
                 setNotes(notes)
+            })
+            .catch((err) => {
+                console.log('could not load notes', err)
             })
     }
 
@@ -52,23 +56,40 @@ export function NoteIndex() {
             })
     }
 
+    function onPinNote(noteToUpdate) {
+        const updatedNote = {
+            ...noteToUpdate,
+            isPinned: !noteToUpdate.isPinned,
+        }
+        onUpdateNote(updatedNote)
+    }
+
 
     console.log('hardcoded notes:', notes)
 
-    const { type } = filterBy
+    const { check, type } = filterBy
+
     if (!notes) return <div>loading...</div>
 
     return <section className="note-index">
         <NoteFilter
             onSetFilter={onSetFilter}
             filterBy={{ type }} />
+
+        <NoteSubFilter
+            filterBy={{ check }}
+            onSetFilter={onSetFilter}
+        />
+
         <div className="btns-container">
             <Link to="/note/edit"><button className='create-btn'>New Note</button></Link>
         </div>
+
         <NoteList
             notes={notes}
             onRemoveNote={onRemoveNote}
             onUpdateNote={onUpdateNote}
+            onPinNote={onPinNote}
         />
     </section>
 }
