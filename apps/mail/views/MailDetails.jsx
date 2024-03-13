@@ -8,42 +8,42 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 export function MailDetails() {
     const [isLoading, setIsLoading] = useState(true)
-	const [mail, setMail] = useState(null)
-	const params = useParams()
-	const navigate = useNavigate()
+    const [mail, setMail] = useState(null)
+    const params = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
-		loadMail()
-	}, [params.mailId])
+        loadMail()
+    }, [params.mailId])
 
-	function loadMail() {
-		setIsLoading(true)
-		mailService.get(params.mailId)
-			.then(mail => setMail(mail))
-			.catch(err => {
-				console.log('Had issues loading mail', err)
-				navigate('/mail')
-			})
-			.finally(() => {
-				setIsLoading(false)
-			})
-	}
+    function loadMail() {
+        setIsLoading(true)
+        mailService.get(params.mailId)
+            .then(mail => setMail(mail))
+            .catch(err => {
+                console.log('Had issues loading mail', err)
+                navigate('/mail')
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }
 
     function onRemoveMail() {
         mailService.remove(mail)
-        .then(() => {
-            setMail(null)
-            // showSuccessMsg(`Mail removed successfully`)
-            navigate('/mail')
-        })
-        .catch((err) => {
-            console.log('Had issues removing mail', err)
-            // showErrorMsg(`Could not remove mail`)
-        })
+            .then(() => {
+                setMail(null)
+                // showSuccessMsg(`Mail removed successfully`)
+                navigate('/mail')
+            })
+            .catch((err) => {
+                console.log('Had issues removing mail', err)
+                // showErrorMsg(`Could not remove mail`)
+            })
 
     }
 
-	if (isLoading) return <div>Loading details..</div>
+    if (isLoading) return <div>Loading details..</div>
     if (!mail) return <div>Mail deleted</div>
     return <section className="mail-details">
         <h1>{mail.subject}</h1>

@@ -1,8 +1,13 @@
+const { Link } = ReactRouterDOM
+const { useParams, useNavigate } = ReactRouter
+const { useState, useEffect, fragment } = React
+
+
 import { NoteList } from "../cmps/NoteList.jsx"
 
 import { noteService } from "../services/note.service.js"
 
-const { useState, useEffect, fragment } = React
+
 
 export function NoteIndex() {
     const [notes, setNotes] = useState(null)
@@ -30,8 +35,9 @@ export function NoteIndex() {
             })
     }
     console.log('notes from index:', notes)
-    if (!notes) return <div>loading notes!</div>
+    if (!notes) return <div>loading...</div>
     return <section className="note-index">
+        <Link to="/note/edit"><button>New Note</button></Link>
         <NoteList
             notes={notes}
             onRemoveNote={onRemoveNote}
