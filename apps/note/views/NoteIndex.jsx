@@ -1,24 +1,30 @@
-const { Link } = ReactRouterDOM
+const { Link, useSearchParams } = ReactRouterDOM
 const { useParams, useNavigate } = ReactRouter
-const { useState, useEffect, fragment } = React
+const { useState, useEffect } = React
 
 
 import { NoteList } from "../cmps/NoteList.jsx"
+import { NoteFilter } from "../cmps/NoteFIlter.jsx"
 
 import { noteService } from "../services/note.service.js"
 
 
-
 export function NoteIndex() {
+    const [searchParams, setSearchParams] = useSearchParams()
     const [notes, setNotes] = useState(null)
+    const [filterBy, setFilterBy] = useState(noteService.getFilterFromParams(searchParams))
 
-    //TODO useEffect for filtering
     useEffect(() => {
+        setSearchParams(filterBy)
         loadNotes()
-    }, [])
+    }, [filterBy])
+
+    function onSetFilter(fieldsToUpdate) {
+        setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
+    }
 
     function loadNotes() {
-        noteService.query()
+        noteService.query(filterBy)
             .then((notes) => {
                 setNotes(notes)
             })
@@ -34,9 +40,18 @@ export function NoteIndex() {
                 console.log('could not remove note', err) //TODO replace with message
             })
     }
-    console.log('notes from index:', notes)
+
+
+    console.log('hardcoded notes:', notes)
+
+    const { txt } = filterBy
     if (!notes) return <div>loading...</div>
+
     return <section className="note-index">
+        <NoteFilter
+            onSetFilter={onSetFilter}
+            filterBy={{ txt }} />
+
         <Link to="/note/edit"><button>New Note</button></Link>
         <NoteList
             notes={notes}

@@ -51,11 +51,19 @@ export const noteService = {
     remove,
     save,
     getEmptyNote,
+    getDefaultFilter,
+    getFilterFromParams
 }
 
-//TODO Filter goes here
-function query() {
+function query(filterBy = getDefaultFilter()) {
     return storageService.query(NOTE_KEY)
+        .then(notes => {
+            if (filterBy.type) {
+                const regex = new RegExp(filterBy.type, 'i')
+                notes = notes.filter(note => regex.test(note.type))
+            }
+            return notes
+        })
 }
 
 function get(noteId) {
@@ -88,13 +96,19 @@ function getEmptyNote(type = '', info = {}) {
 }
 
 //TODO filter stuff
-// function getDefaultFilter() {
+function getDefaultFilter() {
+    //TODO add more
+    return { type: '' }
+}
 
-// }
-
-// function getFilterFromParams() {
-
-// }
+function getFilterFromParams(searchParams = {}) {
+    const defaultFilter = getDefaultFilter()
+    console.log('filter from params activated')
+    return {
+        type: searchParams.get('type') || defaultFilter.type,
+        //TODO add more
+    }
+}
 
 //TODO The real deal
 function _createNotes() {
