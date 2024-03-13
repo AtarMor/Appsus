@@ -27,3 +27,11 @@
     margin: 0;
     list-style-type: none;
 }
+
+.hidden {
+    visibility: hidden;
+}
+
+.transparent {
+    opacity: 0;
+}

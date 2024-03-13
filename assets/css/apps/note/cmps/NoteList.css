@@ -1,6 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+.note-index {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr 5fr repeat(2, 0);
+    grid-column-gap: 1em;
+    grid-row-gap: 0px;
+
+}
+
 .note-list {
-    columns: 230px 3;
-    margin: 1.2em;
+    grid-area: 2 / 2 / 3 / 3;
+    columns: 4;
+    margin-inline-end: 5em;
+
 }
 
 .note-list li:first-child {
@@ -8,23 +23,75 @@
 }
 
 .note-list li {
+    height: 200px;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 5px;
-    border: 2px solid black;
-    break-inside: avoid;
+    border: 1px solid rgb(187, 187, 187);
+    break-inside: avoid-column;
+    margin-bottom: 1em;
+}
+
+li:hover {
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07)
+}
+
+.note-list li:hover .note-actions {
+    opacity: 1;
 }
 
 .note-list .note-actions {
-    /* padding-block: .5em; */
-    border-top: 1px solid gray;
+
+    display: flex;
+    position: absolute;
     text-align: center;
+    bottom: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .note-list .note-actions .remove-btn {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.note-filter {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.note-filter .input-field {
+    width: 50%;
+    border-radius: 5px;
+    padding: 1em;
+    background-color: rgb(230, 230, 230);
+}
+
+input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    content: URL(/assets/img/X.png);
+    cursor: pointer;
+}
+
+.btns-container {
+    margin-left: 1em;
+}
+
+@media (width<=800px) {
+    .note-list {
+        columns: 3;
+    }
+}
+
+@media (width <=600px) {
+    .note-list {
+        columns: 2;
+    }
+}
+
+@media (width<=400px) {
+    .note-list {
+        columns: 1;
+    }
 }

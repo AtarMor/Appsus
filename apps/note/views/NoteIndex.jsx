@@ -44,15 +44,16 @@ export function NoteIndex() {
 
     console.log('hardcoded notes:', notes)
 
-    const { txt } = filterBy
+    const { type } = filterBy
     if (!notes) return <div>loading...</div>
 
     return <section className="note-index">
         <NoteFilter
             onSetFilter={onSetFilter}
-            filterBy={{ txt }} />
-
-        <Link to="/note/edit"><button>New Note</button></Link>
+            filterBy={{ type }} />
+        <div className="btns-container">
+            <Link to="/note/edit"><button className='create-btn'>New Note</button></Link>
+        </div>
         <NoteList
             notes={notes}
             onRemoveNote={onRemoveNote}
