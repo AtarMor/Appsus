@@ -1,1 +1,39 @@
- /* note list */
+.note-list {
+    columns: 230px 3;
+    margin: 1.2em;
+}
+
+.note-list li:first-child {
+    margin-block-start: 0;
+}
+
+.note-list li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px solid black;
+    break-inside: avoid;
+}
+
+.note-list .note-actions {
+    /* padding-block: .5em; */
+    border-top: 1px solid gray;
+    text-align: center;
+}
+
+.note-list .note-actions .remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* .note-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px solid black;
+    break-inside: avoid;
+} */
