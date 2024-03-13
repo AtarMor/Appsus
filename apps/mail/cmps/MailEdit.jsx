@@ -1,12 +1,11 @@
 const { useState, useEffect } = React
-const { useNavigate, useParams } = ReactRouter
+const { useParams } = ReactRouter
 
 import { mailService } from "../services/mail.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 export function MailEdit({ onCloseMailEdit }) {
     const [mailToEdit, setMailToEdit] = useState(mailService.getEmptyMail())
-    const navigate = useNavigate()
     const { mailId } = useParams()
 
     useEffect(() => {
@@ -44,7 +43,7 @@ export function MailEdit({ onCloseMailEdit }) {
     const { to, subject, body } = mailToEdit
     return <section className="mail-edit">
         <header>
-            <h1>{mailToEdit ? mailToEdit.subject : 'New Message'} </h1>
+            <h1>{mailId ? mailToEdit.subject : 'New Message'} </h1>
             <button onClick={() => onCloseMailEdit()}>x</button>
         </header>
 
