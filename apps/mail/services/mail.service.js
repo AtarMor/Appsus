@@ -45,18 +45,22 @@ _createMails()
 
 export const mailService = {
     query,
-    get
+    get,
+    remove
 }
 
 function query() {
     return storageService.query(MAIL_KEY)
-        .then(mails => {
-            return mails
-        })
+        .then(mails => mails.filter(mail => mail.removedAt === null ))
 }
 
 function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
+}
+
+function remove(mail) {
+    const UpdatedMail = {...mail, removedAt: Date.now()}
+    return storageService.put(MAIL_KEY, UpdatedMail)
 }
 
 const criteria = {
