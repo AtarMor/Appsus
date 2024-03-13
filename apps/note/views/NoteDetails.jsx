@@ -27,8 +27,8 @@ export function NoteDetails() {
             })
     }
 
-    function onRemoveNote() {
-        noteService.remove(note)
+    function onRemoveNote(noteId) {
+        noteService.remove(noteId)
             .then(() => {
                 setNote(null)
                 navigate('/note')
@@ -44,7 +44,7 @@ export function NoteDetails() {
         <h1>{note.id}</h1>
         <h1>{note.type}</h1>
         <div className="actions">
-            <button onClick={onRemoveNote}>Delete</button>
+            <button className="remove-btn" onClick={() => onRemoveNote(note.id)}>Delete</button>
             <Link to={`/note`}><button>Return to notes</button></Link>
         </div>
     </section>

@@ -63,8 +63,8 @@ function get(noteId) {
         .then(note => _setNextPrevId(note))
 }
 
-function remove(noteId) {
-    return storageService.remove(NOTE_KEY, noteId)
+function remove(note) {
+    return storageService.remove(NOTE_KEY, note)
 }
 
 function save(note) {
