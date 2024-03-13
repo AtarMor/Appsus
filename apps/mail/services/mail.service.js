@@ -46,12 +46,54 @@ _createMails()
 export const mailService = {
     query,
     get,
-    remove
+    remove,
+    getFilterFromParams
 }
 
-function query() {
+// function query(filterBy) {
+//     return storageService.query(MAIL_KEY)
+//         .then(mails => mails.filter(mail => mail.removedAt === null))
+//         .then(mails => {
+
+
+//             return mails
+//         })
+// }
+function query(filterBy) {
     return storageService.query(MAIL_KEY)
-        .then(mails => mails.filter(mail => mail.removedAt === null ))
+        .then(mails => {
+            if (filterBy.stat) {
+                if (filterBy.stat === 'inbox') mails.filter(mail =>
+                    mail.removedAt === null && mail.from !== loggedInUser.email)
+                else if (filterBy.stat === 'sent') mails.filter(mail =>
+                    mail.from !== loggedInUser.email)
+                else if (filterBy.stat === 'trash') mails.filter(mail => mail.removedAt)
+                else if (filterBy.stat === 'draft') mails.filter(mail => mail.sentAt)
+            }
+            if (filterBy.txt) {
+                const regex = new RegExp(filterBy.txt, 'i')
+                mails = mails.filter(mail => regex.test(mail.subject) || regex.test(mail.body))
+            }
+            if (filterBy.isRead !== undefined) {
+                filterBy.isRead ? mails.filter(mail => mail.isRead) : mails.filter(mail => !mail.isRead)
+            }
+            // if (filterBy.isStared !== undefined) {
+            //     filterBy.isStared ? mails.filter(mail => mail.isStared) : mails.filter(mail => !mail.isStared)
+            // }
+            return mails
+        })
+}
+
+function getFilterFromParams(searchParams = {}) {
+    const defaultFilter = _getDefaultFilter()
+    return {
+        stat: searchParams.get('stat') || defaultFilter.stat,
+        txt: searchParams.get('txt') || defaultFilter.txt
+    }
+}
+
+function _getDefaultFilter() {
+    return { stat: '', txt: '' }
 }
 
 function get(mailId) {
@@ -59,12 +101,12 @@ function get(mailId) {
 }
 
 function remove(mail) {
-    const UpdatedMail = {...mail, removedAt: Date.now()}
+    const UpdatedMail = { ...mail, removedAt: Date.now() }
     return storageService.put(MAIL_KEY, UpdatedMail)
 }
 
 const criteria = {
-    status: 'inbox/sent/trash/draft',
+    stat: 'inbox/sent/trash/draft',
     txt: 'puki',
     isRead: true, // (optional property, if missing: show all)
     isStared: true, // (optional property, if missing: show all)
