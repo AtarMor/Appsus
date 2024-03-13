@@ -41,6 +41,17 @@ export function NoteIndex() {
             })
     }
 
+    function onUpdateNote(noteToUpdate) {
+        noteService.save(noteToUpdate)
+            .then((savedNote) => {
+                setNotes(prevNotes => prevNotes.map(note => note.id === savedNote.id ? savedNote : note))
+                console.log('updated!')
+            })
+            .catch(err => {
+                console.log('could not update', err)
+            })
+    }
+
 
     console.log('hardcoded notes:', notes)
 
@@ -57,6 +68,7 @@ export function NoteIndex() {
         <NoteList
             notes={notes}
             onRemoveNote={onRemoveNote}
+            onUpdateNote={onUpdateNote}
         />
     </section>
 }

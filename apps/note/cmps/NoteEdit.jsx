@@ -1,5 +1,6 @@
 const { useState, useEffect } = React
 const { useNavigate, useParams } = ReactRouter
+const { Link } = ReactRouterDOM
 
 //TODO need to do this with routing
 import { noteService } from "../services/note.service.js"
@@ -71,9 +72,10 @@ export function NoteEdit() {
                     name="type"
                     onChange={handleChange}
                     value={noteToEdit.type || ''}
-                //!THIS IS FOR DEBUGGING PURPOSES, THIS CHANGES THE TYPE!
+                //!THIS IS FOR DEBUGGING PURPOSES, THIS CHANGES THE TYPE OF THE NOTE!
                 />
                 <button>Save</button>
+                <Link to={`/note`}><button>Return</button></Link>
             </form>
         </section>
     )

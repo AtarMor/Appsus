@@ -15,13 +15,12 @@ export function NoteFilter({ onSetFilter, filterBy }) {
     }
 
     return <section className="note-filter">
-        <label htmlFor="type-filter">Filter</label>
-        <input type="text"
+        <label htmlFor="type-filter"></label>
+        <input className="input-field" type="search"
             id="type"
             name="type"
             value={filterByToEdit.txt}
             onChange={handleChange}
-            placeholder="By type" />
-        {console.log(filterByToEdit)}
+            placeholder="Search" />
     </section>
 }
