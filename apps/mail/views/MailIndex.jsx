@@ -36,18 +36,24 @@ export function MailIndex() {
         setIsMailEdit(true)
     }
 
-    const {stat, txt} = filterBy
+    function onCloseMailEdit() {
+        setIsMailEdit(false)
+    }
+
+    const { stat, txt } = filterBy
     if (!mails) return <div>loading...</div>
     return <section className="mail-index">
         <button className="compose-btn" onClick={onMailEdit}>Compose</button>
-        {isMailEdit && <MailEdit />}
+        {isMailEdit && <MailEdit
+            onCloseMailEdit={onCloseMailEdit}
+        />}
 
         <MailFilterTop
-            filterBy={{txt}}
+            filterBy={{ txt }}
             onSetFilter={onSetFilter} />
 
         <MailFilterSide
-            filterBy={{stat}}
+            filterBy={{ stat }}
             onSetFilter={onSetFilter} />
 
         <MailList

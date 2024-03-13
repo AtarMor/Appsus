@@ -4,7 +4,7 @@ const { useNavigate, useParams } = ReactRouter
 import { mailService } from "../services/mail.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
-export function MailEdit() {
+export function MailEdit({ onCloseMailEdit }) {
     const [mailToEdit, setMailToEdit] = useState(mailService.getEmptyMail())
     const navigate = useNavigate()
 
@@ -13,8 +13,8 @@ export function MailEdit() {
 
         mailService.save(mailToEdit)
             .then(() => {
-                navigate('/mail')
                 console.log('saved:')
+                onCloseMailEdit()
                 // showSuccessMsg('Mail sended successfully')
             })
             .catch(err => {
@@ -28,13 +28,12 @@ export function MailEdit() {
         setMailToEdit(prevMail => ({ ...prevMail, [field]: value, sentAt: Date.now() }))
     }
 
-
     const { to, subject, body } = mailToEdit
     return <section className="mail-edit">
         {/* <h1>{mailToEdit ? mailToEdit.subject : 'New Message'} </h1> */}
         <header>
             <h1>{'New Message'} </h1>
-            <button>x</button>
+            <button onClick={() => onCloseMailEdit()}>x</button>
         </header>
 
         <form onSubmit={onSendMail} >
