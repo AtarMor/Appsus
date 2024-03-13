@@ -1,0 +1,28 @@
+/* FONT AWESOME */
+
+@font-face {
+    font-family: fa;
+    src: url("../../fonts/fa/fa-regular-400.ttf");
+}
+
+@font-face {
+    font-family: solid;
+    src: url("../../fonts/fa/fa-solid-900.ttf");
+}
+
+.fa::before {
+    font-family: fa;
+}
+
+.solid::before {
+    font-family: solid;
+}
+
+.fa.star::before {
+    content: "\f005";
+}
+
+.solid.yellow-star::before {
+    content: "\f005";
+    color: #f7ca69;
+}
