@@ -1,8 +1,28 @@
+const { useState, useEffect } = React
+
+import { MailList } from "../cmps/MailList.jsx"
+import { mailService } from "../services/mail.service.js"
+
 
 export function MailIndex() {
-    const [emails, setEmails] = useState(null)
+    const [mails, setMails] = useState(null)
 
-    if (!emails) return <div>loading...</div>
-    return <div>mail app</div>
+    useEffect(() => {
+        loadMails()
+    }, [])
+
+    function loadMails() {
+        mailService.query()
+            .then((mails) => {
+                setMails(mails)
+            })
+    }
+
+    if (!mails) return <div>loading...</div>
+    return <section className="email-index">
+        <MailList
+            emails={mails}
+        />
+    </section>
 }
 

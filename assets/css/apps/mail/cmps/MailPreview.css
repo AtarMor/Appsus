@@ -1,0 +1,4 @@
+.mail-preview > * {
+    display: inline;
+    margin-inline-end: 1em;
+}
