@@ -1,0 +1,13 @@
+.mail-filter-top {
+    display: grid;
+    align-self: stretch;
+    justify-self: stretch;
+}
+
+.mail-filter-top input {
+    background-color: var(--mail-color1);
+    align-self: stretch;
+    justify-self: stretch;
+    border-radius: 20px;
+    padding: 1em;
+}

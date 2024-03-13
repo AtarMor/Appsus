@@ -1,0 +1,20 @@
+.mail-filter-side {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+
+.mail-filter-side >* {
+    padding: 0.6em 0.6em 0.6em 2em;
+    background-color: var(--main-bg-color);
+    text-align: start;
+}
+
+.mail-filter-side >*:hover {
+    background-color: var(--mail-gray1);
+}
+
+.mail-filter-side >*:active {
+    background-color: var(--mail-color-3);
+    font-weight: bold;
+}

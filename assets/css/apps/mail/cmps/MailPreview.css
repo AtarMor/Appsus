@@ -1,4 +1,6 @@
-.mail-preview > * {
+.mail-preview>* {
     display: inline;
     margin-inline-end: 1em;
+    padding: 1em;
+    font-size: 1rem;
 }

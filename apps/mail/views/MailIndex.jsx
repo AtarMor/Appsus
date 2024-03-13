@@ -5,6 +5,7 @@ const { Link, useSearchParams } = ReactRouterDOM
 import { MailList } from "../cmps/MailList.jsx"
 import { MailFilterTop } from "../cmps/MailFilterTop.jsx"
 import { MailFilterSide } from "../cmps/MailFilterSide.jsx"
+import { MailAdd } from "../cmps/MailAdd.jsx"
 
 import { mailService } from "../services/mail.service.js"
 
@@ -34,7 +35,9 @@ export function MailIndex() {
 
     const {stat, txt} = filterBy
     if (!mails) return <div>loading...</div>
-    return <section className="email-index">
+    return <section className="mail-index">
+        <MailAdd />
+
         <MailFilterTop
             filterBy={{txt}}
             onSetFilter={onSetFilter} />

@@ -16,7 +16,7 @@ export function MailFilterTop({ onSetFilter, filterBy }) {
         <input
             type="text"
             name="txt"
-            placeholder="txt"
+            placeholder="Search mail"
             value={filterByToEdit.txt}
             onChange={handleChange}
         />
