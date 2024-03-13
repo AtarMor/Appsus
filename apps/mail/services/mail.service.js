@@ -74,7 +74,7 @@ function query(filterBy) {
                 else if (filterBy.stat === 'sent') mails = mails.filter(mail =>
                     mail.from === loggedInUser.email)
                 else if (filterBy.stat === 'trash') mails = mails.filter(mail => mail.removedAt)
-                else if (filterBy.stat === 'draft') mails = mails.filter(mail => mail.sentAt)
+                else if (filterBy.stat === 'draft') mails = mails.filter(mail => !mail.sentAt)
             }
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i')

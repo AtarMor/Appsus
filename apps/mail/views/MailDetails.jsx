@@ -4,11 +4,14 @@ const { Link } = ReactRouterDOM
 
 import { mailService } from "../services/mail.service.js"
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { MailEdit } from "../cmps/MailEdit.jsx"
 
 
 export function MailDetails() {
     const [isLoading, setIsLoading] = useState(true)
     const [mail, setMail] = useState(null)
+    const [isMailEdit, setIsMailEdit] = useState(false)
+
     const params = useParams()
     const navigate = useNavigate()
 
@@ -19,9 +22,9 @@ export function MailDetails() {
     function loadMail() {
         setIsLoading(true)
         mailService.get(params.mailId)
-            .then(mail => { 
-                const readMail = {...mail, isRead: true}
-                setMail(readMail) 
+            .then(mail => {
+                const readMail = { ...mail, isRead: true }
+                setMail(readMail)
                 mailService.update(readMail)
             })
             .catch(err => {
@@ -47,6 +50,14 @@ export function MailDetails() {
 
     }
 
+    function onMailEdit() {
+        setIsMailEdit(true)
+    }
+
+    function onCloseMailEdit() {
+        setIsMailEdit(false)
+    }
+
     if (isLoading) return <div>Loading details..</div>
     if (!mail) return <div>Mail deleted</div>
     return <section className="mail-details">
@@ -55,8 +66,15 @@ export function MailDetails() {
         <h2>{mail.to}</h2>
         <h3>{mail.sentAt}</h3>
         <div className="actions">
+            {
+                !mail.sentAt && <button onClick={onMailEdit}>Edit</button>
+            }
             <button onClick={onRemoveMail}>Delete</button>
             <Link to={`/mail`}><button>Inbox</button></Link>
         </div>
+
+        {isMailEdit && <MailEdit
+            onCloseMailEdit={onCloseMailEdit}
+        />}
     </section>
 }

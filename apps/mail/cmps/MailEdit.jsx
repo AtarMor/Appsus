@@ -1,4 +1,4 @@
-const { useState } = React
+const { useState, useEffect } = React
 const { useNavigate, useParams } = ReactRouter
 
 import { mailService } from "../services/mail.service.js"
@@ -7,6 +7,19 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 export function MailEdit({ onCloseMailEdit }) {
     const [mailToEdit, setMailToEdit] = useState(mailService.getEmptyMail())
     const navigate = useNavigate()
+    const { mailId } = useParams()
+
+    useEffect(() => {
+        if (mailId) loadMail()
+    }, [])
+
+    function loadMail() {
+        mailService.get(mailId)
+            .then(mail => setMailToEdit(mail))
+            .catch(err => {
+                console.log('Had issues loading mail', err)
+            })
+    }
 
     function onSendMail(ev) {
         ev.preventDefault()
@@ -30,9 +43,8 @@ export function MailEdit({ onCloseMailEdit }) {
 
     const { to, subject, body } = mailToEdit
     return <section className="mail-edit">
-        {/* <h1>{mailToEdit ? mailToEdit.subject : 'New Message'} </h1> */}
         <header>
-            <h1>{'New Message'} </h1>
+            <h1>{mailToEdit ? mailToEdit.subject : 'New Message'} </h1>
             <button onClick={() => onCloseMailEdit()}>x</button>
         </header>
 
