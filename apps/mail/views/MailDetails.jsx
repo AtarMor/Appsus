@@ -58,7 +58,7 @@ export function MailDetails() {
         setIsMailEdit(false)
     }
 
-    if (isLoading) return <div>Loading details..</div>
+    if (isLoading) return <React.Fragment></React.Fragment>
     if (!mail) return <div>Mail deleted</div>
     return <section className="mail-details">
         <h1>{mail.subject}</h1>

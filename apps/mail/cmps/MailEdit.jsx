@@ -4,12 +4,12 @@ const { useParams } = ReactRouter
 import { mailService } from "../services/mail.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
-export function MailEdit({ onCloseMailEdit }) {
+export function MailEdit({ onCloseMailEdit, isNew=false }) {
     const [mailToEdit, setMailToEdit] = useState(mailService.getEmptyMail())
     const { mailId } = useParams()
 
     useEffect(() => {
-        if (mailId) loadMail()
+        if (mailId && !isNew) loadMail()
     }, [])
 
     function loadMail() {
@@ -43,7 +43,7 @@ export function MailEdit({ onCloseMailEdit }) {
     const { to, subject, body } = mailToEdit
     return <section className="mail-edit">
         <header>
-            <h1>{mailId ? mailToEdit.subject : 'New Message'} </h1>
+            <h1>{isNew ? 'New Message' : mailToEdit.subject} </h1>
             <button onClick={() => onCloseMailEdit()}>x</button>
         </header>
 
