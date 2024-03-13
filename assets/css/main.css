@@ -27,6 +27,7 @@
 @import './apps/mail/cmps/MailPreview.css';
 @import './apps/mail/cmps/MailFilterTop.css';
 @import './apps/mail/cmps/MailFilterSide.css';
+@import './apps/mail/cmps/MailEdit.css';
 
 /* Note Cmps */
 @import './apps/note/cmps/NoteList.css';

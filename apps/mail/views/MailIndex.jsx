@@ -5,7 +5,7 @@ const { Link, useSearchParams } = ReactRouterDOM
 import { MailList } from "../cmps/MailList.jsx"
 import { MailFilterTop } from "../cmps/MailFilterTop.jsx"
 import { MailFilterSide } from "../cmps/MailFilterSide.jsx"
-import { MailAdd } from "../cmps/MailAdd.jsx"
+import { MailEdit } from "../cmps/MailEdit.jsx"
 
 import { mailService } from "../services/mail.service.js"
 
@@ -13,9 +13,8 @@ import { mailService } from "../services/mail.service.js"
 export function MailIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [mails, setMails] = useState(null)
+    const [isMailEdit, setIsMailEdit] = useState(false)
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
-    // const [filterBy, setFilterBy] = useState({ txt: '', stat: '' })
-// console.log('filterBy:', filterBy)
 
     useEffect(() => {
         setSearchParams(filterBy)
@@ -33,10 +32,15 @@ export function MailIndex() {
             })
     }
 
+    function onMailEdit() {
+        setIsMailEdit(true)
+    }
+
     const {stat, txt} = filterBy
     if (!mails) return <div>loading...</div>
     return <section className="mail-index">
-        <MailAdd />
+        <button className="compose-btn" onClick={onMailEdit}>Compose</button>
+        {isMailEdit && <MailEdit />}
 
         <MailFilterTop
             filterBy={{txt}}

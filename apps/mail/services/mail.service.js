@@ -58,18 +58,11 @@ export const mailService = {
     get,
     remove,
     getFilterFromParams,
-    update
+    update,
+    getEmptyMail,
+    save
 }
 
-// function query(filterBy) {
-//     return storageService.query(MAIL_KEY)
-//         .then(mails => mails.filter(mail => mail.removedAt === null))
-//         .then(mails => {
-
-
-//             return mails
-//         })
-// }
 function query(filterBy) {
     console.log('filterBy:', filterBy)
     return storageService.query(MAIL_KEY)
@@ -106,10 +99,6 @@ function getFilterFromParams(searchParams = {}) {
     }
 }
 
-function _getDefaultFilter() {
-    return { stat: '', txt: '' }
-}
-
 function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
 }
@@ -123,12 +112,36 @@ function update(mail) {
     return storageService.put(MAIL_KEY, mail)
 }
 
+function getEmptyMail(){
+    return {
+        subject: '',
+        body: '',
+        isRead: false,
+        sentAt: null,
+        removedAt: null,
+        from: loggedInUser.email,
+        to: ''
+    }
+}
+
+function save(mail) {
+    if (mail.id) {
+        return storageService.put(MAIL_KEY, mail)
+    } else {
+        return storageService.post(MAIL_KEY, mail)
+    }
+}
+
 const criteria = {
     stat: 'inbox/sent/trash/draft',
     txt: 'puki',
     isRead: true, // (optional property, if missing: show all)
     isStared: true, // (optional property, if missing: show all)
     labels: ['important', 'romantic']
+}
+
+function _getDefaultFilter() {
+    return { stat: '', txt: '' }
 }
 
 function _createMails() {
