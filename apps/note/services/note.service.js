@@ -87,7 +87,6 @@ function getEmptyNote(type = '', info = {}) {
     }
 }
 
-
 //TODO filter stuff
 // function getDefaultFilter() {
 
@@ -112,7 +111,7 @@ function _createHardCodedNotes(notes) {
     const existingNotes = utilService.loadFromStorage(NOTE_KEY)
 
     if (!existingNotes || !existingNotes.length) {
-        utilService.saveToStorage(BOOK_KEY, notes)
+        utilService.saveToStorage(NOTE_KEY, notes)
     }
 }
 

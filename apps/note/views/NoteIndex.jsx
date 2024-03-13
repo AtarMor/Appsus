@@ -1,4 +1,40 @@
+import { NoteList } from "../cmps/NoteList.jsx"
+
+import { noteService } from "../services/note.service.js"
+
+const { useState, useEffect, fragment } = React
 
 export function NoteIndex() {
-    return <div>note app</div>
+    const [notes, setNotes] = useState(null)
+
+    //TODO useEffect for filtering
+    useEffect(() => {
+        loadNotes()
+    }, [])
+
+    function loadNotes() {
+        noteService.query()
+            .then((notes) => {
+                setNotes(notes)
+            })
+    }
+
+    function onRemoveNote(noteId) {
+        noteService.remove(noteId)
+            .then(() => {
+                setNotes((prevNotes) => prevNotes.filter(note => note.id !== noteId))
+                console.log('note removed!') //TODO replace with message
+            })
+            .catch((err) => {
+                console.log('could not remove note', err) //TODO replace with message
+            })
+    }
+    console.log('notes from index:', notes)
+    if (!notes) return <div>loading notes!</div>
+    return <section className="note-index">
+        <NoteList
+            notes={notes}
+            onRemoveNote={onRemoveNote}
+        />
+    </section>
 }

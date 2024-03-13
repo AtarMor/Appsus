@@ -1,8 +1,18 @@
-import { noteService } from "../services/note.service.js"
+//TODO link
 
-export function NoteList() {
-    const [notes, setNotes] = useState(null)
+import { NotePreview } from "./NotePreview.jsx"
 
-    if (!notes) return <div> loading notes </div>
-    return <div>note list</div>
+export function NoteList({ notes, onRemoveNote }) {
+
+    if (!notes.length) return <div>No notes here!</div>
+    return <ul className="note-list">
+        {
+            notes.map(note => <li key={note.id}>
+                <NotePreview note={note} />
+                <div className="note-actions">
+                    <button className="remove-btn" onClick={() => onRemoveNote(note.id)}>X</button>
+                </div>
+            </li>)
+        }
+    </ul>
 }
