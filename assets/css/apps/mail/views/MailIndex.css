@@ -4,7 +4,7 @@ html {
 
 .mail-index {
     display: grid;
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: 150px 1fr;
     gap: 20px;
 }
 

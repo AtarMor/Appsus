@@ -51,6 +51,11 @@ export function MailIndex() {
         setMailSelected(mailId)
     }
 
+    function UnreadMailCount() {
+        const unreadMails = mails.filter(mail => !mail.isRead)
+        return unreadMails.length
+    }
+
     const { stat, txt } = filterBy
     if (!mails) return <div>loading...</div>
     return <section className="mail-index">
@@ -66,7 +71,8 @@ export function MailIndex() {
 
         <MailFilterSide
             filterBy={{ stat }}
-            onSetFilter={onSetFilter} />
+            onSetFilter={onSetFilter}
+            unreadMails={UnreadMailCount} />
 
         {!mailSelected && <MailList
             mails={mails}

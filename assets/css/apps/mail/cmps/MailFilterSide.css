@@ -18,3 +18,7 @@
     background-color: var(--mail-color-3);
     font-weight: bold;
 }
+
+.mail-filter-side button:first-child {
+    font-weight: bold;
+}
