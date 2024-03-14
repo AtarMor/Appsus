@@ -13,6 +13,7 @@ export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [isMailEdit, setIsMailEdit] = useState(false)
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
+    const [sortBy, setSortBy] = useState({type: 'date', dir: -1})
     const [mailSelected, setMailSelected] = useState(null)
 
     const location = useLocation()
@@ -25,18 +26,22 @@ export function MailIndex() {
     useEffect(() => {
         setSearchParams(filterBy)
         loadMails()
-    }, [filterBy])
+    }, [filterBy, sortBy])
+
+    function loadMails() {
+        mailService.query(filterBy, sortBy)
+            .then((mails) => {
+                setMails(mails)
+            })
+    }
 
     function onSetFilter(fieldsToUpdate) {
         setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
         setMailSelected(null)
     }
 
-    function loadMails() {
-        mailService.query(filterBy)
-            .then((mails) => {
-                setMails(mails)
-            })
+    function onSetSort(type) {
+        setSortBy({ type, dir: -sortBy.dir })
     }
 
     function onMailEdit() {
@@ -76,7 +81,9 @@ export function MailIndex() {
 
         {!mailSelected && <MailList
             mails={mails}
-            onMailSelect={onMailSelect} />}
+            onMailSelect={onMailSelect}
+            sortBy={sortBy}
+            onSetSort={onSetSort} />}
 
         <Link to={`/mail/${mailSelected}`} />
         {mailSelected && <Outlet />}

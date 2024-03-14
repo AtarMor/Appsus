@@ -67,12 +67,10 @@ export const mailService = {
     save
 }
 
-function query(filterBy) {
-    console.log('filterBy:', filterBy)
+function query(filterBy, sortBy) {
     return storageService.query(MAIL_KEY)
         .then(mails => {
             if (filterBy.stat) {
-                console.log('filterBy.stat:', filterBy.stat)
                 if (filterBy.stat === 'inbox') mails = mails.filter(mail =>
                     mail.removedAt === null && mail.to === loggedInUser.email)
                 else if (filterBy.stat === 'sent') mails = mails.filter(mail =>
@@ -90,7 +88,9 @@ function query(filterBy) {
             // if (filterBy.isStared !== undefined) {
             //     filterBy.isStared ? mails.filter(mail => mail.isStared) : mails.filter(mail => !mail.isStared)
             // }
-            console.log('mails:', mails)
+            if (sortBy.type === 'date') mails.sort((mail1, mail2) => (mail1.sentAt - mail2.sentAt) * sortBy.dir)
+            if (sortBy.type === 'subject') mails.sort((mail1, mail2) => (mail1.subject.localeCompare(mail2.subject)) * sortBy.dir)
+
             return mails
         })
 }
@@ -116,7 +116,7 @@ function update(mail) {
     return storageService.put(MAIL_KEY, mail)
 }
 
-function getEmptyMail(){
+function getEmptyMail() {
     return {
         subject: '',
         body: '',

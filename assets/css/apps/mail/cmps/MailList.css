@@ -6,3 +6,32 @@
 .mail-list li:not(:last-child) {
     border-bottom: 1px solid var(--mail-gray1);
 }
+
+.mail-list li:first-child button {
+    border-radius: 20px;
+    background-color: white;
+    border: 1px solid var(--mail-gray1);
+    padding: 0.3em 0.6em;
+    margin: 0.3em;
+    margin-inline-start: 1em;
+}
+
+.mail-list li:first-child button {
+    display: flex;
+    align-items: center;
+}
+
+.sort-list {
+    display: flex;
+}
+
+.sort-list h5 {
+    font-size: 0.8rem;
+    font-weight: lighter;
+}
+
+img.arrow {
+    display: inline;
+    height: 10px;
+    margin-inline-end: .3em;
+}
