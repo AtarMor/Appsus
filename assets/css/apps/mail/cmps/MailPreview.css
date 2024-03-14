@@ -22,7 +22,7 @@
 
 .mail-preview .mail-content {
     display: grid;
-    grid-template-columns: 180px 1fr 100px;
+    grid-template-columns: 170px 1fr 100px;
 }
 
 .mail-preview .mail-subject {

@@ -1,0 +1,93 @@
+/* Mobile Only  */
+@media (width <=650px) {
+    .mail-filter-side {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100dvh;
+        min-width: 200px;
+        background: white;
+
+        transform: translateX(-100%);
+        transition: transform 0.6s, box-shadow 0.6s;
+    }
+
+    body.menu-open .mail-filter-side {
+        transform: translateX(0);
+        box-shadow: -4px 0px 20px rgb(0 0 0 / 30%);
+    }
+
+    .mail-filter-side button {
+        border-bottom: 1px solid var(--clrPrimary-2);
+        border-radius: 0;
+        padding: 15px;
+    }
+
+    .mail-filter-side>button:hover {
+        background-color: #f2f2f2;
+    }
+}
+
+/* Small */
+@media (width > 550) {
+
+}
+
+/* Medium */
+@media (width > 650px) {
+    html {
+        background-color: var(--main-bg-color);
+    }
+
+    .mail-index {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 20px;
+    }
+
+    .toggle-menu-btn {
+        display: none;
+    }
+
+    .mail-index button.compose-btn {
+        position: initial;
+        justify-self: start;
+        align-self: center;
+        background-color: var(--mail-color3);
+        color: black;
+        border-radius: 10px;
+        padding: 1em;
+        margin-inline-start: 10px;
+        box-shadow: none;
+        transition: box-shadow .08s linear,
+            min-width .15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mail-index .compose-btn:hover {
+        box-shadow:
+            0 1px 3px 0 rgba(60, 64, 67, 0.302),
+            0 4px 8px 3px rgba(60, 64, 67, 0.149);
+    }
+
+    .mail-filter-side button:first-child {
+        font-weight: bold;
+    }
+
+    .mail-filter-side .folder.active {
+        background-color: var(--mail-color2);
+        font-weight: bold;
+    }
+
+    .mail-index .mail-filter-top {
+        display: grid;
+        align-self: stretch;
+        justify-self: stretch;
+        border-radius: 20px;
+    }
+
+    .mail-filter-top input {
+        background-color: var(--mail-color1);
+        justify-self: stretch;
+    }
+
+}

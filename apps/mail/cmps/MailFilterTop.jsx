@@ -1,6 +1,6 @@
 const { useState, useEffect } = React
 
-export function MailFilterTop({ onSetFilter, filterBy }) {
+export function MailFilterTop({ onSetFilter, filterBy, onToggleMenu }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
     useEffect(() => {
@@ -13,6 +13,8 @@ export function MailFilterTop({ onSetFilter, filterBy }) {
     }
 
     return <div className="mail-filter-top">
+        <button class="toggle-menu-btn" onClick={onToggleMenu}>☰</button>
+
         <input
             type="text"
             name="txt"

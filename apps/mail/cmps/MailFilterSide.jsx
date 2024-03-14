@@ -18,6 +18,7 @@ export function MailFilterSide({ onSetFilter, filterBy, unreadMails }) {
 
     function handleFilter(value) {
         setFilterByToEdit((prevFilterBy) => ({ ...prevFilterBy, stat: value }))
+        document.body.classList.remove('menu-open')
     }
 
     return <div className="mail-filter-side">

@@ -17,13 +17,8 @@
 }
 
 .mail-filter-side .active {
-    background-color: var(--mail-color2);
-    font-weight: bold;
+    background-color: var(--mail-red1);
     border-radius: 30px;
-}
-
-.mail-filter-side button:first-child {
-    font-weight: bold;
 }
 
 .mail-filter-side .unread-count {

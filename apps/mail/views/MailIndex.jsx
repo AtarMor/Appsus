@@ -40,7 +40,7 @@ export function MailIndex() {
 
     useEffect(() => {
         console.log('mailStarred:', mailStarred)
-        if(!mailStarred) return
+        if (!mailStarred) return
         mailService.update(mailStarred)
             .then(() => loadMails())
 
@@ -78,10 +78,17 @@ export function MailIndex() {
         setMailStarred({ ...mail, isStarred: !mail.isStarred })
     }
 
+    function onToggleMenu() {
+        document.body.classList.toggle('menu-open')
+    }
+
     const { stat, txt } = filterBy
     if (!mails) return <div>loading...</div>
     return <section className="mail-index">
+        <div class="main-screen" onClick={onToggleMenu}></div>
+
         <button className="compose-btn" onClick={onMailEdit}>Compose</button>
+
         {isMailEdit && <MailEdit
             onCloseMailEdit={onCloseMailEdit}
             isNew={true}
@@ -89,7 +96,8 @@ export function MailIndex() {
 
         <MailFilterTop
             filterBy={{ txt }}
-            onSetFilter={onSetFilter} />
+            onSetFilter={onSetFilter}
+            onToggleMenu={onToggleMenu} />
 
         <MailFilterSide
             filterBy={{ stat }}

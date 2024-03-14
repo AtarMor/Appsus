@@ -1,25 +1,19 @@
 html {
-    background-color: var(--main-bg-color);
+    background-color: white;
 }
 
-.mail-index {
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    gap: 20px;
+.mail-index input:focus {
+    outline: none;
 }
 
 .mail-index .compose-btn {
-    justify-self: start;
-    background-color: var(--mail-color3);
-    border-radius: 10px;
-    padding: 1em;
-    margin-inline-start: 10px;
-    transition: box-shadow .08s linear,
-        min-width .15s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mail-index .compose-btn:hover {
-    box-shadow:
-        0 1px 3px 0 rgba(60, 64, 67, 0.302),
+    position: absolute;
+    bottom: 20px;
+    right: 21px;
+    color: var(--mail-red2);
+    background: white;
+    padding: 0.8em;
+    border-radius: 30px;
+    box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.302),
         0 4px 8px 3px rgba(60, 64, 67, 0.149);
 }

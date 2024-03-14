@@ -31,8 +31,8 @@
     display: grid;
     grid-template-rows: 30px 30px 1fr 40px;
     background-color: white;
-
 }
+
 
 .mail-edit input {
     width: 100%;

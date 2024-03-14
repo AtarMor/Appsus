@@ -17,6 +17,8 @@
 
 @import './apps/mail/views/MailIndex.css';
 @import './apps/mail/cmps/MailDetails.css';
+@import './apps/mail/cmps/mq.css';
+@import './apps/mail/views/main-screen.css';
 
 /* Cmps */
 
