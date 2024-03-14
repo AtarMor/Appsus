@@ -14,7 +14,7 @@ export function NoteList({ notes, onRemoveNote, onPinNote, onUpdateNote }) {
     const [selectedNote, setSelectedNote] = useState(null)
     const [showEditModal, setShowEditModal] = useState(false)
 
-    const colors = ['#d3bfdb', '#b4ddd3', '#fff8b8', '#faafa8', '#e2f6d3']
+    const colors = ['#d3bfdb', '#fff8b8', '#d4e4ed', '#f6e2dd', '#faafa8', '#f39f76', '#b4ddd3', '#e2f6d3', '#efeff1']
 
     if (!notes.length) return <div className="empty-notes-msg flex justify-center align-center">No notes here, make some!</div>
 

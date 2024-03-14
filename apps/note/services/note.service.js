@@ -58,7 +58,45 @@ const notes = [
         style: {
             backgroundColor: '#b4ddd3'
         }
-    }
+    },
+    {
+        id: 'n105',
+        createdAt: 1112222,
+        type: 'NoteTxt',
+        isPinned: true,
+        style: {
+            backgroundColor: '#e2f6d3'
+        },
+        info: {
+            txt: 'Remember to hydrate!'
+        }
+    },
+    {
+        id: 'n107',
+        type: 'NoteImg',
+        isPinned: false,
+        info: {
+            url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqbWitrQVchxsz7ZISxescTWLQNnKP8ctdhw&usqp=CAU',
+            title: 'me when sprint'
+        },
+        style: {
+            backgroundColor: '#faafa8'
+        }
+    },
+    {
+        id: 'n108',
+        type: 'NoteTodos',
+        isPinned: false,
+        info: {
+            todos: [
+                { txt: 'Go to sleep early', doneAt: null },
+                { txt: 'Make games', doneAt: null },
+            ]
+        },
+        style: {
+            backgroundColor: '#b4ddd3'
+        }
+    },
 ]
 
 const NOTE_KEY = 'noteDB'
