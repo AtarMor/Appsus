@@ -17,7 +17,8 @@ export const mailService = {
     getFilterFromParams,
     update,
     getEmptyMail,
-    save
+    save,
+    getUnreadMails
 }
 
 function query(filterBy, sortBy) {
@@ -54,6 +55,14 @@ function getFilterFromParams(searchParams = {}) {
         stat: searchParams.get('stat') || defaultFilter.stat,
         txt: searchParams.get('txt') || defaultFilter.txt
     }
+}
+
+function getUnreadMails() {  //unread in inbox 
+    return storageService.query(MAIL_KEY)
+        .then(mails => mails.filter(mail => 
+            !mail.isRead && 
+            mail.removedAt === null && 
+            mail.to === loggedInUser.email))
 }
 
 function get(mailId) {

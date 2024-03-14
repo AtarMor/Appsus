@@ -12,7 +12,7 @@ export function MailFilterSide({ onSetFilter, filterBy, unreadMails }) {
     }
 
     return <div className="mail-filter-side">
-        <button onClick={() => handleFilter('inbox')}>Inbox {unreadMails()}</button>
+        <button onClick={() => handleFilter('inbox')}>Inbox {unreadMails}</button>
         <button onClick={() => handleFilter('sent')}>Sent</button>
         <button onClick={() => handleFilter('draft')}>Draft</button>
         <button onClick={() => handleFilter('trash')}>Trash</button>
