@@ -111,7 +111,8 @@ export const noteService = {
     save,
     getEmptyNote,
     getDefaultFilter,
-    getFilterFromParams
+    getFilterFromParams,
+    renderActionButton,
 }
 
 function query(filterBy = getDefaultFilter()) {
@@ -196,14 +197,23 @@ function _createNote(type = 'NoteTxt', info = { txt: 'Defaultest of notes' }) {
     return note
 }
 
+// function _setNextPrevId(note) {
+//     return storageService.query(NOTE_KEY).then((notes) => {
+//         const carIdx = notes.findIndex((currNote) => currNote.id === note.id)
+//         const nextNote = notes[carIdx + 1] ? notes[carIdx + 1] : notes[0]
+//         const prevNote = notes[carIdx - 1] ? notes[carIdx - 1] : notes[notes.length - 1]
+//         note.nextCarId = nextNote.id
+//         note.prevCarId = prevNote.id
+//         return note
+//     })
+// }
 
-function _setNextPrevId(note) {
-    return storageService.query(NOTE_KEY).then((notes) => {
-        const carIdx = notes.findIndex((currNote) => currNote.id === note.id)
-        const nextNote = notes[carIdx + 1] ? notes[carIdx + 1] : notes[0]
-        const prevNote = notes[carIdx - 1] ? notes[carIdx - 1] : notes[notes.length - 1]
-        note.nextCarId = nextNote.id
-        note.prevCarId = prevNote.id
-        return note
-    })
+function renderActionButton(className, onClick, iconClassName, style) {
+    return (
+        <div className={'hover-circle'}>
+            <button className={'btn ' + className} onClick={onClick}>
+                <div className={iconClassName} style={style}></div>
+            </button>
+        </div>
+    )
 }

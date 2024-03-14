@@ -4,6 +4,7 @@ const { useState } = React
 
 import { NotePreview } from "./NotePreview.jsx"
 import { ColorSelectionModal } from "./ColorSelectionModal.jsx"
+
 import { noteService } from "../services/note.service.js"
 import { EditNoteModal } from "./EditNoteModal.jsx"
 
@@ -13,6 +14,7 @@ export function NoteList({ notes, onRemoveNote, onPinNote, onUpdateNote }) {
     const [selectedNoteId, setSelectedNoteId] = useState(null)
     const [selectedNote, setSelectedNote] = useState(null)
     const [showEditModal, setShowEditModal] = useState(false)
+    const [currentColor, setCurrentColor] = useState('#ff0000')
 
     const colors = ['#d3bfdb', '#fff8b8', '#d4e4ed', '#f6e2dd', '#faafa8', '#f39f76', '#b4ddd3', '#e2f6d3', '#efeff1']
 
@@ -46,6 +48,7 @@ export function NoteList({ notes, onRemoveNote, onPinNote, onUpdateNote }) {
         setSelectedColor(color)
         updateNoteColor(selectedNoteId, color)
         handleCloseColorModal()
+        setCurrentColor(color)
     }
 
     const updateNoteColor = (noteId, color) => {
@@ -64,17 +67,6 @@ export function NoteList({ notes, onRemoveNote, onPinNote, onUpdateNote }) {
         }
     }
 
-    function renderActionButton(className, onClick, iconClassName, style) {
-        return (
-            <div className={'hover-circle'}>
-                <button className={'btn ' + className} onClick={onClick}>
-                    <div className={iconClassName} style={style}></div>
-                </button>
-            </div>
-        )
-    }
-
-
     return (
         <ul className="note-list">
             {notes.map((note) => (
@@ -85,14 +77,11 @@ export function NoteList({ notes, onRemoveNote, onPinNote, onUpdateNote }) {
                         <NotePreview note={note} />
                     </Link>
                     <div className="note-actions transparent">
-                        {renderActionButton("archive-btn", () => onArchiveNote(note), "fa-solid fa-box-archive")}
-                        {renderActionButton("pin-btn", () => onPinNote(note), "fa-solid fa-thumbtack", note.isPinned ? { color: '#FFD43B' } : {})}
-                        {renderActionButton("remove-btn", () => onRemoveNote(note.id), "fa-solid fa-trash")}
-                        {renderActionButton("change-color", () => handleOpenColorModal(note.id), "fa-solid fa-palette")}
-                        {/* <Link to={`/note/edit/${note.id}`}>
-                            {renderActionButton("edit-btn", null, "fa-solid fa-pen-to-square")}
-                        </Link> */}
-                        {renderActionButton("edit-btn", () => handleEditNote(note), "fa-solid fa-pen-to-square")}
+                        {noteService.renderActionButton("archive-btn", () => onArchiveNote(note), "fa-solid fa-box-archive")}
+                        {noteService.renderActionButton("pin-btn", () => onPinNote(note), "fa-solid fa-thumbtack", note.isPinned ? { color: '#FFD43B' } : {})}
+                        {noteService.renderActionButton("remove-btn", () => onRemoveNote(note.id), "fa-solid fa-trash")}
+                        {noteService.renderActionButton("change-color", () => handleOpenColorModal(note.id), "fa-solid fa-palette")}
+                        {noteService.renderActionButton("edit-btn", () => handleEditNote(note), "fa-solid fa-pen-to-square")}
                         {/* EDIT NEEDS TO BE WHEN WE CLICK ON A NOTE*/}
                         {/* NEED TO ADD TOOLTIPS */}
                     </div>
@@ -103,6 +92,7 @@ export function NoteList({ notes, onRemoveNote, onPinNote, onUpdateNote }) {
                     colors={colors}
                     onClose={handleCloseColorModal}
                     onColorSelect={handleColorSelect}
+                    currentColor={currentColor}
                 />
             )}
             {showEditModal && (
