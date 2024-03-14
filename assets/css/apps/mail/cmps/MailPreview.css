@@ -1,6 +1,32 @@
+.mail-preview {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50px 180px 1fr 100px;
+    font-size: 0.7rem;
+    align-items: center;
+}
+
+.mail-preview:hover {
+    box-shadow:
+        inset 1px 0 0 #dadce0,
+        inset -1px 0 0 #dadce0,
+        0 1px 2px 0 rgba(60, 64, 67, .3),
+        0 1px 3px 1px rgba(60, 64, 67, .15)
+}
+
 .mail-preview>* {
     display: inline;
-    margin-inline-end: 1em;
-    padding: 1em;
-    font-size: 1rem;
+    padding: 0.7em;
+}
+
+.mail-preview div {
+    margin: 0;
+    padding-inline-start: 15px;
+    align-self: stretch;
+    padding-top: 11.5px;
+}
+
+.mail-preview.is-read>* {
+    font-weight: lighter;
+    background-color: var(--mail-color11);
 }

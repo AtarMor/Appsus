@@ -3,6 +3,6 @@
     border-radius: 20px;
 }
 
-.mail-list li {
-    border-bottom: 1px solid gray;
+.mail-list li:not(:last-child) {
+    border-bottom: 1px solid var(--mail-gray1);
 }
