@@ -11,6 +11,7 @@ import { MailDetails } from "./apps/mail/views/MailDetails.jsx"
 import { NoteIndex } from "./apps/note/views/NoteIndex.jsx"
 import { NoteDetails } from "./apps/note/views/NoteDetails.jsx"
 import { NoteEdit } from "./apps/note/cmps/NoteEdit.jsx"
+import { UserMsg } from "./cmps/UserMsg.jsx"
 
 export function App() {
     return <Router>
@@ -29,6 +30,10 @@ export function App() {
                 <Route path="/note/edit" element={<NoteEdit />} />
                 <Route path="/note/edit/:noteId" element={<NoteEdit />} />
             </Routes>
+
+            <UserMsg />
         </section>
     </Router>
+
+
 }

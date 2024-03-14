@@ -2,7 +2,7 @@ const { useState, useEffect } = React
 const { useParams, useNavigate } = ReactRouter
 const { Link } = ReactRouterDOM
 
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 import { MailEdit } from "../cmps/MailEdit.jsx"
 
 import { mailService } from "../services/mail.service.js"
@@ -42,12 +42,13 @@ export function MailDetails() {
         mailService.remove(mail)
             .then(() => {
                 setMail(null)
-                // showSuccessMsg(`Mail removed successfully`)
+                console.log('Mail removed:')
+                showSuccessMsg(`Mail removed successfully`)
                 navigate('/mail')
             })
             .catch((err) => {
                 console.log('Had issues removing mail', err)
-                // showErrorMsg(`Could not remove mail`)
+                showErrorMsg(`Could not remove mail`)
             })
 
     }

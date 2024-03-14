@@ -2,7 +2,7 @@ const { useState, useEffect } = React
 const { useParams } = ReactRouter
 
 import { mailService } from "../services/mail.service.js"
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
+import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 
 export function MailEdit({ onCloseMailEdit, isNew=false }) {
     const [mailToEdit, setMailToEdit] = useState(mailService.getEmptyMail())
@@ -27,11 +27,11 @@ export function MailEdit({ onCloseMailEdit, isNew=false }) {
             .then(() => {
                 console.log('saved:')
                 onCloseMailEdit()
-                // showSuccessMsg('Mail sended successfully')
+                showSuccessMsg('Mail sended successfully')
             })
             .catch(err => {
                 console.log('Had issues sending mail', err)
-                // showErrorMsg('could not send mail')
+                showErrorMsg('could not send mail')
             })
     }
 

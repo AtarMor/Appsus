@@ -1,21 +1,23 @@
 .user-msg {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding-inline-start: 0.7em;
     background-color: lightgray;
-    padding: 1em;
     position: absolute;
-    top: 1em;
-    right: 1em;
+    bottom: 1em;
+    left: 1em;
 }
 
 .user-msg.success {
-    background-color: lightgreen;
+    background-color: lightgray;
 }
 
 .user-msg.error {
-    background-color: lightpink;
+    background-color: lightgray;
 }
 
-
-.user-msg button{
+.user-msg button {
     float: right;
     margin: 1em;
 }

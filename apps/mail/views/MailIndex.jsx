@@ -26,8 +26,10 @@ export function MailIndex() {
 
     const location = useLocation()
     useEffect(() => {
+
         if (location.pathname === '/mail') {
             setMailSelected(null)
+            loadMails()
         }
     }, [location])
 
@@ -38,6 +40,7 @@ export function MailIndex() {
 
     useEffect(() => {
         console.log('mailStarred:', mailStarred)
+        if(!mailStarred) return
         mailService.update(mailStarred)
             .then(() => loadMails())
 
