@@ -1,18 +1,17 @@
 .note-index {
     display: grid;
-    grid-template-columns: 1fr 5fr;
-    grid-template-rows: 1fr 5fr repeat(2, 0);
+    grid-template-columns: 1fr 5fr repeat(3, 0);
+    grid-template-rows: 1fr repeat(4, 0);
     grid-column-gap: 1em;
     grid-row-gap: 0px;
-    border-top: 1px solid rgb(216, 216, 216);
-    padding-top: 4px;
 }
 
 .note-list {
-    grid-area: 2 / 2 / 3 / 3;
+    /* width: max-content; */
+    grid-area: 1 / 2 / 2 / 3;
     columns: 4;
     margin-inline-end: 5em;
-
+    padding: 0;
 }
 
 .note-list>li:first-child {
@@ -23,6 +22,7 @@
     min-height: 150px;
     max-height: 400px;
     max-width: 238px;
+    /* may need to change width so it looks better */
     position: relative;
     display: flex;
     flex-direction: column;
@@ -34,7 +34,7 @@
 }
 
 .note-list>li:hover {
-    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .4), inset 0 -1px 0 rgba(0, 0, 0, .07)
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.30)
 }
 
 .note-list>li:hover .note-actions {
@@ -46,23 +46,23 @@
     display: flex;
     justify-content: space-evenly;
     position: absolute;
-    text-align: center;
     bottom: 0;
     transition: opacity 0.3s ease-in-out;
     padding-bottom: 5px;
 }
 
 .note-list .note-actions .hover-circle>.btn {
-    display: block;
+    display: flex;
     background: none;
     color: rgb(119, 119, 119);
 }
 
-.note-list .note-actions>.hover-circle {
+/* THIS BROKE THE ALIGNMENT OF THE BUTTONS */
+/* .note-list .note-actions>.hover-circle {
     height: 100%;
     width: 100%;
     border-radius: 50%;
-}
+} */
 
 .note-list .note-actions .btn:hover {
     opacity: 1;
@@ -86,6 +86,7 @@ input::-webkit-search-cancel-button {
 }
 
 .btns-container {
+    /* grid-area: 1 / 1 / 2 / 2; */
     margin-left: 1em;
 }
 

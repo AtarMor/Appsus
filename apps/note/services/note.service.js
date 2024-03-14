@@ -40,6 +40,24 @@ const notes = [
         style: {
             backgroundColor: '#b4ddd3'
         }
+    },
+    {
+        id: 'n104',
+        type: 'NoteTodos',
+        isPinned: false,
+        info: {
+            title: 'Get my stuff together',
+            todos: [
+                { txt: 'learn react', doneAt: null },
+                { txt: 'finish the sprint', doneAt: null },
+                { txt: 'eat dinner', doneAt: null },
+                { txt: 'walk the dog', doneAt: null },
+                { txt: 'cook food for tomorrow', doneAt: null }
+            ]
+        },
+        style: {
+            backgroundColor: '#b4ddd3'
+        }
     }
 ]
 

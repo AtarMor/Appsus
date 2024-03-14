@@ -1,0 +1,33 @@
+.input-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.input-container .input-field {
+  background-color: #fff;
+  border-color: #e0e0e0;
+  display: flex;
+  margin-inline: auto;
+  margin-block: 25px;
+  width: 50%;
+  height: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.30)
+}
+
+.input-container .input-btns {
+  margin: auto;
+  position: absolute;
+  display: flex;
+  gap: 10px;
+  z-index: 1;
+  top: 50%;
+  left: 68%;
+  transform: translate(-50%, -50%)
+}
+
+.input-btns button {
+  background: none;
+}
