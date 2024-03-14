@@ -1,14 +1,11 @@
-* {
-    box-sizing: border-box;
-}
-
 .note-index {
     display: grid;
     grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr 5fr repeat(2, 0);
     grid-column-gap: 1em;
     grid-row-gap: 0px;
-
+    border-top: 1px solid rgb(216, 216, 216);
+    padding-top: 4px;
 }
 
 .note-list {
@@ -24,6 +21,7 @@
 
 .note-list li {
     height: 200px;
+    max-width: 238px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -53,18 +51,28 @@
     padding-bottom: 5px;
 }
 
-/* .note-list .note-actions .remove-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-} */
+.note-list .note-actions .hover-circle>.btn {
+    display: block;
+    background: none;
+    color: rgb(119, 119, 119);
+}
+
+.note-list .note-actions>.hover-circle {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.note-list .note-actions .btn:hover {
+    opacity: 1;
+}
 
 .note-filter {
     grid-area: 1 / 2 / 2 / 3;
 }
 
 .note-filter .input-field {
-    width: 50%;
+    width: 74%;
     border-radius: 5px;
     padding: 1em;
     background-color: rgb(230, 230, 230);
@@ -79,6 +87,8 @@ input::-webkit-search-cancel-button {
 .btns-container {
     margin-left: 1em;
 }
+
+
 
 @media (width<=800px) {
     .note-list {

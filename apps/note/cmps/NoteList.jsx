@@ -5,14 +5,27 @@ const { useState } = React
 import { NotePreview } from "./NotePreview.jsx"
 import { ColorSelectionModal } from "./ColorSelectionModal.jsx"
 import { noteService } from "../services/note.service.js"
+import { EditNoteModal } from "./EditNoteModal.jsx"
 
-export function NoteList({ notes, onRemoveNote, onPinNote, setNotes }) {
+export function NoteList({ notes, onRemoveNote, onPinNote, onUpdateNote }) {
     const [showColorModal, setShowColorModal] = useState(false)
     const [selectedColor, setSelectedColor] = useState(null)
     const [selectedNoteId, setSelectedNoteId] = useState(null)
-    const colors = ['#ff0000', '#00ff00', '#0000ff']
+    const [selectedNote, setSelectedNote] = useState(null)
+    const [showEditModal, setShowEditModal] = useState(false)
+
+    const colors = ['#d3bfdb', '#b4ddd3', '#fff8b8', '#faafa8', '#e2f6d3']
 
     if (!notes.length) return <div className="empty-notes-msg flex justify-center align-center">No notes here, make some!</div>
+
+    const handleEditNote = (note) => {
+        setSelectedNote(note)
+        setShowEditModal(true)
+    }
+
+    const handleCloseEditModal = () => {
+        setShowEditModal(false)
+    }
 
     const handleOpenColorModal = (noteId) => {
         setSelectedNoteId(noteId)
@@ -21,6 +34,12 @@ export function NoteList({ notes, onRemoveNote, onPinNote, setNotes }) {
 
     const handleCloseColorModal = () => {
         setShowColorModal(false)
+    }
+
+    const handleUpdateNote = (updatedNote) => {
+        console.log('Updated note:', updatedNote)
+        onUpdateNote(updatedNote)
+        setShowEditModal(false)
     }
 
     const handleColorSelect = (color) => {
@@ -45,6 +64,17 @@ export function NoteList({ notes, onRemoveNote, onPinNote, setNotes }) {
         }
     }
 
+    function renderActionButton(className, onClick, iconClassName, style) {
+        return (
+            <div className={'hover-circle'}>
+                <button className={'btn ' + className} onClick={onClick}>
+                    <div className={iconClassName} style={style}></div>
+                </button>
+            </div>
+        )
+    }
+
+
     return (
         <ul className="note-list">
             {notes.map((note) => (
@@ -55,13 +85,16 @@ export function NoteList({ notes, onRemoveNote, onPinNote, setNotes }) {
                         <NotePreview note={note} />
                     </Link>
                     <div className="note-actions transparent">
-                        <button className="archive-btn" onClick={() => onArchiveNote(note)}>archive</button>
-                        <button className="pin-btn" onClick={() => onPinNote(note)}>
-                            {note.isPinned ? 'unpin' : 'pin'}</button>
-                        <button className="remove-btn" onClick={() => onRemoveNote(note.id)}>X</button>
-                        <button className="change-color" onClick={() => handleOpenColorModal(note.id)}>Change Color</button>
-                        <Link to={`/note/edit/${note.id}`}><button>Edit note</button></Link>
+                        {renderActionButton("archive-btn", () => onArchiveNote(note), "fa-solid fa-box-archive")}
+                        {renderActionButton("pin-btn", () => onPinNote(note), "fa-solid fa-thumbtack", note.isPinned ? { color: '#FFD43B' } : {})}
+                        {renderActionButton("remove-btn", () => onRemoveNote(note.id), "fa-solid fa-trash")}
+                        {renderActionButton("change-color", () => handleOpenColorModal(note.id), "fa-solid fa-palette")}
+                        {/* <Link to={`/note/edit/${note.id}`}>
+                            {renderActionButton("edit-btn", null, "fa-solid fa-pen-to-square")}
+                        </Link> */}
+                        {renderActionButton("edit-btn", () => handleEditNote(note), "fa-solid fa-pen-to-square")}
                         {/* EDIT NEEDS TO BE WHEN WE CLICK ON A NOTE*/}
+                        {/* NEED TO ADD TOOLTIPS */}
                     </div>
                 </li>
             ))}
@@ -70,6 +103,13 @@ export function NoteList({ notes, onRemoveNote, onPinNote, setNotes }) {
                     colors={colors}
                     onClose={handleCloseColorModal}
                     onColorSelect={handleColorSelect}
+                />
+            )}
+            {showEditModal && (
+                <EditNoteModal
+                    note={selectedNote}
+                    onClose={handleCloseEditModal}
+                    onUpdateNote={handleUpdateNote}
                 />
             )}
         </ul>

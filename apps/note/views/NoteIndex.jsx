@@ -110,7 +110,7 @@ export function NoteIndex() {
         <NoteList
             notes={notes}
             onRemoveNote={onRemoveNote}
-            setNotes={setNotes}
+            onUpdateNote={onUpdateNote}
             onPinNote={onPinNote}
         />
     </section>
