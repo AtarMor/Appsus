@@ -27,7 +27,6 @@ export function MailIndex() {
     }, [location])
 
     useEffect(() => {
-        console.log('inUseEffect');
         setSearchParams(filterBy)
         loadMails()
     }, [filterBy, sortBy])
