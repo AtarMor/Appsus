@@ -15,12 +15,13 @@
 
 }
 
-.note-list li:first-child {
+.note-list>li:first-child {
     margin-block-start: 0;
 }
 
-.note-list li {
-    height: 200px;
+.note-list>li {
+    min-height: 150px;
+    max-height: 400px;
     max-width: 238px;
     position: relative;
     display: flex;
@@ -32,11 +33,11 @@
     margin-bottom: 1em;
 }
 
-.note-list li:hover {
+.note-list>li:hover {
     box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .4), inset 0 -1px 0 rgba(0, 0, 0, .07)
 }
 
-.note-list li:hover .note-actions {
+.note-list>li:hover .note-actions {
     opacity: 1;
 }
 

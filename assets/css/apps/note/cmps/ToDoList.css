@@ -1,0 +1,22 @@
+ul .todo-container {
+    padding: 0;
+}
+
+li .todo-item:first-child {
+    margin-top: 10px;
+}
+
+li .todo-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    justify-content: space-between;
+}
+
+span .todo-text {
+    flex: 1;
+}
+
+input .todo-checkbox {
+    margin-left: 5px;
+}

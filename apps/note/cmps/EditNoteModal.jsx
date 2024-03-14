@@ -1,23 +1,23 @@
 const { useState } = React
 
 export function EditNoteModal({ note, onClose, onUpdateNote }) {
-    const [editedNote, setEditedNote] = useState(note);
+    const [editedNote, setEditedNote] = useState(note)
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const handleChange = (ev) => {
+        const { name, value } = ev.target
         setEditedNote({
             ...editedNote,
             info: {
                 ...editedNote.info,
                 [name]: value,
             },
-        });
-    };
+        })
+    }
 
     const handleUpdateNote = () => {
-        onUpdateNote(editedNote);
-        onClose();
-    };
+        onUpdateNote(editedNote)
+        onClose()
+    }
 
     return (
         <div className="modal">

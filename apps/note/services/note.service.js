@@ -8,7 +8,7 @@ const notes = [
         type: 'NoteTxt',
         isPinned: true,
         style: {
-            backgroundColor: '#00d'
+            backgroundColor: '#e2f6d3'
         },
         info: {
             txt: 'Fullstack Me Baby!'
@@ -19,11 +19,11 @@ const notes = [
         type: 'NoteImg',
         isPinned: false,
         info: {
-            url: 'http://some-img/me',
+            url: 'https://www.shutterstock.com/image-photo/two-dogs-smile-260nw-684918079.jpg',
             title: 'Bobi and Me'
         },
         style: {
-            backgroundColor: '#00d'
+            backgroundColor: '#faafa8'
         }
     },
     {
@@ -36,6 +36,9 @@ const notes = [
                 { txt: 'Driving license', doneAt: null },
                 { txt: 'Coding power', doneAt: 187111111 }
             ]
+        },
+        style: {
+            backgroundColor: '#b4ddd3'
         }
     }
 ]
@@ -92,14 +95,14 @@ function getEmptyNote(type = '', info = {}) {
         type,
         isPinned: false,
         style: {},
-        info,
+        info: {},
     }
 }
 
 //TODO filter stuff
 function getDefaultFilter() {
     //TODO add more
-    return { type: '', check: '' }
+    return { type: '' }
 }
 
 function getFilterFromParams(searchParams = {}) {
@@ -110,17 +113,17 @@ function getFilterFromParams(searchParams = {}) {
     }
 }
 
-//TODO The real deal
+//TODO dynamically created notes
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)
     if (!notes || !notes.length) {
         notes = []
-        notes.push(_createNote('NoteTxt')) //need more
+        notes.push(_createNote('NoteTxt'))
     }
 
 }
 
-//! TEMPORARY 
+//! hardcoded notes
 function _createHardCodedNotes(notes) {
     const existingNotes = utilService.loadFromStorage(NOTE_KEY)
 
