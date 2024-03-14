@@ -14,11 +14,12 @@ export function NoteIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [notes, setNotes] = useState(null)
     const [filterBy, setFilterBy] = useState(noteService.getFilterFromParams(searchParams))
+    const [pinnedNotes, setPinnedNotes] = useState(null)
 
     useEffect(() => {
         setSearchParams(filterBy)
         loadNotes()
-    }, [filterBy])
+    }, [filterBy, pinnedNotes])
 
     function onSetFilter(fieldsToUpdate) {
         setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
@@ -48,6 +49,7 @@ export function NoteIndex() {
     function onUpdateNote(noteToUpdate) {
         noteService.save(noteToUpdate)
             .then((savedNote) => {
+                loadNotes()
                 setNotes(prevNotes => prevNotes.map(note => note.id === savedNote.id ? savedNote : note))
                 console.log('updated!')
             })
@@ -61,6 +63,7 @@ export function NoteIndex() {
             ...noteToUpdate,
             isPinned: !noteToUpdate.isPinned,
         }
+        console.log(noteToUpdate)
         onUpdateNote(updatedNote)
     }
 

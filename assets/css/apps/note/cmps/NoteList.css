@@ -34,7 +34,7 @@
     margin-bottom: 1em;
 }
 
-li:hover {
+.note-list li:hover {
     box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07)
 }
 
@@ -43,19 +43,21 @@ li:hover {
 }
 
 .note-list .note-actions {
-
+    width: 100%;
     display: flex;
+    justify-content: space-evenly;
     position: absolute;
     text-align: center;
     bottom: 0;
     transition: opacity 0.3s ease-in-out;
+    padding-bottom: 5px;
 }
 
-.note-list .note-actions .remove-btn {
+/* .note-list .note-actions .remove-btn {
     position: absolute;
     top: 0;
     right: 0;
-}
+} */
 
 .note-filter {
     grid-area: 1 / 2 / 2 / 3;
