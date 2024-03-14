@@ -5,10 +5,9 @@ const { useState, useEffect } = React
 
 import { NoteList } from "../cmps/NoteList.jsx"
 import { NoteFilter } from "../cmps/NoteFIlter.jsx"
-
-import { noteService } from "../services/note.service.js"
 import { NoteSubFilter } from "../cmps/NoteSubFilter.jsx"
 
+import { noteService } from "../services/note.service.js"
 
 export function NoteIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
@@ -19,7 +18,7 @@ export function NoteIndex() {
     useEffect(() => {
         setSearchParams(filterBy)
         loadNotes()
-    }, [filterBy, pinnedNotes])
+    }, [filterBy])
 
     function onSetFilter(fieldsToUpdate) {
         setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
@@ -47,14 +46,34 @@ export function NoteIndex() {
     }
 
     function onUpdateNote(noteToUpdate) {
+        if (noteToUpdate.id) {
+            updateExistingNote(noteToUpdate)
+        } else {
+            createNewNote(noteToUpdate)
+        }
+    }
+
+    function updateExistingNote(noteToUpdate) {
         noteService.save(noteToUpdate)
             .then((savedNote) => {
-                loadNotes()
+                loadNotes();
                 setNotes(prevNotes => prevNotes.map(note => note.id === savedNote.id ? savedNote : note))
                 console.log('updated!')
             })
             .catch(err => {
                 console.log('could not update', err)
+            });
+    }
+
+    function createNewNote(noteToUpdate) {
+        noteService.save(noteToUpdate)
+            .then((savedNote) => {
+                loadNotes()
+                setNotes(prevNotes => [savedNote, ...prevNotes])
+                console.log('created!')
+            })
+            .catch(err => {
+                console.log('could not create', err)
             })
     }
 
@@ -91,7 +110,7 @@ export function NoteIndex() {
         <NoteList
             notes={notes}
             onRemoveNote={onRemoveNote}
-            onUpdateNote={onUpdateNote}
+            setNotes={setNotes}
             onPinNote={onPinNote}
         />
     </section>
