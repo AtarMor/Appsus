@@ -3,53 +3,6 @@ import { utilService } from '../../../services/util.service.js'
 
 const MAIL_KEY = 'mailDB'
 
-const emails = [
-    {
-        id: 'e101',
-        subject: 'Miss you!',
-        body: 'Would love to catch up sometimes',
-        isRead: false,
-        isStarred: true,
-        sentAt: 1551133930594,
-        removedAt: null,
-        from: 'momo@momo.com',
-        to: 'user@appsus.com'
-    },
-    {
-        id: 'e102',
-        subject: 'Love you!',
-        body: 'Would love to meet',
-        isRead: false,
-        isStarred: false,
-        sentAt: null,
-        removedAt: null,
-        from: 'pooo@momo.com',
-        to: 'user@appsus.com'
-    },
-    {
-        id: 'e103',
-        subject: 'Call me!',
-        body: 'Hi! how are you?',
-        isRead: true,
-        isStarred: true,
-        sentAt: null,
-        removedAt: null,
-        from: 'comc@momo.com',
-        to: 'user@appsus.com'
-    },
-    {
-        id: 'e104',
-        subject: 'Call me!',
-        body: 'Hi!!!!',
-        isRead: true,
-        isStarred: false,
-        sentAt: 1551133930194,
-        removedAt: 1551133930194,
-        from: 'user@appsus.com',
-        to: 'user@appsus.com'
-    },
-]
-
 const loggedInUser = {
     email: 'user@appsus.com',
     fullName: 'Mahatma Appsus'
@@ -64,7 +17,8 @@ export const mailService = {
     getFilterFromParams,
     update,
     getEmptyMail,
-    save
+    save,
+    getUnreadMails
 }
 
 function query(filterBy, sortBy) {
@@ -103,6 +57,14 @@ function getFilterFromParams(searchParams = {}) {
     }
 }
 
+function getUnreadMails() {  //unread in inbox 
+    return storageService.query(MAIL_KEY)
+        .then(mails => mails.filter(mail => 
+            !mail.isRead && 
+            mail.removedAt === null && 
+            mail.to === loggedInUser.email))
+}
+
 function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
 }
@@ -121,6 +83,7 @@ function getEmptyMail() {
         subject: '',
         body: '',
         isRead: false,
+        isStarred: false,
         sentAt: null,
         removedAt: null,
         from: loggedInUser.email,
@@ -145,13 +108,46 @@ const criteria = {
 }
 
 function _getDefaultFilter() {
-    return { stat: '', txt: '' }
+    return { stat: 'inbox', txt: '' }
 }
 
 function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
-        mails = emails
+        mails = []
+        for (let i = 0; i <= 30; i++) {
+            mails.push(_createMail())
+        }
         utilService.saveToStorage(MAIL_KEY, mails)
     }
+}
+
+function _createMail() {
+    return {
+        id: utilService.makeId(),
+        subject: utilService.makeLorem(5),
+        body: utilService.makeLorem(50),
+        isRead: Math.random() < 0.5,
+        isStarred: Math.random() < 0.3,
+        sentAt: _getRandSentAt(),
+        removedAt: _getRandRemovedAt(),
+        from: _getRandFrom(),
+        to: _getRandTo(),
+    }
+}
+
+function _getRandSentAt() {
+    return Math.random() > 0.2 ? utilService.makeRandTimestamp() : null
+}
+
+function _getRandRemovedAt() {
+    return Math.random() < 0.3 ? utilService.makeRandTimestamp() : null
+}
+
+function _getRandTo() {
+    return Math.random() < 0.2 ? utilService.makeRandMail() : loggedInUser.email
+}
+
+function _getRandFrom() {
+    return Math.random() > 0.2 ? utilService.makeRandMail() : loggedInUser.email
 }

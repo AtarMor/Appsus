@@ -15,9 +15,14 @@ export function MailIndex() {
     const [isMailEdit, setIsMailEdit] = useState(false)
     const [mailSelected, setMailSelected] = useState(null)
     const [mailStarred, setMailStarred] = useState(null)
+    const [unreadMails, setUnreadMails] = useState(null)
 
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
     const [sortBy, setSortBy] = useState({ type: 'date', dir: -1 })
+
+    mailService.getUnreadMails()
+        .then(unreadMails =>
+            setUnreadMails(unreadMails.length))
 
     const location = useLocation()
     useEffect(() => {
@@ -27,7 +32,6 @@ export function MailIndex() {
     }, [location])
 
     useEffect(() => {
-        console.log('inUseEffect');
         setSearchParams(filterBy)
         loadMails()
     }, [filterBy, sortBy])
@@ -71,11 +75,6 @@ export function MailIndex() {
         setMailStarred({ ...mail, isStarred: !mail.isStarred })
     }
 
-    function UnreadMailCount() {
-        const unreadMails = mails.filter(mail => !mail.isRead)
-        return unreadMails.length
-    }
-
     const { stat, txt } = filterBy
     if (!mails) return <div>loading...</div>
     return <section className="mail-index">
@@ -92,7 +91,7 @@ export function MailIndex() {
         <MailFilterSide
             filterBy={{ stat }}
             onSetFilter={onSetFilter}
-            unreadMails={UnreadMailCount} />
+            unreadMails={unreadMails} />
 
         {!mailSelected && <MailList
             mails={mails}
