@@ -2,9 +2,11 @@ const { useState, useEffect } = React
 const { useParams, useNavigate } = ReactRouter
 const { Link } = ReactRouterDOM
 
-import { mailService } from "../services/mail.service.js"
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { MailEdit } from "../cmps/MailEdit.jsx"
+
+import { mailService } from "../services/mail.service.js"
+import { utilService } from "../../../services/util.service.js"
 
 
 export function MailDetails() {
@@ -58,13 +60,20 @@ export function MailDetails() {
         setIsMailEdit(false)
     }
 
+    
     if (isLoading) return <React.Fragment></React.Fragment>
     if (!mail) return <div>Mail deleted</div>
+
+    const sentDate = new Date(mail.sentAt)
+    const formattedDate = sentDate.getDate() + ' ' + utilService.getMonthName(sentDate).substring(0, 3)
+    
     return <section className="mail-details">
-        <h1>{mail.subject}</h1>
-        <h2>{mail.from}</h2>
-        <h2>{mail.to}</h2>
-        <h3>{mail.sentAt}</h3>
+        <h1 className="mail-subject">{mail.subject}</h1>
+        <h2 className="mail-from"><span>From: </span>{mail.from}
+        <span className="mail-sent-at">{formattedDate} </span>
+        </h2>
+        <h2 className="mail-to"><span>To: </span>{mail.to}</h2>
+        <h3 className="mail-body">{mail.body}</h3>
         <div className="actions">
             {
                 !mail.sentAt && <button onClick={onMailEdit}>Edit</button>
