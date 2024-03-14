@@ -47,3 +47,7 @@
     font-weight: lighter;
     background-color: var(--mail-color11);
 }
+
+.mail-preview.is-read div>* {
+    font-weight: inherit;
+}

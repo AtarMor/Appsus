@@ -1,6 +1,6 @@
 const { useState, useEffect } = React
 
-export function MailFilterSide({ onSetFilter, filterBy }) {
+export function MailFilterSide({ onSetFilter, filterBy, unreadMails }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     // console.log('filterByToEdit:', filterByToEdit)
     useEffect(() => {
@@ -12,7 +12,7 @@ export function MailFilterSide({ onSetFilter, filterBy }) {
     }
 
     return <div className="mail-filter-side">
-        <button onClick={() => handleFilter('inbox')}>Inbox</button>
+        <button onClick={() => handleFilter('inbox')}>Inbox {unreadMails()}</button>
         <button onClick={() => handleFilter('sent')}>Sent</button>
         <button onClick={() => handleFilter('draft')}>Draft</button>
         <button onClick={() => handleFilter('trash')}>Trash</button>
