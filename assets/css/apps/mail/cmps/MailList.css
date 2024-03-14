@@ -7,13 +7,16 @@
     border-bottom: 1px solid var(--mail-gray1);
 }
 
+.mail-list li:first-child {
+    margin-inline-start: 1em;
+}
+
 .mail-list li:first-child button {
     border-radius: 20px;
     background-color: white;
     border: 1px solid var(--mail-gray1);
     padding: 0.3em 0.6em;
     margin: 0.3em;
-    margin-inline-start: 1em;
 }
 
 .mail-list li:first-child button {

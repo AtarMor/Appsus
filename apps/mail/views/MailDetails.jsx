@@ -60,7 +60,6 @@ export function MailDetails() {
     function onCloseMailEdit() {
         setIsMailEdit(false)
     }
-
     
     if (isLoading) return <React.Fragment></React.Fragment>
     if (!mail) return <div>Mail deleted</div>

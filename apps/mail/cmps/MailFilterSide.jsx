@@ -1,8 +1,17 @@
 const { useState, useEffect } = React
+const { useSearchParams } = ReactRouterDOM
+
 
 export function MailFilterSide({ onSetFilter, filterBy, unreadMails }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-    // console.log('filterByToEdit:', filterByToEdit)
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    useEffect(() => {
+        const folder = searchParams.get('stat')
+        if (document.querySelector('.active')) document.querySelector('.active').classList.remove('active')
+        if (folder) document.querySelector(`.${folder}.folder`).classList.add('active')
+    }, [searchParams])
+
     useEffect(() => {
         onSetFilter(filterByToEdit)
     }, [filterByToEdit])
@@ -12,9 +21,9 @@ export function MailFilterSide({ onSetFilter, filterBy, unreadMails }) {
     }
 
     return <div className="mail-filter-side">
-        <button onClick={() => handleFilter('inbox')}>Inbox {unreadMails}</button>
-        <button onClick={() => handleFilter('sent')}>Sent</button>
-        <button onClick={() => handleFilter('draft')}>Draft</button>
-        <button onClick={() => handleFilter('trash')}>Trash</button>
+        <button className="inbox folder" onClick={() => handleFilter('inbox')}>Inbox <span className="unread-count">{unreadMails}</span></button>
+        <button className="sent folder" onClick={() => handleFilter('sent')}>Sent</button>
+        <button className="draft folder" onClick={() => handleFilter('draft')}>Draft</button>
+        <button className="trash folder" onClick={() => handleFilter('trash')}>Trash</button>
     </div>
 }
