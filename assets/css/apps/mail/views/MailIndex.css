@@ -9,6 +9,7 @@ html {
 }
 
 .mail-index .compose-btn {
+    justify-self: start;
     background-color: var(--mail-color3);
     border-radius: 10px;
     padding: 1em;

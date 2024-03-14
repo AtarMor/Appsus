@@ -17,7 +17,7 @@
 }
 
 .mail-filter-side .active {
-    background-color: var(--mail-color3);
+    background-color: var(--mail-color2);
     font-weight: bold;
     border-radius: 30px;
 }

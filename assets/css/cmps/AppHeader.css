@@ -1,5 +1,4 @@
 header {
-
     background: var(--main-bg-color);
 }
 
@@ -7,18 +6,20 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 20px 0;
+    margin-inline: 23px;
 }
 
 nav a {
+    padding: 0.4em 0.6em;
     margin: .5em;
 }
 
-nav a:active {
-    color: purple;
+nav a:hover {
+    background-color: var(--mail-gray1);
+    border-radius: 20px;
 }
 
 nav a.active {
-    color: darkblue;
+    color: var(--mail-color4);
     font-weight: bold;
-    text-decoration: overline;
 }
