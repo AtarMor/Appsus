@@ -11,10 +11,13 @@ import { mailService } from "../services/mail.service.js"
 export function MailIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [mails, setMails] = useState(null)
+
     const [isMailEdit, setIsMailEdit] = useState(false)
-    const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
-    const [sortBy, setSortBy] = useState({type: 'date', dir: -1})
     const [mailSelected, setMailSelected] = useState(null)
+    const [mailStarred, setMailStarred] = useState(null)
+
+    const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
+    const [sortBy, setSortBy] = useState({ type: 'date', dir: -1 })
 
     const location = useLocation()
     useEffect(() => {
@@ -24,9 +27,17 @@ export function MailIndex() {
     }, [location])
 
     useEffect(() => {
+        console.log('inUseEffect');
         setSearchParams(filterBy)
         loadMails()
     }, [filterBy, sortBy])
+
+    useEffect(() => {
+        console.log('mailStarred:', mailStarred)
+        mailService.update(mailStarred)
+            .then(() => loadMails())
+
+    }, [mailStarred])
 
     function loadMails() {
         mailService.query(filterBy, sortBy)
@@ -56,6 +67,10 @@ export function MailIndex() {
         setMailSelected(mailId)
     }
 
+    function onMailStar(mail) {
+        setMailStarred({ ...mail, isStarred: !mail.isStarred })
+    }
+
     function UnreadMailCount() {
         const unreadMails = mails.filter(mail => !mail.isRead)
         return unreadMails.length
@@ -83,7 +98,8 @@ export function MailIndex() {
             mails={mails}
             onMailSelect={onMailSelect}
             sortBy={sortBy}
-            onSetSort={onSetSort} />}
+            onSetSort={onSetSort}
+            onMailStar={onMailStar} />}
 
         <Link to={`/mail/${mailSelected}`} />
         {mailSelected && <Outlet />}
