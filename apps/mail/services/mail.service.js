@@ -31,6 +31,7 @@ function query(filterBy, sortBy) {
                     mail.from === loggedInUser.email)
                 else if (filterBy.stat === 'trash') mails = mails.filter(mail => mail.removedAt)
                 else if (filterBy.stat === 'draft') mails = mails.filter(mail => !mail.sentAt)
+                else if (filterBy.stat === 'starred') mails = mails.filter(mail => mail.isStarred)
             }
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i')
@@ -39,9 +40,6 @@ function query(filterBy, sortBy) {
             if (filterBy.isRead !== undefined) {
                 filterBy.isRead ? mails.filter(mail => mail.isRead) : mails.filter(mail => !mail.isRead)
             }
-            // if (filterBy.isStared !== undefined) {
-            //     filterBy.isStared ? mails.filter(mail => mail.isStared) : mails.filter(mail => !mail.isStared)
-            // }
             if (sortBy.type === 'date') mails.sort((mail1, mail2) => (mail1.sentAt - mail2.sentAt) * sortBy.dir)
             if (sortBy.type === 'subject') mails.sort((mail1, mail2) => (mail1.subject.localeCompare(mail2.subject)) * sortBy.dir)
 
@@ -103,7 +101,7 @@ const criteria = {
     stat: 'inbox/sent/trash/draft',
     txt: 'puki',
     isRead: true, // (optional property, if missing: show all)
-    isStared: true, // (optional property, if missing: show all)
+    isStarred: true, // (optional property, if missing: show all)
     labels: ['important', 'romantic']
 }
 

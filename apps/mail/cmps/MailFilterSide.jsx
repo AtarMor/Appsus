@@ -24,6 +24,7 @@ export function MailFilterSide({ onSetFilter, filterBy, unreadMails }) {
     return <div className="mail-filter-side">
         <header className="mobile-header">Appsus</header>
         <button className="inbox folder" onClick={() => handleFilter('inbox')}>Inbox <span className="unread-count">{unreadMails}</span></button>
+        <button className="starred folder" onClick={() => handleFilter('starred')}>Starred</button>
         <button className="sent folder" onClick={() => handleFilter('sent')}>Sent</button>
         <button className="draft folder" onClick={() => handleFilter('draft')}>Draft</button>
         <button className="trash folder" onClick={() => handleFilter('trash')}>Trash</button>
