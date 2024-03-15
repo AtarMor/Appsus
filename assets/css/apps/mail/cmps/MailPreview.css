@@ -17,15 +17,16 @@
 .mail-preview>* {
     display: inline;
     padding: 0.7em;
-    height: 35px;
 }
 
 .mail-preview .mail-content {
     display: grid;
-    grid-template-columns: 170px 1fr 100px;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 20px 38px;
 }
 
 .mail-preview .mail-subject {
+    grid-row: 2;
     line-height: 1.4;
     overflow-y: hidden;
 }
@@ -33,19 +34,6 @@
 .mail-preview .mail-sent-at {
     text-align: end;
     padding-inline-end: 1.5em;
-}
-
-/* .mail-preview div {
-    margin: 0;
-    padding-inline-start: 15px;
-    /* align-self: stretch; */
-    /* padding-top: 11.5px; */
-    /* z-index: 2; */
-/* } */
-
-.mail-preview.is-read{
-    background-color: var(--mail-color11);
-
 }
 
 .mail-preview.is-read>* {

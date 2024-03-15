@@ -1,17 +1,17 @@
-header {
-    background: var(--main-bg-color);
-}
-
 .app-header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 20px 0;
-    margin-inline: 23px;
+    padding: 1em;
 }
 
 nav a {
     padding: 0.4em 0.6em;
-    margin: .5em;
+    /* margin: .5em; */
+}
+
+nav a:last-child {
+    padding-inline-end: 0;
 }
 
 nav a:hover {
@@ -22,4 +22,18 @@ nav a:hover {
 nav a.active {
     color: var(--mail-color4);
     font-weight: bold;
+}
+
+@media (width > 650px) {
+    html {
+        background-color: var(--main-bg-color);
+    }
+
+    header {
+        background: var(--main-bg-color);
+    }
+
+    .app-header {
+        margin-inline: 23px;
+    }
 }

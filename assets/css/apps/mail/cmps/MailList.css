@@ -7,8 +7,9 @@
     border-bottom: 1px solid var(--mail-gray1);
 }
 
-.mail-list li:first-child {
-    margin-inline-start: 1em;
+.mail-list .sort-list {
+    padding-inline-start: 1em;
+    padding-block-end: 0.5em;
 }
 
 .mail-list li:first-child button {

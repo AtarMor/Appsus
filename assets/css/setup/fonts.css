@@ -26,3 +26,8 @@
     content: "\f005";
     color: #f7ca69;
 }
+
+.solid.circle-user::before {
+    content: "\f2bd";
+    color: #f7ca69;
+}
