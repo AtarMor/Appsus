@@ -7,6 +7,8 @@ html {
 }
 
 .mail-index .compose-btn {
+    display: flex;
+    align-items: center;
     position: absolute;
     bottom: 20px;
     right: 21px;
@@ -16,4 +18,16 @@ html {
     border-radius: 30px;
     box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.302),
         0 4px 8px 3px rgba(60, 64, 67, 0.149);
+}
+
+.mail-index .compose-btn:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('https://www.gstatic.com/images/icons/material/system_gm/2x/create_black_24dp.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    margin-inline-end: 1.5em;
 }

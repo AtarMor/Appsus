@@ -85,7 +85,7 @@ export function MailIndex() {
     const { stat, txt } = filterBy
     if (!mails) return <div>loading...</div>
     return <section className="mail-index">
-        <div class="main-screen" onClick={onToggleMenu}></div>
+        <div className="main-screen" onClick={onToggleMenu}></div>
 
         <button className="compose-btn" onClick={onMailEdit}>Compose</button>
 

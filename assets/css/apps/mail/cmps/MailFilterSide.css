@@ -5,7 +5,10 @@
 }
 
 .mail-filter-side>* {
-    padding: 0.6em 0.6em 0.6em 2em;
+    display: flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 12px 0 26px;
     background-color: var(--main-bg-color);
     text-align: start;
     transition: 0.3s;
@@ -13,14 +16,53 @@
 
 .mail-filter-side>*:hover {
     background-color: var(--mail-gray1);
-    border-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .mail-filter-side .active {
     background-color: var(--mail-red1);
-    border-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
-.mail-filter-side .unread-count {
-    padding-inline-start: 4em;
+.mail-filter-side .inbox {
+    /* position: relative; */
+}
+
+.mail-filter-side>*:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    margin-inline-end: 1.5em;
+}
+
+.mail-filter-side .inbox .unread-count {
+    flex-grow: 1;
+    text-align: end;
+    margin-inline-end: .5em;
+}
+
+.mail-filter-side .inbox::before {
+    background-image: url(//ssl.gstatic.com/ui/v1/icons/mail/gm3/2x/inbox_fill_baseline_p900_20dp.png);
+}
+
+.mail-filter-side .starred::before {
+    background-image: url('//ssl.gstatic.com/ui/v1/icons/mail/gm3/2x/star_baseline_nv700_20dp.png');
+}
+
+.mail-filter-side .sent::before {
+    background-image: url('//ssl.gstatic.com/ui/v1/icons/mail/gm3/2x/send_baseline_nv700_20dp.png');
+}
+
+.mail-filter-side .draft::before {
+    background-image: url('//ssl.gstatic.com/ui/v1/icons/mail/gm3/2x/draft_baseline_nv700_20dp.png');
+}
+
+.mail-filter-side .trash::before {
+    background-image: url('//ssl.gstatic.com/ui/v1/icons/mail/gm3/2x/delete_baseline_nv700_20dp.png');
 }
