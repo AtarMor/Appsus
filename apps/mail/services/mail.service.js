@@ -35,13 +35,16 @@ function query(filterBy, sortBy) {
             }
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i')
-                mails = mails.filter(mail => regex.test(mail.subject) || regex.test(mail.body))
+                mails = mails.filter(mail => regex.test(mail.subject) || regex.test(mail.body) || 
+                regex.test(mail.from) || regex.test(mail.to))
             }
             if (filterBy.isRead !== undefined) {
                 filterBy.isRead ? mails.filter(mail => mail.isRead) : mails.filter(mail => !mail.isRead)
             }
             if (sortBy.type === 'date') mails.sort((mail1, mail2) => (mail1.sentAt - mail2.sentAt) * sortBy.dir)
             if (sortBy.type === 'subject') mails.sort((mail1, mail2) => (mail1.subject.localeCompare(mail2.subject)) * sortBy.dir)
+            if (sortBy.type === 'from') mails.sort((mail1, mail2) => (mail1.from.localeCompare(mail2.from)) * sortBy.dir)
+            if (sortBy.type === 'to') mails.sort((mail1, mail2) => (mail1.to.localeCompare(mail2.to)) * sortBy.dir)
 
             return mails
         })

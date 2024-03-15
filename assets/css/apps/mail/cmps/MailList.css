@@ -13,11 +13,12 @@
 }
 
 .mail-list li:first-child button {
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: white;
-    border: 1px solid var(--mail-gray1);
-    padding: 0.3em 0.6em;
+    border: 1px solid var(--mail-gray2);
+    padding: 0.4em 1em;
     margin: 0.3em;
+    gap: 8px;
 }
 
 .mail-list li:first-child button {
@@ -27,6 +28,7 @@
 
 .sort-list {
     display: flex;
+
 }
 
 .sort-list h5 {

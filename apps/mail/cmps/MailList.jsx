@@ -3,26 +3,30 @@ const { Link } = ReactRouterDOM
 import { MailPreview } from "./MailPreview.jsx"
 
 export function MailList({ mails, onMailSelect, sortBy, onSetSort, onMailStar }) {
-    let dateArrow = "assets/img/down-arrow.svg"
-    let subjectArrow = "assets/img/down-arrow.svg"
+    let fromDir = 'solid caret-down'
+    let dateDir = 'solid caret-down'
+    let subjectDir = 'solid caret-down'
+    let toDir = 'solid caret-down'
 
-    if (sortBy.type === 'date') {
-        dateArrow = (sortBy.dir === 1) ? "assets/img/up-arrow.svg" : "assets/img/down-arrow.svg"
+    if (sortBy.type === 'from') {
+        fromDir = (sortBy.dir === 1) ? 'solid caret-up' : 'solid caret-down'
+    }
+    else if (sortBy.type === 'date') {
+        dateDir = (sortBy.dir === 1) ? 'solid caret-up' : 'solid caret-down'
     }
     else if (sortBy.type === 'subject') {
-        subjectArrow = (sortBy.dir === 1) ? "assets/img/up-arrow.svg" : "assets/img/down-arrow.svg"
+        subjectDir = (sortBy.dir === 1) ? 'solid caret-up' : 'solid caret-down'
+    }
+    else if (sortBy.type === 'to') {
+        toDir = (sortBy.dir === 1) ? 'solid caret-up' : 'solid caret-down'
     }
 
     return <ul className="mail-list clean-list">
         <li className="sort-list">
-            <button onClick={() => onSetSort('date')}>
-                <img className="arrow" src={dateArrow} alt="arrow" />
-                <h5>Date</h5>
-            </button>
-            <button onClick={() => onSetSort('subject')}>
-                <img className="arrow" src={subjectArrow} alt="arrow" />
-                <h5>Subject</h5>
-            </button>
+            <button className={fromDir} onClick={() => onSetSort('from')}>From</button>
+            <button className={dateDir} onClick={() => onSetSort('date')}>Date</button>
+            <button className={subjectDir} onClick={() => onSetSort('subject')}>Subject</button>
+            <button className={toDir} onClick={() => onSetSort('to')}>To</button>
         </li>
         {
             mails.map(mail => <li key={mail.id}>

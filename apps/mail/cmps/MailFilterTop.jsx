@@ -13,7 +13,7 @@ export function MailFilterTop({ onSetFilter, filterBy, onToggleMenu }) {
     }
 
     return <div className="mail-filter-top">
-        <button class="toggle-menu-btn" onClick={onToggleMenu}>☰</button>
+        <button className="toggle-menu-btn" onClick={onToggleMenu}>☰</button>
 
         <input
             type="text"

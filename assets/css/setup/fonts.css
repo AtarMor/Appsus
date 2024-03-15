@@ -17,6 +17,9 @@
 .solid::before {
     font-family: solid;
 }
+.solid::after {
+    font-family: solid;
+}
 
 .fa.star::before {
     content: "\f005";
@@ -30,4 +33,16 @@
 .solid.circle-user::before {
     content: "\f2bd";
     color: #f7ca69;
+}
+
+.solid.caret-up::after {
+    content: "\f0d8";
+}
+
+.solid.caret-down::after {
+    content: "\f0d7";
+}
+
+.solid.angle-up::before {
+    content: "\f106";
 }
