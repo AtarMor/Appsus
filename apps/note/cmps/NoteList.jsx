@@ -84,6 +84,7 @@ export function NoteList({ notes, onRemoveNote, onPinNote, onUpdateNote }) {
                         {noteService.renderActionButton("edit-btn", () => handleEditNote(note), "fa-solid fa-pen-to-square")}
                         {/* EDIT NEEDS TO BE WHEN WE CLICK ON A NOTE*/}
                         {/* NEED TO ADD TOOLTIPS */}
+                        {/* NEED TO ADD MODAL TO BE A CHILD OF THE ELEMENT SO IT APPEARS BELOW IT!!!*/}
                     </div>
                 </li>
             ))}

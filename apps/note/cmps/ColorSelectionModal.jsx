@@ -19,6 +19,7 @@ export function ColorSelectionModal({ colors, onClose, onColorSelect, currentCol
                         key={index}
                         className="color-option"
                         // className={`color-option ${color === currentColor ? "current-color" : ''}`}
+                        //TODO need to try to make this work...
                         style={{ backgroundColor: color }}
                         onClick={() => handleColorSelect(color)}
                     ></div>
