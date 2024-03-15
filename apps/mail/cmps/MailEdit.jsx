@@ -59,7 +59,7 @@ export function MailEdit({ onCloseMailEdit, isNew=false }) {
             </div>
 
             <div className="subject">
-                <input
+                <textarea
                     type="text"
                     placeholder="Subject"
                     name="subject"
@@ -71,6 +71,7 @@ export function MailEdit({ onCloseMailEdit, isNew=false }) {
             <div className="body">
                 <textarea
                     type="text"
+                    placeholder="Compose mail"
                     name="body"
                     onChange={handleChange}
                     value={body}

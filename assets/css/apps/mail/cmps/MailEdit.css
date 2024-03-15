@@ -3,11 +3,11 @@
     flex-direction: column;
     position: fixed;
     bottom: 0;
-    width: 100dvw;
+    left: 0;
+    width: 100%;
     height: 100dvh;
     z-index: 3;
     background-color: var(--main-bg-color);
-
 }
 
 .mail-edit>* {
@@ -17,6 +17,7 @@
 .mail-edit header {
     position: relative;
     margin-block-start: 40px;
+    margin-inline-end: 15px;
 }
 
 .mail-edit header>* {
@@ -26,15 +27,15 @@
 
 .mail-edit header button {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 15px;
+    right: 0px;
     background-color: transparent;
 }
 
 .mail-edit form {
     flex-grow: 1;
     display: grid;
-    grid-template-rows: 40px 40px 1fr 50px;
+    grid-template-rows: 30px 30px 1fr 50px;
     background-color: white;
     padding-block: 0.2em;
 }
@@ -47,13 +48,22 @@
 }
 
 .mail-edit textarea {
-    width: 368px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
     resize: none;
     border: none;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.4em;
-    margin-top: 6px;
+    padding-block: 0.5em;
+}
+
+.mail-edit .subject {
+    display: flex;
+    align-items: end;
+}
+
+.mail-edit .subject textarea {
+    border-block-end: 1px solid var(--mail-gray1);
 }
 
 .mail-edit .send-btn {
@@ -77,6 +87,7 @@
             0px 3px 14px 2px rgba(0, 0, 0, .12),
             0px 5px 5px -3px rgba(0, 0, 0, .2);
         border-radius: 5px;
+        left: unset
     }
 
     .mail-edit header {

@@ -1,5 +1,6 @@
 .mail-details {
     min-height: 500px;
+    min-width:300px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -53,7 +54,7 @@
 
 .mail-details .actions {
     display: flex;
-    gap: 20px;
+    gap: 10px;
 }
 
 .mail-details .actions button {
