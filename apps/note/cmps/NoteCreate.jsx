@@ -1,18 +1,26 @@
 const { useState, useEffect } = React
 import { noteService } from "../services/note.service.js"
 import NoteCreateExpand from "./NoteCreateExpand.jsx"
+import useClickAway from "../services/useClickAway.js"
 
 export function NoteCreate() {
   const [isOpen, setIsOpen] = useState(false)
   const [noteType, setNoteType] = useState('')
+
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+  const ref = useClickAway(handleClose);
+
 
   function handleUserInteraction(type) {
     setIsOpen(true)
     setNoteType(type)
   }
 
+  //TODO FIX THIS 
   return (
-    <section className="input-container">
+    <section className="input-container" ref={ref}>
       {!isOpen && (
         <React.Fragment>
           <input type="text" className="input-field" placeholder="Take a note..." onClick={() => handleUserInteraction('NoteTxt')} />

@@ -24,5 +24,27 @@ export default function NoteCreateExpand({ noteType }) {
     }
   }
 
-  return (<React.Fragment>{returnNoteCreator()}</React.Fragment>)
+  return (<React.Fragment>
+    <section className="note-creator-container">
+      <div className="title-input-container">
+        <input type="text" className="title-input" placeholder="Title"></input>
+        <button className="pin-btn" onClick={console.log('pinned!')}>pin</button>
+      </div>
+      <div className="dynamic-cmp">
+        {returnNoteCreator()}
+      </div>
+      <div className="footer-btns-container">
+        <div className="footer-action-btns">
+          <button>a</button>
+          <button>b</button>
+          <button>c</button>
+          <button>d</button>
+        </div>
+        <div className="footer-close-btn">
+          <button>close</button>
+        </div>
+      </div>
+
+    </section>
+  </React.Fragment>)
 }

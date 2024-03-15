@@ -71,7 +71,7 @@ export function NoteList({ notes, onRemoveNote, onPinNote, onUpdateNote }) {
         <ul className="note-list">
             {notes.map((note) => (
                 <li key={note.id} className="note-item" style={{
-                    backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'whitesmoke'
+                    backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white'
                 }}>
                     <Link to={`/note/${note.id}`} className="note-link">
                         <NotePreview note={note} />

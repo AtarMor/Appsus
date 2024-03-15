@@ -1,0 +1,38 @@
+.note-creator-container {
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto;
+  margin-block: 25px;
+  width: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.30);
+  border-radius: 8px;
+}
+
+.title-input-container {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.dynamic-cmp {
+  background-color: white;
+  padding: 10px;
+}
+
+.footer-btns-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: white;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 10px;
+}
+
+.footer-action-btns {
+  display: flex;
+  gap: 30px;
+}
