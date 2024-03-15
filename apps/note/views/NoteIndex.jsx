@@ -35,17 +35,6 @@ export function NoteIndex() {
       })
   }
 
-  function onRemoveNote(noteId) {
-    noteService.remove(noteId)
-      .then(() => {
-        setNotes((prevNotes) => prevNotes.filter(note => note.id !== noteId))
-        console.log('note removed!') //TODO replace with message
-      })
-      .catch((err) => {
-        console.log('could not remove note', err) //TODO replace with message
-      })
-  }
-
   function onUpdateNote(noteToUpdate) {
     if (noteToUpdate.id) {
       updateExistingNote(noteToUpdate)
@@ -78,16 +67,6 @@ export function NoteIndex() {
       })
   }
 
-  function onPinNote(noteToUpdate) {
-    const updatedNote = {
-      ...noteToUpdate,
-      isPinned: !noteToUpdate.isPinned,
-    }
-    console.log(noteToUpdate)
-    onUpdateNote(updatedNote)
-  }
-
-
   console.log('hardcoded notes:', notes)
 
   const { title } = filterBy
@@ -117,9 +96,8 @@ export function NoteIndex() {
 
         <NoteList
           notes={notes}
-          onRemoveNote={onRemoveNote}
           onUpdateNote={onUpdateNote}
-          onPinNote={onPinNote}
+          setNotes={setNotes}
         />
       </section>
     </React.Fragment>)
