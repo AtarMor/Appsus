@@ -69,7 +69,7 @@ export function MailEdit({ onCloseMailEdit, isNew=false }) {
             </div>
 
             <div className="body">
-                <input
+                <textarea
                     type="text"
                     name="body"
                     onChange={handleChange}
@@ -77,7 +77,7 @@ export function MailEdit({ onCloseMailEdit, isNew=false }) {
                 />
             </div>
 
-            <button>Send</button>
+            <button className="send-btn">Send</button>
         </form>
     </section>
 

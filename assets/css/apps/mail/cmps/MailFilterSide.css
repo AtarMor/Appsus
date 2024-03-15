@@ -8,13 +8,13 @@
     display: flex;
     align-items: center;
     height: 32px;
+    background-color: white;
     padding: 0 12px 0 26px;
-    background-color: var(--main-bg-color);
     text-align: start;
     transition: 0.3s;
 }
 
-.mail-filter-side>*:hover {
+.mail-filter-side>*:not(.active):hover {
     background-color: var(--mail-gray1);
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -22,12 +22,9 @@
 
 .mail-filter-side .active {
     background-color: var(--mail-red1);
+    color: var(--mail-red2);
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
-}
-
-.mail-filter-side .inbox {
-    /* position: relative; */
 }
 
 .mail-filter-side>*:before {
@@ -39,6 +36,25 @@
     background-repeat: no-repeat;
     background-size: 20px;
     margin-inline-end: 1.5em;
+}
+/* 
+.mail-filter-side>*.active:before{
+    color: var(--mail-red2);
+} */
+
+.mail-filter-side .mobile-header {
+    padding-inline-start: 0.6em;
+    display: inline-block;
+    margin-top: 2em;
+    border-bottom: 1px solid var(--mail-gray1);
+}
+
+.mail-filter-side .mobile-header:hover {
+    background-color: transparent;
+}
+
+.mail-filter-side .inbox {
+    margin-block-start: 0.5em;
 }
 
 .mail-filter-side .inbox .unread-count {

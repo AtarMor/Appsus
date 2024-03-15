@@ -60,19 +60,22 @@ export function MailDetails() {
     function onCloseMailEdit() {
         setIsMailEdit(false)
     }
-    
+
     if (isLoading) return <React.Fragment></React.Fragment>
     if (!mail) return <div>Mail deleted</div>
 
     const sentDate = new Date(mail.sentAt)
     const formattedDate = sentDate.getDate() + ' ' + utilService.getMonthName(sentDate).substring(0, 3)
-    
+
     return <section className="mail-details">
         <h1 className="mail-subject">{mail.subject}</h1>
-        <h2 className="mail-from"><span>From: </span>{mail.from}
-        <span className="mail-sent-at">{formattedDate} </span>
-        </h2>
-        <h2 className="mail-to"><span>To: </span>{mail.to}</h2>
+        <div className="mail-send-details solid circle-user">
+            <h2 className="mail-from"><span >From: </span>{mail.from}
+                <span className="mail-sent-at">{formattedDate} </span>
+                {/* <span className="mail-details-star"> </span> */}
+            </h2>
+            <h2 className="mail-to"><span>To: </span>{mail.to}</h2>
+        </div>
         <h3 className="mail-body">{mail.body}</h3>
         <div className="actions">
             {

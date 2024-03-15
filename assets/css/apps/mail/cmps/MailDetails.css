@@ -2,20 +2,23 @@
     min-height: 500px;
     display: flex;
     flex-direction: column;
-    /* gap: 30px; */
+    gap: 20px;
     grid-area: 2/2;
     background-color: white;
     border-radius: 20px;
     padding: 2em;
 }
 
-.mail-details >*{
+.mail-details>* {
+    font-weight: lighter;
+}
+
+.mail-details .mail-send-details>* {
     font-weight: lighter;
 }
 
 .mail-details .mail-subject {
     font-size: 1.5rem;
-    margin-block-end: 15px;
 }
 
 .mail-details h2 {
@@ -26,17 +29,26 @@
     font-weight: bold;
 }
 
-.mail-details .mail-sent-at {
-    margin-inline-start: 20px;
+.mail-details .mail-send-details {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: 20px 20px;
 }
 
-.mail-details .mail-to {
-    margin-block-end: 25px;
+.mail-details .mail-send-details::before {
+    grid-row: span 2;
+    font-size: 2rem;
+    ;
+}
+
+.mail-details .mail-sent-at {
+    margin-inline-start: 20px;
 }
 
 .mail-details .mail-body {
     font-size: 0.9rem;
     flex-grow: 1;
+    line-height: 1.5em;
 }
 
 .mail-details .actions {
@@ -52,5 +64,5 @@
 }
 
 .mail-details .actions button:hover {
-    background-color: rgba(32,33,36,0.059)
+    background-color: rgba(32, 33, 36, 0.059)
 }
