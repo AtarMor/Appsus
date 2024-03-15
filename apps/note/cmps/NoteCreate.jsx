@@ -28,7 +28,7 @@ export function NoteCreate() {
             {noteService.renderActionButton("txt-input-btn", () => handleUserInteraction('NoteTxt'), "fa-solid fa-font")}
             {noteService.renderActionButton("img-input-btn", () => handleUserInteraction('NoteImg'), "fa-solid fa-image")}
             {noteService.renderActionButton("video-input-btn", () => handleUserInteraction('NoteVideo'), "fa-brands fa-youtube")}
-            {noteService.renderActionButton("audio-input-btn", () => handleUserInteraction('NoteAudio'), "fa-solid fa-microphone")}
+            {noteService.renderActionButton("audio-input-btn", () => handleUserInteraction('NoteAudio'), "fa-solid fa-volume-high")}
             {noteService.renderActionButton("list-input-btn", () => handleUserInteraction('NoteTodos'), "fa-solid fa-list-check")}
           </div>
         </React.Fragment>

@@ -141,12 +141,12 @@ function save(note) {
   if (note.id) {
     return storageService.put(NOTE_KEY, note)
   } else {
-    note = createNote(note.type, note.info)
+    // note = createNote(note.title, note.type, note.isPinned, note.info, note.style)
     return storageService.post(NOTE_KEY, note)
   }
 }
 
-function getEmptyNote(type = '', info = {}) {
+function getEmptyNote(type = '', info) {
   return {
     id: '',
     createdAt: 0,
@@ -155,7 +155,7 @@ function getEmptyNote(type = '', info = {}) {
     style: {
       backgroundColor: 'white',
     },
-    info: {},
+    info: '',
   }
 }
 
@@ -192,28 +192,45 @@ function _createHardCodedNotes(notes) {
   }
 }
 
-function createNote(type = 'NoteTxt', isPinned, info = { txt: 'Defaultest of notes' }, style) {
+function createNote(title = '', type, isPinned, info = '', style) {
   const note = getEmptyNote(type, info)
-  note.id = utilService.makeId()
   note.createdAt = Date.now()
   note.isPinned = isPinned
   note.style = style
-  note.info = info
+  note.info = { title }
+  switch (type) {
+    case 'NoteTxt':
+      note.info.txt = info
+      break
+    case 'NoteTodos':
+      const splitList = info.split(',')
+      note.info.todos = splitList.map(item => ({ txt: item, doneAt: null }))
+      break
+    case 'NoteImg':
+      note.info.url = info
+      break
+    case 'NoteVideo':
+      note.info.url = getYouTubeId(info)
+      break
+    case 'NoteAudio':
+      note.info.url = info
+      break
+  }
 
   return note
 }
 
 
-// function _setNextPrevId(note) {
-//     return storageService.query(NOTE_KEY).then((notes) => {
-//         const carIdx = notes.findIndex((currNote) => currNote.id === note.id)
-//         const nextNote = notes[carIdx + 1] ? notes[carIdx + 1] : notes[0]
-//         const prevNote = notes[carIdx - 1] ? notes[carIdx - 1] : notes[notes.length - 1]
-//         note.nextCarId = nextNote.id
-//         note.prevCarId = prevNote.id
-//         return note
-//     })
-// }
+function _setNextPrevId(note) {
+  return storageService.query(NOTE_KEY).then((notes) => {
+    const carIdx = notes.findIndex((currNote) => currNote.id === note.id)
+    const nextNote = notes[carIdx + 1] ? notes[carIdx + 1] : notes[0]
+    const prevNote = notes[carIdx - 1] ? notes[carIdx - 1] : notes[notes.length - 1]
+    note.nextCarId = nextNote.id
+    note.prevCarId = prevNote.id
+    return note
+  })
+}
 
 function renderActionButton(className, onClick, iconClassName, style) {
   return (
@@ -223,4 +240,12 @@ function renderActionButton(className, onClick, iconClassName, style) {
       </button>
     </div>
   )
+}
+
+function getYouTubeId(url) {
+  const regex = /(?:v=)(.{11})/
+  const match = url.match(regex)
+  if (match && match[1]) {
+    return match[1]
+  }
 }

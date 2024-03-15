@@ -39,21 +39,22 @@ export default function NoteCreateExpand({ noteType, handleClose }) {
   }
 
   function createNewNote() {
-    console.log('created')
-    noteService.createNote(noteType, isPinned, info, {})
+    const createdNote = noteService.createNote(title, noteType, isPinned, info, {})
+    noteService.save(createdNote)
+      .then(savedNote => {
+        console.log('note saved!', savedNote)
+      })
+      .catch(err => {
+        console.log('could not save note', err)
+      })
+
   }
 
   function checkIfCanSave() {
-
     if (title.length || info.length) {
       return true
     }
     return false
-  }
-
-  function getNoteList() {
-    const splitList = info.list.split(',')
-    return splitList.map(item => ({ txt: item, doneAt: null }))
   }
 
   return (<React.Fragment>
