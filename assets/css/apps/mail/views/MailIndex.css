@@ -2,7 +2,8 @@ html {
     background-color: white;
 }
 
-.mail-index input:focus {
+.mail-index input:focus,
+.mail-index textarea {
     outline: none;
 }
 

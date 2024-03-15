@@ -26,6 +26,9 @@
 
 /* Small */
 @media (width > 520px) {
+    html {
+        background-color: var(--main-bg-color);
+    }
 
     .mail-preview div.mail-content {
         display: grid;
@@ -42,13 +45,14 @@
         grid-column: 2;
     }
 
+    .mail-preview.is-read {
+        background-color: var(--mail-color11);
+    }
 }
 
 /* Medium */
 @media (width > 650px) {
-    html {
-        background-color: var(--main-bg-color);
-    }
+    
 
     .mail-index {
         display: grid;
@@ -113,11 +117,8 @@
         background-color: var(--mail-color1);
     }
 
-    .mail-list {
+    .mail-list,
+    .mail-details {
         margin-inline-end: 15px;
-    }
-
-    .mail-preview.is-read {
-        background-color: var(--mail-color11);
     }
 }
