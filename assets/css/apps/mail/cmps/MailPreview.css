@@ -1,9 +1,13 @@
-.mail-preview {
+.mail-list .mail-preview {
     width: 100%;
     display: grid;
     grid-template-columns: 40px 1fr;
-    font-size: 0.7rem;
+    font-size: 0.875rem;
     align-items: center;
+}
+
+.mail-content>* {
+    font-size: 0.875rem;
 }
 
 .mail-preview:hover {
@@ -29,6 +33,11 @@
     grid-row: 2;
     line-height: 1.4;
     overflow-y: hidden;
+}
+
+.mail-preview .mail-body {
+    color: var(--mail-gray2);
+    font-weight: lighter;
 }
 
 .mail-preview .mail-sent-at {

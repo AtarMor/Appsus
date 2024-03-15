@@ -9,7 +9,7 @@
 
 .mail-list .sort-list {
     padding-inline-start: 1em;
-    padding-block-end: 0.5em;
+    padding-block: 0.5em;
 }
 
 .mail-list li:first-child button {
@@ -30,7 +30,7 @@
 }
 
 .sort-list h5 {
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     font-weight: lighter;
 }
 

@@ -12,7 +12,7 @@ export function MailPreview({ mail, onMailSelect, onMailStar }) {
     <div className={`star ${starClass}`} onClick={() => onMailStar(mail)}></div>
     <div className="mail-content" onClick={() => onMailSelect(mail.id)}>
       <h3 className="mail-from">{mail.from}</h3>
-      <h3 className="mail-subject">{mail.subject} - {mail.body}</h3>
+      <h3 className="mail-subject">{mail.subject} <span className="mail-body">- {mail.body}</span></h3>
       <h3 className="mail-sent-at">{formattedDate}</h3>
     </div>
   </article>

@@ -13,6 +13,7 @@ html {
     align-items: center;
     bottom: 20px;
     right: 20px;
+    font-size: 0.875rem;
     color: var(--mail-red2);
     background: white;
     padding: 0.8em;
