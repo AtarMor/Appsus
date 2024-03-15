@@ -3,7 +3,7 @@ import { noteService } from "../services/note.service.js"
 import NoteCreateExpand from "./NoteCreateExpand.jsx"
 import useClickAway from "../services/useClickAway.js"
 
-export function NoteCreate() {
+export function NoteCreate({ loadNotes }) {
   const [isOpen, setIsOpen] = useState(false)
   const [noteType, setNoteType] = useState('')
 
@@ -33,7 +33,11 @@ export function NoteCreate() {
           </div>
         </React.Fragment>
       )}
-      {isOpen && <NoteCreateExpand noteType={noteType} handleClose={handleClose} />}
+      {isOpen && <NoteCreateExpand
+        noteType={noteType}
+        handleClose={handleClose}
+        loadNotes={loadNotes}
+      />}
     </section>
   )
 }

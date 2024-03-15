@@ -68,14 +68,19 @@
 }
 
 .note-filter {
-    grid-area: 1 / 2 / 2 / 3;
+    width: 50%;
 }
 
 .note-filter .input-field {
-    width: 74%;
-    border-radius: 5px;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 8px;
     padding: 1em;
     background-color: rgb(230, 230, 230);
+}
+
+.note-filter .input-field:focus-visible {
+    outline: none;
 }
 
 input::-webkit-search-cancel-button {
@@ -85,7 +90,6 @@ input::-webkit-search-cancel-button {
 }
 
 .btns-container {
-    /* grid-area: 1 / 1 / 2 / 2; */
     margin-left: 1em;
 }
 

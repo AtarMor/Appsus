@@ -119,9 +119,9 @@ export const noteService = {
 function query(filterBy = getDefaultFilter()) {
   return storageService.query(NOTE_KEY)
     .then(notes => {
-      if (filterBy.type) {
-        const regex = new RegExp(filterBy.type, 'i')
-        notes = notes.filter(note => regex.test(note.type))
+      if (filterBy.title) {
+        const regex = new RegExp(filterBy.title, 'i')
+        notes = notes.filter(note => regex.test(note.info.title) || (note.info.txt && regex.test(note.info.txt)))
       }
       notes.sort((a, b) => (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0))
       return notes
@@ -162,13 +162,13 @@ function getEmptyNote(type = '', info) {
 //TODO filter stuff
 function getDefaultFilter() {
   //TODO add more
-  return { type: '' }
+  return { title: '' }
 }
 
 function getFilterFromParams(searchParams = {}) {
   const defaultFilter = getDefaultFilter()
   return {
-    type: searchParams.get('type') || defaultFilter.type,
+    title: searchParams.get('title') || defaultFilter.title,
     //TODO add more
   }
 }

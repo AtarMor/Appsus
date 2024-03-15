@@ -8,6 +8,10 @@
   border-radius: 8px;
 }
 
+.note-creator-container input:focus-visible {
+  outline: none;
+}
+
 .title-input-container {
   background-color: white;
   display: flex;

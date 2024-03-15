@@ -8,7 +8,7 @@ import NoteTodos from "./dynamic-cmps/NoteTodos.jsx"
 import NoteTxt from "./dynamic-cmps/NoteTxt.jsx"
 import NoteVideo from "./dynamic-cmps/NoteVideo.jsx"
 
-export default function NoteCreateExpand({ noteType, handleClose }) {
+export default function NoteCreateExpand({ noteType, handleClose, loadNotes }) {
   const [isPinned, setIsPinned] = useState(false)
   const [title, setTitle] = useState('')
 
@@ -42,6 +42,8 @@ export default function NoteCreateExpand({ noteType, handleClose }) {
     const createdNote = noteService.createNote(title, noteType, isPinned, info, {})
     noteService.save(createdNote)
       .then(savedNote => {
+        loadNotes()
+        handleClose()
         console.log('note saved!', savedNote)
       })
       .catch(err => {

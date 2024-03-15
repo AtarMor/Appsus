@@ -1,8 +1,9 @@
- /* note index */
- .note-create-container {
-   border-top: 1px solid rgb(216, 216, 216);
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   place-items: center;
- }
+.note-create-container {
+  border-top: 1px solid rgb(216, 216, 216);
+  display: flex;
+  /* Change this if needed */
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  place-items: center;
+}

@@ -90,33 +90,37 @@ export function NoteIndex() {
 
   console.log('hardcoded notes:', notes)
 
-  const { check, type } = filterBy
+  const { title } = filterBy
 
   if (!notes) return <div>loading...</div>
 
-  return <React.Fragment> <div className="note-create-container">  <NoteCreate />
-    {/* <NoteFilter
-    onSetFilter={onSetFilter}
-    filterBy={{ type }} />
+  return (
+    <React.Fragment>
+      <div className="note-create-container">
+        <NoteCreate
+          loadNotes={loadNotes} />
+        <NoteFilter
+          onSetFilter={onSetFilter}
+          filterBy={{ title }} />
 
-  <NoteSubFilter
-    filterBy={{ check }}
-    onSetFilter={onSetFilter}
-  /> */}
-  </div>
-    <section className="note-index">
-
-
-      <div className="btns-container">
-        {/* <Link to="/note/edit"><button className='create-btn'>New Note</button></Link> */}
+        {/* <NoteSubFilter
+      filterBy={{ check }}
+      onSetFilter={onSetFilter}
+    /> */}
       </div>
+      <section className="note-index">
 
-      <NoteList
-        notes={notes}
-        onRemoveNote={onRemoveNote}
-        onUpdateNote={onUpdateNote}
-        onPinNote={onPinNote}
-      />
-    </section>
-  </React.Fragment>
+
+        <div className="btns-container">
+          {/* <Link to="/note/edit"><button className='create-btn'>New Note</button></Link> */}
+        </div>
+
+        <NoteList
+          notes={notes}
+          onRemoveNote={onRemoveNote}
+          onUpdateNote={onUpdateNote}
+          onPinNote={onPinNote}
+        />
+      </section>
+    </React.Fragment>)
 }
