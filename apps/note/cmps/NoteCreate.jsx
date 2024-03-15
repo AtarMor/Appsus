@@ -33,7 +33,7 @@ export function NoteCreate() {
           </div>
         </React.Fragment>
       )}
-      {isOpen && <NoteCreateExpand noteType={noteType} />}
+      {isOpen && <NoteCreateExpand noteType={noteType} handleClose={handleClose} />}
     </section>
   )
 }

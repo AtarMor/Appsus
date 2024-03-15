@@ -1,34 +1,66 @@
+const { useState, useEffect } = React
+
+import { noteService } from "../services/note.service.js"
+
 import NoteAudio from "./dynamic-cmps/NoteAudio.jsx"
 import NoteImg from "./dynamic-cmps/NoteImg.jsx"
 import NoteTodos from "./dynamic-cmps/NoteTodos.jsx"
 import NoteTxt from "./dynamic-cmps/NoteTxt.jsx"
 import NoteVideo from "./dynamic-cmps/NoteVideo.jsx"
 
+export default function NoteCreateExpand({ noteType, handleClose }) {
+  const [isPinned, setIsPinned] = useState(false)
+  const [title, setTitle] = useState('')
 
-export default function NoteCreateExpand({ noteType }) {
+  const [info, setInfo] = useState('')
+
 
   function returnNoteCreator() {
     switch (noteType) {
       case 'NoteTxt':
-        return <NoteTxt />
+        return <NoteTxt info={info} setInfo={setInfo} />
       case 'NoteImg':
-        return <NoteImg />
+        return <NoteImg info={info} setInfo={setInfo} />
       case 'NoteVideo':
-        return <NoteVideo />
+        return <NoteVideo info={info} setInfo={setInfo} />
       case 'NoteAudio':
-        return <NoteAudio />
+        return <NoteAudio info={info} setInfo={setInfo} />
       case 'NoteTodos':
-        return <NoteTodos />
+        return <NoteTodos info={info} setInfo={setInfo} />
       default:
-        return <NoteTxt />
+        return <NoteTxt info={info} setInfo={setInfo} />
     }
+  }
+
+  function handleNoteSave() {
+    const canSave = checkIfCanSave()
+    if (canSave) createNewNote()
+    else handleClose()
+  }
+
+  function createNewNote() {
+    console.log('created')
+    noteService.createNote(noteType, isPinned, info, {})
+  }
+
+  function checkIfCanSave() {
+
+    if (title.length || info.length) {
+      return true
+    }
+    return false
+  }
+
+  function getNoteList() {
+    const splitList = info.list.split(',')
+    return splitList.map(item => ({ txt: item, doneAt: null }))
   }
 
   return (<React.Fragment>
     <section className="note-creator-container">
       <div className="title-input-container">
-        <input type="text" className="title-input" placeholder="Title"></input>
-        <button className="pin-btn" onClick={console.log('pinned!')}>pin</button>
+        <input type="text" className="title-input" placeholder="Title" value={title} onChange={(ev) => setTitle(ev.target.value)} />
+        <button className="pin-btn" onClick={() => setIsPinned(!isPinned)}>{isPinned ? 'unpin' : 'pin'}</button>
       </div>
       <div className="dynamic-cmp">
         {returnNoteCreator()}
@@ -41,7 +73,7 @@ export default function NoteCreateExpand({ noteType }) {
           <button>d</button>
         </div>
         <div className="footer-close-btn">
-          <button>close</button>
+          <button onClick={handleNoteSave}>close</button>
         </div>
       </div>
 

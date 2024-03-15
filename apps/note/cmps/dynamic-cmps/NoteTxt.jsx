@@ -1,7 +1,8 @@
-export default function NoteTxt() {
 
-
+export default function NoteTxt({ info, setInfo }) {
   return (
-    <div>NoteTxt</div>
+    <React.Fragment>
+      <input className="note-text-input" placeholder="Take a note..." value={info} onChange={(ev) => setInfo(ev.target.value)} />
+    </React.Fragment>
   )
 }

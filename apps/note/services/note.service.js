@@ -113,6 +113,7 @@ export const noteService = {
   getDefaultFilter,
   getFilterFromParams,
   renderActionButton,
+  createNote,
 }
 
 function query(filterBy = getDefaultFilter()) {
@@ -140,7 +141,7 @@ function save(note) {
   if (note.id) {
     return storageService.put(NOTE_KEY, note)
   } else {
-    note = _createNote(note.type, note.info)
+    note = createNote(note.type, note.info)
     return storageService.post(NOTE_KEY, note)
   }
 }
@@ -151,7 +152,9 @@ function getEmptyNote(type = '', info = {}) {
     createdAt: 0,
     type,
     isPinned: false,
-    style: {},
+    style: {
+      backgroundColor: 'white',
+    },
     info: {},
   }
 }
@@ -175,7 +178,7 @@ function _createNotes() {
   let notes = utilService.loadFromStorage(NOTE_KEY)
   if (!notes || !notes.length) {
     notes = []
-    notes.push(_createNote('NoteTxt'))
+    notes.push(createNote('NoteTxt'))
   }
 
 }
@@ -189,13 +192,17 @@ function _createHardCodedNotes(notes) {
   }
 }
 
-function _createNote(type = 'NoteTxt', info = { txt: 'Defaultest of notes' }) {
+function createNote(type = 'NoteTxt', isPinned, info = { txt: 'Defaultest of notes' }, style) {
   const note = getEmptyNote(type, info)
   note.id = utilService.makeId()
   note.createdAt = Date.now()
+  note.isPinned = isPinned
+  note.style = style
+  note.info = info
 
   return note
 }
+
 
 // function _setNextPrevId(note) {
 //     return storageService.query(NOTE_KEY).then((notes) => {

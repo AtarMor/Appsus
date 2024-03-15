@@ -1,6 +1,8 @@
 
-export default function NoteVideo() {
+export default function NoteVideo({ info, setInfo }) {
   return (
-    <div>NoteVideo</div>
+    <React.Fragment>
+      <input className="note-video-input" placeholder="Enter video URL..." value={info} onChange={(ev) => setInfo(ev.target.value)} />
+    </React.Fragment>
   )
 }
