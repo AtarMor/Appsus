@@ -7,8 +7,9 @@ import NoteImg from "./dynamic-cmps/NoteImg.jsx"
 import NoteTodos from "./dynamic-cmps/NoteTodos.jsx"
 import NoteTxt from "./dynamic-cmps/NoteTxt.jsx"
 import NoteVideo from "./dynamic-cmps/NoteVideo.jsx"
+import NoteActions from "./NoteActions.jsx"
 
-export default function NoteCreateExpand({ noteType, handleClose, loadNotes }) {
+export default function NoteCreateExpand({ noteType, handleClose, loadNotes, onUpdateNote, setNotes }) {
   const [isPinned, setIsPinned] = useState(false)
   const [title, setTitle] = useState('')
 
@@ -70,10 +71,9 @@ export default function NoteCreateExpand({ noteType, handleClose, loadNotes }) {
       </div>
       <div className="footer-btns-container">
         <div className="footer-action-btns">
-          <button>a</button>
-          <button>b</button>
-          <button>c</button>
-          <button>d</button>
+          <NoteActions note={{ title, info }}
+            onUpdateNote={onUpdateNote}
+            setNotes={setNotes} />
         </div>
         <div className="footer-close-btn">
           <button onClick={handleNoteSave}>close</button>

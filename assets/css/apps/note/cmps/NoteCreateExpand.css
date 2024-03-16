@@ -27,13 +27,19 @@
 }
 
 .footer-btns-container {
+
   display: flex;
+
   justify-content: space-between;
   padding: 5px;
   background-color: white;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   padding: 10px;
+}
+
+.footer-btns-container .note-actions {
+  opacity: 1;
 }
 
 .footer-action-btns {

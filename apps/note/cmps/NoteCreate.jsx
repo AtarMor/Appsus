@@ -1,9 +1,9 @@
-const { useState, useEffect } = React
+const { useState } = React
 import { noteService } from "../services/note.service.js"
 import NoteCreateExpand from "./NoteCreateExpand.jsx"
 import useClickAway from "../services/useClickAway.js"
 
-export function NoteCreate({ loadNotes }) {
+export function NoteCreate({ loadNotes, onUpdateNote, setNotes }) {
   const [isOpen, setIsOpen] = useState(false)
   const [noteType, setNoteType] = useState('')
 
@@ -37,6 +37,8 @@ export function NoteCreate({ loadNotes }) {
         noteType={noteType}
         handleClose={handleClose}
         loadNotes={loadNotes}
+        onUpdateNote={onUpdateNote}
+        setNotes={setNotes}
       />}
     </section>
   )

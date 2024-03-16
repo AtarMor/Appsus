@@ -28,19 +28,43 @@ export function NoteList({ notes, onUpdateNote, setNotes }) {
     setShowEditModal(false)
   }
 
+
+
+  const pinnedNotes = notes.filter(note => note.isPinned)
+  const unpinnedNotes = notes.filter(note => !note.isPinned)
+
   return (
-    <ul className="note-list">
-      {notes.map((note) => (
-        <li key={note.id} className="note-item" style={{
-          backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white'
-        }}>
-          <NotePreview note={note} />
-          <NoteActions note={note}
-            onUpdateNote={onUpdateNote}
-            setNotes={setNotes}
-            notes={notes} />
-        </li>
-      ))}
+    <div className="note-list-container">
+      <div className="pinned-notes">
+        {pinnedNotes.length ? <h5>Pinned Notes</h5> : ''}
+        <ul className="note-list">
+          {pinnedNotes.map((note) => (
+            <li key={note.id} className="note-item" style={{ backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white' }}>
+              <NotePreview note={note} />
+              <NoteActions
+                note={note}
+                onUpdateNote={onUpdateNote}
+                setNotes={setNotes}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="unpinned-notes">
+        {pinnedNotes.length && unpinnedNotes.length ? <h5>Others</h5> : ''}
+        <ul className="note-list">
+          {unpinnedNotes.map((note) => (
+            <li key={note.id} className="note-item" style={{ backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white' }}>
+              <NotePreview note={note} />
+              <NoteActions
+                note={note}
+                onUpdateNote={onUpdateNote}
+                setNotes={setNotes}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
       {showEditModal && (
         <EditNoteModal
           note={selectedNote}
@@ -48,6 +72,8 @@ export function NoteList({ notes, onUpdateNote, setNotes }) {
           onUpdateNote={handleUpdateNote}
         />
       )}
-    </ul>
-  )
+    </div>
+  );
 }
+
+

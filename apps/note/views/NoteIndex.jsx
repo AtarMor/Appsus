@@ -77,7 +77,9 @@ export function NoteIndex() {
     <React.Fragment>
       <div className="note-create-container">
         <NoteCreate
-          loadNotes={loadNotes} />
+          loadNotes={loadNotes}
+          onUpdateNote={onUpdateNote}
+          setNotes={setNotes} />
         <NoteFilter
           onSetFilter={onSetFilter}
           filterBy={{ title }} />
