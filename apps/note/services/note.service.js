@@ -3,18 +3,6 @@ import { storageService } from '../../../services/async-storage.service.js'
 //hardcoded notes
 const notes = [
   {
-    id: 'n101',
-    createdAt: 1112222,
-    type: 'NoteTxt',
-    isPinned: true,
-    style: {
-      backgroundColor: '#e2f6d3'
-    },
-    info: {
-      txt: 'Fullstack Me Baby!'
-    }
-  },
-  {
     id: 'n102',
     type: 'NoteImg',
     isPinned: false,
@@ -23,22 +11,7 @@ const notes = [
       title: ''
     },
     style: {
-      backgroundColor: '#faafa8'
-    }
-  },
-  {
-    id: 'n103',
-    type: 'NoteTodos',
-    isPinned: false,
-    info: {
-      title: 'Get my stuff together',
-      todos: [
-        { txt: 'Driving license', doneAt: null },
-        { txt: 'Coding power', doneAt: 187111111 }
-      ]
-    },
-    style: {
-      backgroundColor: '#b4ddd3'
+      backgroundColor: '#d3bfdb'
     }
   },
   {
@@ -56,7 +29,7 @@ const notes = [
       ]
     },
     style: {
-      backgroundColor: '#b4ddd3'
+      backgroundColor: '#fff8b8'
     }
   },
   {
@@ -65,7 +38,7 @@ const notes = [
     type: 'NoteTxt',
     isPinned: true,
     style: {
-      backgroundColor: '#e2f6d3'
+      backgroundColor: '#d4e4ed'
     },
     info: {
       txt: 'Remember to hydrate!'
@@ -77,10 +50,10 @@ const notes = [
     isPinned: false,
     info: {
       url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqbWitrQVchxsz7ZISxescTWLQNnKP8ctdhw&usqp=CAU',
-      title: 'me when sprint'
+      title: 'me when sprint 3'
     },
     style: {
-      backgroundColor: '#faafa8'
+      backgroundColor: '#f6e2dd'
     }
   },
   {
@@ -90,13 +63,88 @@ const notes = [
     info: {
       todos: [
         { txt: 'Go to sleep early', doneAt: null },
-        { txt: 'Make games', doneAt: null },
+        { txt: 'Be better', doneAt: null },
       ]
+    },
+    style: {
+      backgroundColor: '#faafa8'
+    }
+  },
+  {
+    id: 'n109',
+    type: 'NoteImg',
+    isPinned: true,
+    info: {
+      url: 'https://picsum.photos/200',
+      title: 'good vibes only'
+    },
+    style: {
+      backgroundColor: '#f39f76'
+    }
+  },
+  {
+    id: 'n110',
+    type: 'NoteTxt',
+    isPinned: false,
+    info: {
+      txt: 'Call mom'
     },
     style: {
       backgroundColor: '#b4ddd3'
     }
   },
+  // {
+  //   id: 'n112',
+  //   type: 'NoteAudio',
+  //   isPinned: true,
+  //   info: {
+  //     url: 'https://www.myinstants.com/media/sounds/mlg-airhorn.mp3',
+  //     title: ''
+  //   },
+  //   style: {
+  //     backgroundColor: '#e2f6d3'
+  //   }
+  // },
+  {
+    id: 'n113',
+    type: 'NoteTodos',
+    isPinned: true,
+    info: {
+      todos: [
+        { txt: 'eggs', doneAt: null },
+        { txt: 'milk', doneAt: null },
+        { txt: 'bread', doneAt: null }
+      ],
+      title: 'Buy groceries'
+    },
+    style: {
+      backgroundColor: '#e2f6d3'
+    }
+  },
+  {
+    id: 'n120',
+    type: 'NoteImg',
+    isPinned: true,
+    info: {
+      url: 'https://picsum.photos/300',
+      title: 'feelin good'
+    },
+    style: {
+      backgroundColor: '#efeff1'
+    }
+  },
+  {
+    id: 'n121',
+    type: 'NoteImg',
+    isPinned: false,
+    info: {
+      url: 'https://picsum.photos/299',
+      title: 'eat healthy'
+    },
+    style: {
+      backgroundColor: '#d3bfdb'
+    }
+  }
 ]
 
 const NOTE_KEY = 'noteDB'

@@ -1,6 +1,6 @@
 .note-index {
     display: grid;
-    grid-template-columns: 1fr 5fr repeat(3, 0);
+    grid-template-columns: 1fr 5fr 1fr repeat(3, 0);
     grid-template-rows: 1fr repeat(4, 0);
     grid-row-gap: 0px;
 }
@@ -9,7 +9,6 @@
     /* width: max-content; */
     grid-area: 1 / 2 / 2 / 3;
     columns: 5;
-    margin-inline-end: 9em;
     padding: 0;
 }
 
@@ -107,10 +106,19 @@ input::-webkit-search-cancel-button {
     .note-list {
         columns: 2;
     }
+
+    .note-filter {
+        width: 100%;
+        padding-inline: 26px;
+    }
 }
 
-@media (width<=400px) {
+@media (width<=480px) {
     .note-list {
         columns: 1;
+    }
+
+    .note-index {
+        justify-items: center;
     }
 }

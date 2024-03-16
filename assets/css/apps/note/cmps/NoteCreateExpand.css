@@ -93,3 +93,13 @@
 .half-width {
   width: 50%;
 }
+
+@media (width<=600) {
+  .note-creator-container {
+    margin-inline: 0 !important;
+  }
+
+  .half-width {
+    width: 100% !important;
+  }
+}
