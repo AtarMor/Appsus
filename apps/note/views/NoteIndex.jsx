@@ -100,6 +100,7 @@ export function NoteIndex() {
           notes={notes}
           onUpdateNote={onUpdateNote}
           setNotes={setNotes}
+          loadNotes={loadNotes}
         />
       </section>
     </React.Fragment>)

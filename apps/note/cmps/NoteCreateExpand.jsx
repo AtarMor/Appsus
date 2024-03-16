@@ -9,11 +9,13 @@ import NoteTxt from "./dynamic-cmps/NoteTxt.jsx"
 import NoteVideo from "./dynamic-cmps/NoteVideo.jsx"
 import NoteActions from "./NoteActions.jsx"
 
-export default function NoteCreateExpand({ noteType, handleClose, loadNotes, onUpdateNote, setNotes }) {
+
+
+export default function NoteCreateExpand({ noteType, handleClose, loadNotes, onUpdateNote, setNotes, note }) {
   const [isPinned, setIsPinned] = useState(false)
   const [title, setTitle] = useState('')
-
   const [info, setInfo] = useState('')
+
 
 
   function returnNoteCreator() {
@@ -35,12 +37,13 @@ export default function NoteCreateExpand({ noteType, handleClose, loadNotes, onU
 
   function handleNoteSave() {
     const canSave = checkIfCanSave()
-    if (canSave) createNewNote()
+    if (canSave) saveNote()
     else handleClose()
   }
 
-  function createNewNote() {
+  function saveNote() {
     const createdNote = noteService.createNote(title, noteType, isPinned, info, {})
+    if (note) createdNote.id = note.id
     noteService.save(createdNote)
       .then(savedNote => {
         loadNotes()
@@ -59,6 +62,26 @@ export default function NoteCreateExpand({ noteType, handleClose, loadNotes, onU
     }
     return false
   }
+
+  function getRelevantInfo(type) {
+    switch (type) {
+      case 'NoteTxt':
+        return (note.info.txt && note.info.txt.length) ? note.info.txt : ''
+      case 'NoteTodos':
+        const stringTodos = note.info.todos.map(todo => todo.txt).join(',')
+        return (stringTodos && stringTodos.length) ? stringTodos : ''
+      default:
+        return (note.info.url && note.info.url.length) ? note.info.url : ''
+    }
+  }
+
+  useEffect(() => {
+    if (!note) return
+    setInfo(note.info = getRelevantInfo(note.type))
+    setTitle(note.title ? note.title : '')
+    setIsPinned(note.isPinned)
+    console.log(note)
+  }, [note])
 
   return (<React.Fragment>
     <section className="note-creator-container">

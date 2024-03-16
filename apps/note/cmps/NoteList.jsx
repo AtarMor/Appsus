@@ -6,8 +6,19 @@ import { utilService } from "../../../services/util.service.js"
 import { EditNoteModal } from "./EditNoteModal.jsx"
 import NoteActions from "./NoteActions.jsx"
 
-export function NoteList({ notes, onUpdateNote, setNotes }) {
-  const [selectedNote, setSelectedNote] = useState(null)
+const EMPTY_NOTE = {
+  id: '',
+  createdAt: 0,
+  type: '',
+  isPinned: false,
+  style: {
+    backgroundColor: 'white',
+  },
+  info: '',
+}
+
+export function NoteList({ notes, onUpdateNote, setNotes, loadNotes }) {
+  const [selectedNote, setSelectedNote] = useState(EMPTY_NOTE)
   const [showEditModal, setShowEditModal] = useState(false)
 
 
@@ -20,12 +31,16 @@ export function NoteList({ notes, onUpdateNote, setNotes }) {
 
   const handleCloseEditModal = () => {
     setShowEditModal(false)
+    setSelectedNote(EMPTY_NOTE)
+    setTimeout(() => {
+      console.log(showEditModal)
+    },
+      0)
   }
 
   const handleUpdateNote = (updatedNote) => {
     console.log('Updated note:', updatedNote)
     onUpdateNote(updatedNote)
-    setShowEditModal(false)
   }
 
   const handleUpdateTodo = (noteId, updatedTodos) => {
@@ -47,7 +62,7 @@ export function NoteList({ notes, onUpdateNote, setNotes }) {
         {pinnedNotes.length ? <h5>Pinned Notes</h5> : ''}
         <ul className="note-list">
           {pinnedNotes.map((note) => (
-            <li key={note.id} className="note-item" style={{ backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white' }}>
+            <li onClick={() => handleEditNote(note)} key={note.id} className="note-item" style={{ backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white' }}>
               <NotePreview note={note} />
               <NoteActions
                 note={note}
@@ -64,7 +79,7 @@ export function NoteList({ notes, onUpdateNote, setNotes }) {
         {pinnedNotes.length && unpinnedNotes.length ? <h5>Others</h5> : ''}
         <ul className="note-list">
           {unpinnedNotes.map((note) => (
-            <li key={note.id} className="note-item" style={{ backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white' }}>
+            <li onClick={() => handleEditNote(note)} key={note.id} className="note-item" style={{ backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white' }}>
               <NotePreview
                 note={note}
                 onUpdateTodo={handleUpdateTodo} />
@@ -79,13 +94,13 @@ export function NoteList({ notes, onUpdateNote, setNotes }) {
           ))}
         </ul>
       </div>
-      {showEditModal && (
-        <EditNoteModal
-          note={selectedNote}
-          onClose={handleCloseEditModal}
-          onUpdateNote={handleUpdateNote}
-        />
-      )}
+      <EditNoteModal
+        note={selectedNote}
+        onClose={handleCloseEditModal}
+        onUpdateNote={handleUpdateNote}
+        isOpen={showEditModal}
+        loadNotes={loadNotes}
+      />
     </div>
   )
 }

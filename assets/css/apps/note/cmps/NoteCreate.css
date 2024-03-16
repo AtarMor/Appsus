@@ -32,6 +32,7 @@
   top: 50%;
   right: -90px;
   transform: translate(-50%, -50%)
+    /* ADD DESIGN */
 }
 
 .input-btns button {
