@@ -121,7 +121,19 @@ function query(filterBy = getDefaultFilter()) {
     .then(notes => {
       if (filterBy.title) {
         const regex = new RegExp(filterBy.title, 'i')
-        notes = notes.filter(note => regex.test(note.info.title) || (note.info.txt && regex.test(note.info.txt)))
+        notes = notes.filter(note => {
+          if (regex.test(note.info.title) || (note.info.txt && regex.test(note.info.txt))) {
+            return true
+          }
+          if (note.info.todos) {
+            for (const todo of note.info.todos) {
+              if (todo.txt && regex.test(todo.txt)) {
+                return true
+              }
+            }
+          }
+          return false
+        })
       }
       notes.sort((a, b) => (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0))
       return notes
