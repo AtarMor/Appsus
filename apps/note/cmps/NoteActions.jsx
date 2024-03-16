@@ -46,6 +46,7 @@ export default function NoteActions({ note, notes, onUpdateNote, setNotes, isNot
   }
 
   const updateNoteColor = (noteId, color) => {
+    console.log('notes:', notes, 'noteId:', noteId)
     const noteToUpdate = notes.find(note => note.id === noteId)
     if (noteToUpdate) {
       noteToUpdate.style.backgroundColor = color

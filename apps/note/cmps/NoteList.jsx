@@ -72,6 +72,7 @@ export function NoteList({ notes, onUpdateNote, setNotes }) {
                 onUpdateNote={onUpdateNote}
                 setNotes={setNotes}
                 isNoteList
+                notes={notes}
               />
             </li>
           ))}
