@@ -42,13 +42,26 @@ export function MailDetails() {
         mailService.remove(mail)
             .then(() => {
                 setMail(null)
-                console.log('Mail removed:')
-                showSuccessMsg(`Mail removed successfully`)
+                showSuccessMsg(`Mail moves to trash`)
                 navigate('/mail')
             })
             .catch((err) => {
                 console.log('Had issues removing mail', err)
                 showErrorMsg(`Could not remove mail`)
+            })
+
+    }
+
+    function onMailDelete() {
+        mailService.deleteMail(mail.id)
+            .then(() => {
+                setMail(null)
+                showSuccessMsg(`Mail deleted permanently`)
+                navigate('/mail')
+            })
+            .catch((err) => {
+                console.log('Had issues deleting mail', err)
+                showErrorMsg(`Could not delete mail permanently`)
             })
 
     }
@@ -78,10 +91,9 @@ export function MailDetails() {
         </div>
         <h3 className="mail-body">{mail.body}</h3>
         <div className="actions">
-            {
-                !mail.sentAt && <button onClick={onMailEdit}>Edit</button>
-            }
-            <button onClick={onRemoveMail}>Delete</button>
+            {!mail.sentAt && <button onClick={onMailEdit}>Edit</button>}
+            {mail.removedAt && <button onClick={onMailDelete}>Delete permanently</button>}
+            {!mail.removedAt && <button onClick={onRemoveMail}>Delete</button>}
             <Link to={`/mail`}><button>Inbox</button></Link>
         </div>
 
