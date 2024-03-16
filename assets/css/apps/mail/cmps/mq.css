@@ -1,4 +1,5 @@
 /* Mobile Only  */
+
 @media (width <=650px) {
     .mail-filter-side {
         position: fixed;
@@ -25,6 +26,7 @@
 }
 
 /* Small */
+
 @media (width > 520px) {
     html {
         background-color: var(--main-bg-color);
@@ -52,6 +54,7 @@
 }
 
 /* Medium */
+
 @media (width > 650px) {
     .mail-index {
         display: grid;

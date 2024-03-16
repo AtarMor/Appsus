@@ -35,14 +35,14 @@ export function MailList({ mails, onMailSelect, sortBy, onSetSort, onMailStar, i
         </li>
         {
             isLoading ? <span className="loader"></span> :
-            (!mails || !mails.length ? (<p className="empty-folder-msg">{emptyFolderMsg()}</p>): mails.map(mail => <li key={mail.id}>
-                <Link to={`/mail/${mail.id}`}>
-                    <MailPreview
-                        mail={mail}
-                        onMailSelect={onMailSelect}
-                        onMailStar={onMailStar} />
-                </Link>
-            </li>))
+                (!mails || !mails.length ? (<p className="empty-folder-msg">{emptyFolderMsg()}</p>) : mails.map(mail => <li key={mail.id}>
+                    <Link to={`/mail/${mail.id}`}>
+                        <MailPreview
+                            mail={mail}
+                            onMailSelect={onMailSelect}
+                            onMailStar={onMailStar} />
+                    </Link>
+                </li>))
         }
     </ul>
 }

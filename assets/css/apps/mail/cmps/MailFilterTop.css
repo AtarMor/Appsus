@@ -3,8 +3,8 @@
     margin: 10px;
     border-radius: 5px;
     background-color: white;
-    box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.302), 
-    1px 2px 1px 0px rgba(60, 64, 67, 0.149);
+    box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.302),
+        1px 2px 1px 0px rgba(60, 64, 67, 0.149);
 }
 
 .mail-filter-top .search {
@@ -15,7 +15,7 @@
     align-self: stretch;
     border-radius: 20px;
     padding: 1em;
-    flex-grow: 1; 
+    flex-grow: 1;
     font-size: 1rem;
     color: var(--mail-gray2)
 }

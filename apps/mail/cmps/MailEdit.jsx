@@ -15,6 +15,9 @@ export function MailEdit({ onCloseMailEdit, isNew = false }) {
             .then(newMail => {
                 setMailToEdit(newMail)
             })
+            .catch(err => {
+                console.log('Had issues saving new mail', err)
+            })
     }, [])
 
     useEffect(() => {
@@ -50,7 +53,7 @@ export function MailEdit({ onCloseMailEdit, isNew = false }) {
             })
             .catch(err => {
                 console.log('Had issues sending mail', err)
-                showErrorMsg('could not send mail')
+                showErrorMsg('Could not send mail')
             })
     }
 

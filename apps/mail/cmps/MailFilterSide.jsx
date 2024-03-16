@@ -1,7 +1,6 @@
 const { useState, useEffect } = React
 const { useSearchParams } = ReactRouterDOM
 
-
 export function MailFilterSide({ onSetFilter, filterBy, unreadMails }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     const [searchParams, setSearchParams] = useSearchParams()

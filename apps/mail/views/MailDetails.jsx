@@ -2,12 +2,11 @@ const { useState, useEffect } = React
 const { useParams, useNavigate } = ReactRouter
 const { Link } = ReactRouterDOM
 
-import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 import { MailEdit } from "../cmps/MailEdit.jsx"
 
 import { mailService } from "../services/mail.service.js"
 import { utilService } from "../../../services/util.service.js"
-
+import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
 export function MailDetails() {
     const [isLoading, setIsLoading] = useState(true)
@@ -42,7 +41,7 @@ export function MailDetails() {
         mailService.remove(mail)
             .then(() => {
                 setMail(null)
-                showSuccessMsg(`Mail moves to trash`)
+                showSuccessMsg(`Mail moved to trash`)
                 navigate('/mail')
             })
             .catch((err) => {

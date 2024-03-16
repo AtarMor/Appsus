@@ -1,7 +1,6 @@
 const { useSearchParams } = ReactRouterDOM
 
 import { utilService } from "../../../services/util.service.js"
-import { mailService } from "../services/mail.service.js"
 
 export function MailPreview({ mail, onMailSelect, onMailStar }) {
   const [searchParams, setSearchParams] = useSearchParams()
