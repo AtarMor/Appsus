@@ -15,6 +15,8 @@ export function MailFilterTop({ onSetFilter, filterBy, onToggleMenu }) {
     return <div className="mail-filter-top">
         <button className="toggle-menu-btn" onClick={onToggleMenu}>☰</button>
 
+        <div className="search solid magnifying-glass"> </div>
+
         <input
             type="text"
             name="txt"

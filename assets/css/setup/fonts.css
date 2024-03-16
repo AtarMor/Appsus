@@ -46,3 +46,7 @@
 .solid.angle-up::before {
     content: "\f106";
 }
+
+.solid.magnifying-glass::before {
+    content: "\f002";
+}

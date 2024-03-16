@@ -7,12 +7,17 @@
     1px 2px 1px 0px rgba(60, 64, 67, 0.149);
 }
 
+.mail-filter-top .search {
+    display: none;
+}
+
 .mail-filter-top input {
     align-self: stretch;
     border-radius: 20px;
     padding: 1em;
     flex-grow: 1; 
     font-size: 1rem;
+    color: var(--mail-gray2)
 }
 
 .mail-filter-top button {

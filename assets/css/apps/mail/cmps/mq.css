@@ -38,6 +38,7 @@
 
     .mail-preview>* {
         height: 40px;
+        line-height: 1.7;
     }
 
     .mail-preview h3.mail-subject {
@@ -102,10 +103,12 @@
     }
 
     .mail-index .mail-filter-top {
-        display: grid;
+        display: flex;
+        align-items: center;
         align-self: end;
         justify-self: stretch;
         border-radius: 20px;
+        padding-inline-start: 20px;
         margin: 0 15px 0 0;
         background-color: var(--mail-color1);
         box-shadow: none;
@@ -113,6 +116,11 @@
 
     .mail-filter-top>* {
         background-color: var(--mail-color1);
+    }
+
+    .mail-filter-top .search {
+        display: inline;
+        color: var(--mail-gray2)
     }
 
     .mail-list,

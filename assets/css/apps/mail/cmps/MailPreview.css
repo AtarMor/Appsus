@@ -22,7 +22,7 @@
 .mail-preview>* {
     display: inline;
     padding: 0.7em;
-    line-height: 1.7;
+    line-height: 1.4;
 }
 
 .mail-preview .mail-content {
