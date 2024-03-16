@@ -1,7 +1,8 @@
 .note-preview {
     padding: 0.5em;
     height: 100%;
-
+    width: 100%;
+    padding-bottom: 20px;
 }
 
 .note-title {
@@ -18,4 +19,9 @@
     flex-direction: column;
     max-width: 200px;
     min-width: 100px;
+}
+
+.todo-done {
+    text-decoration: line-through;
+    color: rgb(87, 87, 87);
 }

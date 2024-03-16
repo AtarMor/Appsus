@@ -153,7 +153,6 @@ function save(note) {
   if (note.id) {
     return storageService.put(NOTE_KEY, note)
   } else {
-    // note = createNote(note.title, note.type, note.isPinned, note.info, note.style)
     return storageService.post(NOTE_KEY, note)
   }
 }
@@ -246,7 +245,7 @@ function _setNextPrevId(note) {
 
 function renderActionButton(className, onClick, iconClassName, style) {
   return (
-    <div className={'hover-circle'}>
+    <div>
       <button className={'btn ' + className} onClick={onClick}>
         <div className={iconClassName} style={style}></div>
       </button>

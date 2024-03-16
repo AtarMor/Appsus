@@ -46,13 +46,13 @@ export function NoteIndex() {
   function updateExistingNote(noteToUpdate) {
     noteService.save(noteToUpdate)
       .then((savedNote) => {
-        loadNotes();
+        loadNotes()
         setNotes(prevNotes => prevNotes.map(note => note.id === savedNote.id ? savedNote : note))
         console.log('updated!')
       })
       .catch(err => {
         console.log('could not update', err)
-      });
+      })
   }
 
   function createNewNote(noteToUpdate) {

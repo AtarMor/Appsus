@@ -4,7 +4,7 @@ const { useState } = React
 
 const COLORS = ['#d3bfdb', '#fff8b8', '#d4e4ed', '#f6e2dd', '#faafa8', '#f39f76', '#b4ddd3', '#e2f6d3', '#efeff1']
 
-export default function NoteActions({ note, notes, onUpdateNote, setNotes }) {
+export default function NoteActions({ note, notes, onUpdateNote, setNotes, isNoteList }) {
   const [showColorModal, setShowColorModal] = useState(false)
   const [selectedColor, setSelectedColor] = useState(null)
   const [selectedNoteId, setSelectedNoteId] = useState(null)
@@ -71,10 +71,10 @@ export default function NoteActions({ note, notes, onUpdateNote, setNotes }) {
 
   return (
     <React.Fragment>
-      <div className="note-actions">
+      <div className={`note-actions ${isNoteList ? 'transparent' : ''}`}>
         {noteService.renderActionButton("archive-btn", () => onArchiveNote(note), "fa-solid fa-box-archive")}
-        {noteService.renderActionButton("pin-btn", () => onPinNote(note), "fa-solid fa-thumbtack", note.isPinned ? { color: '#FFD43B' } : {})}
-        {noteService.renderActionButton("remove-btn", () => onRemoveNote(note.id), "fa-solid fa-trash")}
+        {isNoteList && noteService.renderActionButton("pin-btn", () => onPinNote(note), "fa-solid fa-thumbtack", note.isPinned ? { color: '#FFD43B' } : {})}
+        {isNoteList && noteService.renderActionButton("remove-btn", () => onRemoveNote(note.id), "fa-solid fa-trash")}
         {noteService.renderActionButton("change-color", () => handleOpenColorModal(note.id), "fa-solid fa-palette")}
       </div>
       <div>

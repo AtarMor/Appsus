@@ -17,6 +17,6 @@ span .todo-text {
     flex: 1;
 }
 
-input .todo-checkbox {
-    margin-left: 5px;
+.checkbox-container {
+    position: relative;
 }

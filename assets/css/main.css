@@ -40,3 +40,4 @@
 @import './apps/note/cmps/ToDoList.css';
 @import './apps/note/cmps/NoteCreate.css';
 @import './apps/note/cmps/NoteCreateExpand.css';
+@import './apps/note/cmps/NoteActions.css';

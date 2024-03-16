@@ -64,7 +64,7 @@ export default function NoteCreateExpand({ noteType, handleClose, loadNotes, onU
     <section className="note-creator-container">
       <div className="title-input-container">
         <input type="text" className="title-input" placeholder="Title" value={title} onChange={(ev) => setTitle(ev.target.value)} />
-        <button className="pin-btn" onClick={() => setIsPinned(!isPinned)}>{isPinned ? 'unpin' : 'pin'}</button>
+        {noteService.renderActionButton("pin-btn", () => setIsPinned(!isPinned), "fa-solid fa-thumbtack", isPinned ? { color: '#FFD43B' } : {})}
       </div>
       <div className="dynamic-cmp">
         {returnNoteCreator()}
