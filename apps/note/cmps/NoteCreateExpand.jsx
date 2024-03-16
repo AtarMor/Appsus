@@ -43,7 +43,10 @@ export default function NoteCreateExpand({ noteType, handleClose, loadNotes, onU
 
   function saveNote() {
     const createdNote = noteService.createNote(title, noteType, isPinned, info, {})
-    if (note) createdNote.id = note.id
+    if (note) {
+      createdNote.id = note.id
+      createdNote.style.backgroundColor = note.style.backgroundColor
+    }
     noteService.save(createdNote)
       .then(savedNote => {
         loadNotes()
@@ -84,7 +87,7 @@ export default function NoteCreateExpand({ noteType, handleClose, loadNotes, onU
   }, [note])
 
   return (<React.Fragment>
-    <section className="note-creator-container">
+    <section className={`note-creator-container ${note ? 'half-width' : ''}`} >
       <div className="title-input-container">
         <input type="text" className="title-input" placeholder="Title" value={title} onChange={(ev) => setTitle(ev.target.value)} />
         {noteService.renderActionButton("pin-btn", () => setIsPinned(!isPinned), "fa-solid fa-thumbtack", isPinned ? { color: '#FFD43B' } : {})}

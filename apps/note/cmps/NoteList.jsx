@@ -24,7 +24,12 @@ export function NoteList({ notes, onUpdateNote, setNotes, loadNotes }) {
 
   if (!notes.length) return <div className="empty-notes-msg flex justify-center align-center">No notes here, make some!</div>
 
-  const handleEditNote = (note) => {
+  const handleEditNote = (note, ev) => {
+    console.log('ev:', ev.target.tagName)
+    console.log('parentNode', ev.target.parentElement.type)
+    if (ev.target.tagName !== 'IMG') {
+      if (ev.target.type === 'checkbox' || ev.target.parentElement.type === 'submit' || ev.target.parentElement.type === undefined) return
+    }
     setSelectedNote(note)
     setShowEditModal(true)
   }
@@ -62,8 +67,10 @@ export function NoteList({ notes, onUpdateNote, setNotes, loadNotes }) {
         {pinnedNotes.length ? <h5>Pinned Notes</h5> : ''}
         <ul className="note-list">
           {pinnedNotes.map((note) => (
-            <li onClick={() => handleEditNote(note)} key={note.id} className="note-item" style={{ backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white' }}>
-              <NotePreview note={note} />
+            <li key={note.id} onClick={(ev) => handleEditNote(note, ev)} className="note-item" style={{ backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white' }}>
+              <NotePreview
+                note={note}
+                onUpdateTodo={handleUpdateTodo} />
               <NoteActions
                 note={note}
                 onUpdateNote={onUpdateNote}
@@ -79,7 +86,7 @@ export function NoteList({ notes, onUpdateNote, setNotes, loadNotes }) {
         {pinnedNotes.length && unpinnedNotes.length ? <h5>Others</h5> : ''}
         <ul className="note-list">
           {unpinnedNotes.map((note) => (
-            <li onClick={() => handleEditNote(note)} key={note.id} className="note-item" style={{ backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white' }}>
+            <li key={note.id} onClick={(ev) => handleEditNote(note, ev)} className="note-item" style={{ backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white' }}>
               <NotePreview
                 note={note}
                 onUpdateTodo={handleUpdateTodo} />
@@ -94,13 +101,13 @@ export function NoteList({ notes, onUpdateNote, setNotes, loadNotes }) {
           ))}
         </ul>
       </div>
-      <EditNoteModal
+      {showEditModal && <EditNoteModal
         note={selectedNote}
         onClose={handleCloseEditModal}
         onUpdateNote={handleUpdateNote}
         isOpen={showEditModal}
         loadNotes={loadNotes}
-      />
+      />}
     </div>
   )
 }

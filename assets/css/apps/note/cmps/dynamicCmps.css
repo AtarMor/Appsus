@@ -1,0 +1,7 @@
+.note-txt-input,
+.note-video-input,
+.note-img-input,
+.note-todos-input,
+.note-audio-input {
+  width: 100%;
+}
