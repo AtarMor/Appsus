@@ -1,77 +1,83 @@
 .mail-list {
-    background-color: white;
-    border-radius: 20px;
-    min-height: 400px;
+  background-color: white;
+  border-radius: 20px;
+  min-height: 400px;
 }
 
 .mail-list li:not(:last-child) {
-    border-bottom: 1px solid var(--mail-gray1);
+  border-bottom: 1px solid var(--mail-gray1);
 }
 
 .mail-list .sort-list {
-    padding-inline-start: 1em;
-    padding-block: 0.5em;
+  padding-inline-start: 1em;
+  padding-block: 0.5em;
 }
 
 .mail-list li:first-child button {
-    border-radius: 10px;
-    background-color: white;
-    border: 1px solid var(--mail-gray2);
-    padding: 0.4em 1em;
-    margin: 0.3em;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  background-color: white;
+  color: var(--mail-gray2);
+  border: 1px solid var(--mail-gray2);
+  padding: 0.5em 1em;
+  margin: 0.3em;
+  gap: 8px;
+  font-size: 0.875rem;
 }
 
-.mail-list li:first-child button {
-    display: flex;
-    align-items: center;
+.mail-list li:first-child button:hover {
+  background-color: var(--mail-gray);
 }
 
 .sort-list {
-    display: flex;
+  display: flex;
 
 }
 
 .sort-list h5 {
-    font-size: 0.875rem;
-    font-weight: lighter;
+  font-size: 0.875rem;
+  font-weight: lighter;
 }
 
 .sort-list img.arrow {
-    display: inline;
-    height: 10px;
-    margin-inline-end: .3em;
+  display: inline;
+  height: 10px;
+  margin-inline-end: .3em;
 }
 
 .mail-list .empty-folder-msg {
-    padding-block-end: 1em;
-    text-align: center;
-    font-weight: lighter;
+  padding-block-end: 1em;
+  text-align: center;
+  font-weight: lighter;
 }
 
 .mail-list .loader {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: block;
-    margin:15px auto;
-    position: relative;
-    color: var(--mail-color2);
-    box-sizing: border-box;
-    animation: animLoader 1s linear infinite alternate;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto;
+  position: relative;
+  color: var(--mail-color2);
+  box-sizing: border-box;
+  animation: animLoader 1s linear infinite alternate;
+}
+
+@keyframes animLoader {
+  0% {
+    box-shadow: -38px -6px, -14px 6px, 14px -6px;
   }
-  
-  @keyframes animLoader {
-    0% {
-      box-shadow: -38px -6px, -14px 6px,  14px -6px;
-    }
-    33% {
-      box-shadow: -38px 6px, -14px -6px,  14px 6px;
-    }
-    66% {
-      box-shadow: -38px -6px, -14px 6px, 14px -6px;
-    }
-    100% {
-      box-shadow: -38px 6px, -14px -6px, 14px 6px;
-    }
+
+  33% {
+    box-shadow: -38px 6px, -14px -6px, 14px 6px;
   }
+
+  66% {
+    box-shadow: -38px -6px, -14px 6px, 14px -6px;
+  }
+
+  100% {
+    box-shadow: -38px 6px, -14px -6px, 14px 6px;
+  }
+}

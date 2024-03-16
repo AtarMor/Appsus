@@ -38,15 +38,14 @@
     background-size: 20px;
     margin-inline-end: 1.5em;
 }
-/* 
-.mail-filter-side>*.active:before{
-    color: var(--mail-red2);
-} */
 
 .mail-filter-side .mobile-header {
-    padding-inline-start: 0.6em;
-    display: inline-block;
-    margin-top: 2em;
+    display: inline;
+    padding: 0;
+    font-size: 1.3rem;
+    font-weight: lighter;
+    color: var(--logo-color1);
+    margin-top: 1.5em;
     border-bottom: 1px solid var(--mail-gray1);
 }
 
