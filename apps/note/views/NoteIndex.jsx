@@ -67,8 +67,6 @@ export function NoteIndex() {
       })
   }
 
-  console.log('hardcoded notes:', notes)
-
   const { title } = filterBy
 
   if (!notes) return <div>loading...</div>

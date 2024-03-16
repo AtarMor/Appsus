@@ -10,6 +10,7 @@
     grid-area: 1 / 2 / 2 / 3;
     columns: 5;
     padding: 0;
+    justify-items: center;
 }
 
 .note-list .note-item {
@@ -98,7 +99,9 @@ input::-webkit-search-cancel-button {
 
 @media (width<=800px) {
     .note-list {
+
         columns: 3;
+
     }
 }
 

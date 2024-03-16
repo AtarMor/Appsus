@@ -75,7 +75,6 @@ export default function NoteActions({ note, notes, onUpdateNote, setNotes, isNot
   return (
     <React.Fragment>
       <div className={`note-actions ${isNoteList ? 'transparent' : ''}`}>
-        {noteService.renderActionButton("archive-btn", () => onArchiveNote(note), "fa-solid fa-box-archive")}
         {isNoteList && noteService.renderActionButton("pin-btn", () => onPinNote(note), "fa-solid fa-thumbtack", note.isPinned ? { color: '#FFD43B' } : {})}
         {isNoteList && noteService.renderActionButton("remove-btn", () => onRemoveNote(note.id), "fa-solid fa-trash")}
         {noteService.renderActionButton("change-color", () => handleOpenColorModal(note.id), "fa-solid fa-palette")}

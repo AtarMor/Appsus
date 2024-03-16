@@ -15,6 +15,18 @@ const notes = [
     }
   },
   {
+    id: 'n140',
+    type: 'NoteVideo',
+    isPinned: false,
+    info: {
+      url: 'fgl3nw1R5Ac',
+      title: ''
+    },
+    style: {
+      backgroundColor: '##f6e2dd'
+    }
+  },
+  {
     id: 'n104',
     type: 'NoteTodos',
     isPinned: false,

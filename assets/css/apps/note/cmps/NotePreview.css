@@ -6,12 +6,15 @@
 }
 
 .note-title {
+    font-size: 16px;
     text-align: center;
+    padding-bottom: 5px;
 }
 
 .note-img {
-    width: 100;
+    width: 100%;
     height: auto;
+    border-radius: 7px;
 }
 
 .audio-player {
