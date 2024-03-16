@@ -1,5 +1,6 @@
 import { noteService } from "../services/note.service.js"
 import { ColorSelectionModal } from "./ColorSelectionModal.jsx"
+import useClickAway from "../services/useClickAway.js"
 const { useState } = React
 
 const COLORS = ['#d3bfdb', '#fff8b8', '#d4e4ed', '#f6e2dd', '#faafa8', '#f39f76', '#b4ddd3', '#e2f6d3', '#efeff1']
@@ -69,6 +70,7 @@ export default function NoteActions({ note, notes, onUpdateNote, setNotes, isNot
       console.error('Note not found with ID:', noteId)
     }
   }
+  const ref = useClickAway(handleCloseColorModal)
 
   return (
     <React.Fragment>
@@ -78,7 +80,7 @@ export default function NoteActions({ note, notes, onUpdateNote, setNotes, isNot
         {isNoteList && noteService.renderActionButton("remove-btn", () => onRemoveNote(note.id), "fa-solid fa-trash")}
         {noteService.renderActionButton("change-color", () => handleOpenColorModal(note.id), "fa-solid fa-palette")}
       </div>
-      <div>
+      <div ref={ref}>
         {showColorModal && (
           <ColorSelectionModal
             colors={COLORS}

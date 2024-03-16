@@ -8,15 +8,13 @@ import NoteTodos from "./dynamic-cmps/NoteTodos.jsx"
 import NoteTxt from "./dynamic-cmps/NoteTxt.jsx"
 import NoteVideo from "./dynamic-cmps/NoteVideo.jsx"
 import NoteActions from "./NoteActions.jsx"
-
+import useClickAway from "../services/useClickAway.js"
 
 
 export default function NoteCreateExpand({ noteType, handleClose, loadNotes, onUpdateNote, setNotes, note }) {
   const [isPinned, setIsPinned] = useState(false)
   const [title, setTitle] = useState('')
   const [info, setInfo] = useState('')
-
-
 
   function returnNoteCreator() {
     switch (noteType) {
@@ -96,13 +94,8 @@ export default function NoteCreateExpand({ noteType, handleClose, loadNotes, onU
         {returnNoteCreator()}
       </div>
       <div className="footer-btns-container">
-        <div className="footer-action-btns">
-          <NoteActions note={{ title, info }}
-            onUpdateNote={onUpdateNote}
-            setNotes={setNotes} />
-        </div>
         <div className="footer-close-btn">
-          <button onClick={handleNoteSave}>close</button>
+          <button onClick={handleNoteSave}>Close</button>
         </div>
       </div>
 

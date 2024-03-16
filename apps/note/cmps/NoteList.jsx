@@ -2,7 +2,6 @@ const { useState } = React
 
 
 import { NotePreview } from "./NotePreview.jsx"
-import { utilService } from "../../../services/util.service.js"
 import { EditNoteModal } from "./EditNoteModal.jsx"
 import NoteActions from "./NoteActions.jsx"
 
@@ -21,7 +20,6 @@ export function NoteList({ notes, onUpdateNote, setNotes, loadNotes }) {
   const [selectedNote, setSelectedNote] = useState(EMPTY_NOTE)
   const [showEditModal, setShowEditModal] = useState(false)
 
-
   if (!notes.length) return <div className="empty-notes-msg flex justify-center align-center">No notes here, make some!</div>
 
   const handleEditNote = (note, ev) => {
@@ -37,10 +35,6 @@ export function NoteList({ notes, onUpdateNote, setNotes, loadNotes }) {
   const handleCloseEditModal = () => {
     setShowEditModal(false)
     setSelectedNote(EMPTY_NOTE)
-    setTimeout(() => {
-      console.log(showEditModal)
-    },
-      0)
   }
 
   const handleUpdateNote = (updatedNote) => {

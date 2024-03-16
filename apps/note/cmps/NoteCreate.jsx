@@ -10,7 +10,7 @@ export function NoteCreate({ loadNotes, onUpdateNote, setNotes }) {
   const handleClose = () => {
     setIsOpen(false)
   }
-  const ref = useClickAway(handleClose);
+  const ref = useClickAway(handleClose)
 
 
   function handleUserInteraction(type) {
