@@ -86,7 +86,6 @@ export function MailIndex() {
     }
 
     const { stat, txt } = filterBy
-    if (!mails) return <div>loading...</div>
     return <section className="mail-index">
         <div className="main-screen" onClick={onToggleMenu}></div>
 

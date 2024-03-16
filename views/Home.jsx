@@ -9,7 +9,7 @@ export function Home() {
             <span>u</span>
             <span>s</span>
         </logo>
-        <h1>Welcome to home page!</h1>
+        <h1>Welcome to our home page!</h1>
         <footer>Appsus - all rights reserved</footer>
     </section>
 }
