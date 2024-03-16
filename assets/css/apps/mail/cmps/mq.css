@@ -32,12 +32,12 @@
 
     .mail-preview div.mail-content {
         display: grid;
-        grid-template-columns: 170px 1fr 100px;
+        grid-template-columns: 170px 1fr 120px;
         grid-template-rows: none;
     }
 
     .mail-preview>* {
-        height: 37px;
+        height: 40px;
     }
 
     .mail-preview h3.mail-subject {

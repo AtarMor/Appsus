@@ -13,7 +13,7 @@ export function MailPreview({ mail, onMailSelect, onMailStar }) {
   return <article className={`mail-preview ${readClass}`}>
     <div className={`star ${starClass}`} onClick={() => onMailStar(mail)}></div>
     <div className="mail-content" onClick={() => onMailSelect(mail.id)}>
-      <h3 className="mail-from">{searchParams.get('stat') === 'sent' ? `To: ${mail.to}` : mail.from}</h3>
+      <h3 className="mail-from">{['sent', 'draft'].includes(searchParams.get('stat')) ? `To: ${mail.to}` : mail.from}</h3>
       <h3 className="mail-subject">{mail.subject} <span className="mail-body">- {mail.body}</span></h3>
       <h3 className="mail-sent-at">{formattedDate}</h3>
     </div>
