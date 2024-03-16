@@ -30,15 +30,15 @@ function query(filterBy, sortBy) {
                 if (filterBy.stat === 'inbox') mails = mails.filter(mail =>
                     mail.removedAt === null && mail.to === loggedInUser.email)
                 else if (filterBy.stat === 'sent') mails = mails.filter(mail =>
-                    mail.from === loggedInUser.email)
+                    mail.from === loggedInUser.email && mail.sentAt)
                 else if (filterBy.stat === 'trash') mails = mails.filter(mail => mail.removedAt)
                 else if (filterBy.stat === 'draft') mails = mails.filter(mail => !mail.sentAt)
                 else if (filterBy.stat === 'starred') mails = mails.filter(mail => mail.isStarred)
             }
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i')
-                mails = mails.filter(mail => regex.test(mail.subject) || regex.test(mail.body) || 
-                regex.test(mail.from) || regex.test(mail.to))
+                mails = mails.filter(mail => regex.test(mail.subject) || regex.test(mail.body) ||
+                    regex.test(mail.from) || regex.test(mail.to))
             }
             if (filterBy.isRead !== undefined) {
                 filterBy.isRead ? mails.filter(mail => mail.isRead) : mails.filter(mail => !mail.isRead)
@@ -62,9 +62,9 @@ function getFilterFromParams(searchParams = {}) {
 
 function getUnreadMails() {  //unread in inbox 
     return storageService.query(MAIL_KEY)
-        .then(mails => mails.filter(mail => 
-            !mail.isRead && 
-            mail.removedAt === null && 
+        .then(mails => mails.filter(mail =>
+            !mail.isRead &&
+            mail.removedAt === null &&
             mail.to === loggedInUser.email))
 }
 
@@ -110,14 +110,6 @@ function save(mail) {
     }
 }
 
-const criteria = {
-    stat: 'inbox/sent/trash/draft',
-    txt: 'puki',
-    isRead: true, // (optional property, if missing: show all)
-    isStarred: true, // (optional property, if missing: show all)
-    labels: ['important', 'romantic']
-}
-
 function _getDefaultFilter() {
     return { stat: 'inbox', txt: '' }
 }
@@ -141,15 +133,15 @@ function _createMail() {
         body: utilService.makeLorem(50),
         isRead: Math.random() < 0.5,
         isStarred: Math.random() < 0.3,
-        sentAt: _getRandSentAt(),
+        sentAt: _getRandSentAt(randTo),
         removedAt: _getRandRemovedAt(),
         from: _getRandFrom(randTo),
         to: randTo,
     }
 }
 
-function _getRandSentAt() {
-    return Math.random() > 0.2 ? utilService.makeRandTimestamp() : null
+function _getRandSentAt(randTo) {
+    return randTo === loggedInUser.email || Math.random() > 0.5 ? utilService.makeRandTimestamp() : null
 }
 
 function _getRandRemovedAt() {

@@ -9,7 +9,8 @@ export const utilService = {
     loadFromStorage,
     saveToStorage,
     makeRandMail,
-    makeRandTimestamp
+    makeRandTimestamp,
+    getFormattedDate
 }
 
 function makeId(length = 6) {
@@ -33,20 +34,34 @@ function makeLorem(size = 100) {
     return txt
 }
 
+function getFormattedDate(timeStamp) {
+    const psTime = new Date(timeStamp)
+    const now = Date.now()
+    const yesterday = now - 24 * 60 * 60 * 1000
+    const currYear = new Date(2024,0,1).getTime()
+
+    if (timeStamp > yesterday) return psTime.getHours() + ':' + String(psTime.getMinutes()).padStart(2, '0')
+
+    if (timeStamp > currYear) {
+        return psTime.getDate() + ' ' + utilService.getMonthName(psTime).substring(0, 3)
+    }
+    return psTime.toLocaleDateString('en-IL')
+}
+
 function makeRandMail() {
     let mails = ['atar@gmail.com', 'ariel@gmail.com', 'tom@gmail.com', 'gal@gmail.com']
     return mails[getRandomIntInclusive(0, mails.length - 1)]
 }
 
-function makeRandTimestamp() {
-    let timestamps = [1710427738000, 1710222538000, 1707112138000, 1703137738000]
-    return timestamps[getRandomIntInclusive(0, timestamps.length - 1)]
+function makeRandTimestamp(start = new Date(2023, 9, 1).getTime(), end = new Date()) {
+    if (Math.random() < 0.2) start = new Date().setHours(0, 0, 0, 0)
+    return start + Math.random() * (end.getTime() - start)
 }
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min)
     max = Math.floor(max)
-    return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive 
+    return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 function padNum(num) {

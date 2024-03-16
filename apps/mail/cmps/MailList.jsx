@@ -34,7 +34,7 @@ export function MailList({ mails, onMailSelect, sortBy, onSetSort, onMailStar, i
             <button className={toDir} onClick={() => onSetSort('to')}>To</button>
         </li>
         {
-            isLoading ? <span class="loader"></span> :
+            isLoading ? <span className="loader"></span> :
             (!mails || !mails.length ? (<p className="empty-folder-msg">{emptyFolderMsg()}</p>): mails.map(mail => <li key={mail.id}>
                 <Link to={`/mail/${mail.id}`}>
                     <MailPreview

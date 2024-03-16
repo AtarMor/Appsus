@@ -5,10 +5,7 @@ import { mailService } from "../services/mail.service.js"
 
 export function MailPreview({ mail, onMailSelect, onMailStar }) {
   const [searchParams, setSearchParams] = useSearchParams()
-  // const userMail = mailService.getUserMail()
-
-  const sentDate = new Date(mail.sentAt)
-  const formattedDate = sentDate.getDate() + ' ' + utilService.getMonthName(sentDate).substring(0, 3)
+  const formattedDate = mail.sentAt ? utilService.getFormattedDate(mail.sentAt) : ''
 
   const readClass = mail.isRead ? 'is-read' : ''
   const starClass = mail.isStarred ? 'solid yellow-star' : 'fa star'

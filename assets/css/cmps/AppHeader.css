@@ -5,8 +5,9 @@
     padding: 1em;
 }
 
-.app-header logo {
+.app-header .logo {
     font-size: 1.3rem;
+    font-weight: lighter;
     color: var(--logo-color1);
     padding-inline-start: 0.5em
 }

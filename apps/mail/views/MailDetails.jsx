@@ -49,7 +49,6 @@ export function MailDetails() {
                 console.log('Had issues removing mail', err)
                 showErrorMsg(`Could not remove mail`)
             })
-
     }
 
     function onMailDelete() {
@@ -63,7 +62,6 @@ export function MailDetails() {
                 console.log('Had issues deleting mail', err)
                 showErrorMsg(`Could not delete mail permanently`)
             })
-
     }
 
     function onMailEdit() {
@@ -77,15 +75,13 @@ export function MailDetails() {
     if (isLoading) return <React.Fragment></React.Fragment>
     if (!mail) return <div>Mail deleted</div>
 
-    const sentDate = new Date(mail.sentAt)
-    const formattedDate = sentDate.getDate() + ' ' + utilService.getMonthName(sentDate).substring(0, 3)
+    const formattedDate = mail.sentAt ? utilService.getFormattedDate(mail.sentAt) : ''
 
     return <section className="mail-details">
         <h1 className="mail-subject">{mail.subject}</h1>
         <div className="mail-send-details solid circle-user">
             <h2 className="mail-from"><span >From: </span>{mail.from}
                 <span className="mail-sent-at">{formattedDate} </span>
-                {/* <span className="mail-details-star"> </span> */}
             </h2>
             <h2 className="mail-to"><span>To: </span>{mail.to}</h2>
         </div>

@@ -4,7 +4,7 @@ export function AppHeader() {
 
     return <header className="app-header">
         <Link to="/">
-            <logo>Appsus</logo>
+            <h1 className="logo">Appsus</h1>
         </Link>
         <nav>
             <NavLink to="/">Home</NavLink>
