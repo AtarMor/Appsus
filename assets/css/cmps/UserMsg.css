@@ -3,21 +3,18 @@
     align-items: center;
     flex-direction: row-reverse;
     padding-inline-start: 0.7em;
-    background-color: lightgray;
+    color: white;
+    background-color: var(--mail-gray2);
     position: absolute;
     bottom: 1em;
     left: 1em;
-}
-
-.user-msg.success {
-    background-color: lightgray;
-}
-
-.user-msg.error {
-    background-color: lightgray;
+    border-radius: 10px;
+    font-size: 0.875;
 }
 
 .user-msg button {
     float: right;
     margin: 1em;
+    background: transparent;
+    color: white;
 }

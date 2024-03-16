@@ -7,6 +7,7 @@ import { MailFilterSide } from "../cmps/MailFilterSide.jsx"
 import { MailEdit } from "../cmps/MailEdit.jsx"
 
 import { mailService } from "../services/mail.service.js"
+import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 
 export function MailIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
@@ -25,6 +26,9 @@ export function MailIndex() {
     mailService.getUnreadMails()
         .then(unreadMails =>
             setUnreadMails(unreadMails.length))
+        .catch(err => {
+            console.log('Had issues getting unread mails count', err)
+        })
 
     useEffect(() => {
 
@@ -54,6 +58,9 @@ export function MailIndex() {
                 setMails(mails)
                 setIsLoading(false)
             })
+            .catch(err => {
+                console.log('Had issues loading mails', err)
+            })
     }
 
     function onSetFilter(fieldsToUpdate) {
@@ -71,6 +78,7 @@ export function MailIndex() {
 
     function onCloseMailEdit() {
         setIsMailEdit(false)
+        showSuccessMsg('Your draft mail was saved')
     }
 
     function onMailSelect(mailId) {
@@ -111,10 +119,10 @@ export function MailIndex() {
             onMailSelect={onMailSelect}
             sortBy={sortBy}
             onSetSort={onSetSort}
-            onMailStar={onMailStar} 
+            onMailStar={onMailStar}
             isLoading={isLoading}
             folder={stat}
-            />}
+        />}
 
         <Link to={`/mail/${mailSelected}`} />
         {mailSelected && <Outlet />}
