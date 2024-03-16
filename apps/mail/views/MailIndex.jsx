@@ -16,15 +16,16 @@ export function MailIndex() {
     const [mailSelected, setMailSelected] = useState(null)
     const [mailStarred, setMailStarred] = useState(null)
     const [unreadMails, setUnreadMails] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
 
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromParams(searchParams))
     const [sortBy, setSortBy] = useState({ type: 'date', dir: -1 })
+    const location = useLocation()
 
     mailService.getUnreadMails()
         .then(unreadMails =>
             setUnreadMails(unreadMails.length))
 
-    const location = useLocation()
     useEffect(() => {
 
         if (location.pathname === '/mail') {
@@ -39,17 +40,19 @@ export function MailIndex() {
     }, [filterBy, sortBy])
 
     useEffect(() => {
-        console.log('mailStarred:', mailStarred)
         if (!mailStarred) return
         mailService.update(mailStarred)
-            .then(() => loadMails())
-
+        const starredMailIdx = mails.findIndex(mail => mail.id === mailStarred.id)
+        mails[starredMailIdx].isStarred = !mails[starredMailIdx].isStarred
+        setMails([...mails])
     }, [mailStarred])
 
     function loadMails() {
+        setIsLoading(true)
         mailService.query(filterBy, sortBy)
             .then((mails) => {
                 setMails(mails)
+                setIsLoading(false)
             })
     }
 
@@ -109,7 +112,10 @@ export function MailIndex() {
             onMailSelect={onMailSelect}
             sortBy={sortBy}
             onSetSort={onSetSort}
-            onMailStar={onMailStar} />}
+            onMailStar={onMailStar} 
+            isLoading={isLoading}
+            folder={stat}
+            />}
 
         <Link to={`/mail/${mailSelected}`} />
         {mailSelected && <Outlet />}

@@ -58,6 +58,8 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    padding: 0.5em;
+    font-weight: lighter;
 }
 
 .mail-preview .star:hover {

@@ -18,7 +18,9 @@ export const mailService = {
     update,
     getEmptyMail,
     save,
-    getUnreadMails
+    getUnreadMails,
+    getUserMail,
+    deleteMail
 }
 
 function query(filterBy, sortBy) {
@@ -70,9 +72,17 @@ function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
 }
 
+function getUserMail() {
+    return loggedInUser.email
+}
+
 function remove(mail) {
     const UpdatedMail = { ...mail, removedAt: Date.now() }
     return storageService.put(MAIL_KEY, UpdatedMail)
+}
+
+function deleteMail(mailId) {
+    return storageService.remove(MAIL_KEY, mailId)
 }
 
 function update(mail) {
@@ -124,6 +134,7 @@ function _createMails() {
 }
 
 function _createMail() {
+    const randTo = _getRandTo()
     return {
         id: utilService.makeId(),
         subject: utilService.makeLorem(5),
@@ -132,8 +143,8 @@ function _createMail() {
         isStarred: Math.random() < 0.3,
         sentAt: _getRandSentAt(),
         removedAt: _getRandRemovedAt(),
-        from: _getRandFrom(),
-        to: _getRandTo(),
+        from: _getRandFrom(randTo),
+        to: randTo,
     }
 }
 
@@ -146,9 +157,9 @@ function _getRandRemovedAt() {
 }
 
 function _getRandTo() {
-    return Math.random() < 0.2 ? utilService.makeRandMail() : loggedInUser.email
+    return Math.random() < 0.4 ? utilService.makeRandMail() : loggedInUser.email
 }
 
-function _getRandFrom() {
-    return Math.random() > 0.2 ? utilService.makeRandMail() : loggedInUser.email
+function _getRandFrom(randTo) {
+    return randTo === loggedInUser.email ? utilService.makeRandMail() : loggedInUser.email
 }

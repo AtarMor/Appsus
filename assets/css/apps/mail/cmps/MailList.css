@@ -1,6 +1,7 @@
 .mail-list {
     background-color: white;
     border-radius: 20px;
+    min-height: 400px;
 }
 
 .mail-list li:not(:last-child) {
@@ -36,8 +37,41 @@
     font-weight: lighter;
 }
 
-img.arrow {
+.sort-list img.arrow {
     display: inline;
     height: 10px;
     margin-inline-end: .3em;
 }
+
+.mail-list .empty-folder-msg {
+    padding-block-end: 1em;
+    text-align: center;
+    font-weight: lighter;
+}
+
+.mail-list .loader {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+    margin:15px auto;
+    position: relative;
+    color: var(--mail-color2);
+    box-sizing: border-box;
+    animation: animLoader 1s linear infinite alternate;
+  }
+  
+  @keyframes animLoader {
+    0% {
+      box-shadow: -38px -6px, -14px 6px,  14px -6px;
+    }
+    33% {
+      box-shadow: -38px 6px, -14px -6px,  14px 6px;
+    }
+    66% {
+      box-shadow: -38px -6px, -14px 6px, 14px -6px;
+    }
+    100% {
+      box-shadow: -38px 6px, -14px -6px, 14px 6px;
+    }
+  }
