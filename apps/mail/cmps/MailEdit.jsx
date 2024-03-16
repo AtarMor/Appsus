@@ -1,12 +1,32 @@
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 const { useParams } = ReactRouter
 
 import { mailService } from "../services/mail.service.js"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 
-export function MailEdit({ onCloseMailEdit, isNew=false }) {
+export function MailEdit({ onCloseMailEdit, isNew = false }) {
     const [mailToEdit, setMailToEdit] = useState(mailService.getEmptyMail())
     const { mailId } = useParams()
+    const timeoutRef = useRef(null)
+    const [timer, setTimer] = useState(0)
+
+    useEffect(() => {
+        if (isNew) mailService.save(mailToEdit)
+            .then(newMail => {
+                setMailToEdit(newMail)
+            })
+    }, [])
+
+    useEffect(() => {
+        timeoutRef.current = setTimeout(() => {
+            if (mailToEdit.id) mailService.save(mailToEdit)
+            setTimer(timer + 1)
+        }, 5000)
+        return () => {
+            clearTimeout(timeoutRef)
+            timeoutRef.current = null
+        }
+    }, [timer])
 
     useEffect(() => {
         if (mailId && !isNew) loadMail()
@@ -23,9 +43,8 @@ export function MailEdit({ onCloseMailEdit, isNew=false }) {
     function onSendMail(ev) {
         ev.preventDefault()
 
-        mailService.save(mailToEdit)
+        mailService.save({ ...mailToEdit, sentAt: Date.now() })
             .then(() => {
-                console.log('saved:')
                 onCloseMailEdit()
                 showSuccessMsg('Mail sended successfully')
             })
@@ -37,7 +56,7 @@ export function MailEdit({ onCloseMailEdit, isNew=false }) {
 
     function handleChange({ target }) {
         let { value, name: field } = target
-        setMailToEdit(prevMail => ({ ...prevMail, [field]: value, sentAt: Date.now() }))
+        setMailToEdit(prevMail => ({ ...prevMail, [field]: value }))
     }
 
     const { to, subject, body } = mailToEdit
@@ -81,5 +100,4 @@ export function MailEdit({ onCloseMailEdit, isNew=false }) {
             <button className="send-btn">Send</button>
         </form>
     </section>
-
 }
