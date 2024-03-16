@@ -3,8 +3,8 @@
     grid-template-rows: 1fr auto 3fr;
     justify-content: center;
     align-items: center;
-    height: 100svh;
     gap: 20px;
+    height: 100svh;
     text-align: center;
 }
 

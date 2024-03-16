@@ -7,15 +7,14 @@
 
 @import './basics/base.css';
 @import './basics/helpers.css';
-/* @import './basics/layout.css'; */
 
 /* Views */
-@import './views/home.css';
+@import './views/homepage.css';
+@import './views/about.css';
+
 @import './apps/note/views/NoteIndex.css';
-
-/* @import './apps/note/views/NoteIndex.css'; */
-
 @import './apps/mail/views/MailIndex.css';
+
 @import './apps/mail/cmps/MailDetails.css';
 @import './apps/mail/views/main-screen.css';
 
