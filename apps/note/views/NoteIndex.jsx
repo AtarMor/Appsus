@@ -69,7 +69,7 @@ export function NoteIndex() {
 
   const { title } = filterBy
 
-  if (!notes) return <div>loading...</div>
+
 
   return (
     <React.Fragment>
@@ -81,25 +81,22 @@ export function NoteIndex() {
         <NoteFilter
           onSetFilter={onSetFilter}
           filterBy={{ title }} />
-
-        {/* <NoteSubFilter
-      filterBy={{ check }}
-      onSetFilter={onSetFilter}
-    /> */}
       </div>
       <section className="note-index">
-
-
         <div className="btns-container">
-          {/* <Link to="/note/edit"><button className='create-btn'>New Note</button></Link> */}
         </div>
-
-        <NoteList
-          notes={notes}
-          onUpdateNote={onUpdateNote}
-          setNotes={setNotes}
-          loadNotes={loadNotes}
-        />
+        {!notes ? (
+          <div className="loading flex justify-center">
+            <img src="/assets/img/loading.gif" alt="loading" />
+          </div>
+        ) : (
+          <NoteList
+            notes={notes}
+            onUpdateNote={onUpdateNote}
+            setNotes={setNotes}
+            loadNotes={loadNotes}
+          />
+        )}
       </section>
     </React.Fragment>)
 }
