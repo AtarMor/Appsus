@@ -79,7 +79,7 @@
 @media (width>550px) {
     .mail-edit {
         position: absolute;
-        right: 20px;
+        right: 40px;
         width: 400px;
         height: 400px;
         box-shadow:

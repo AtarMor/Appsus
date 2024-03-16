@@ -52,8 +52,6 @@
 
 /* Medium */
 @media (width > 650px) {
-    
-
     .mail-index {
         display: grid;
         grid-template-columns: 200px 1fr;
