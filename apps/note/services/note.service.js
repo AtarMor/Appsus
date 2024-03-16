@@ -20,7 +20,7 @@ const notes = [
     isPinned: false,
     info: {
       url: 'https://www.shutterstock.com/image-photo/two-dogs-smile-260nw-684918079.jpg',
-      title: 'Bobi and Me'
+      title: ''
     },
     style: {
       backgroundColor: '#faafa8'
