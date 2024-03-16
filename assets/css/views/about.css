@@ -1,0 +1,105 @@
+.about {
+    display: grid;
+    margin-block: 20px;
+    grid-template-columns: 1fr 1fr;
+    margin-inline: 10px;
+
+}
+
+.about-us-header {
+    grid-area: 1/1/2/3;
+    font-size: 1.5rem;
+}
+
+.welcome-p {
+    grid-area: 2/1/3/-1
+}
+
+.mission-header {
+    grid-area: 3/1/4/-1
+}
+
+.mission-p {
+    grid-area: 4/1/5/-1
+}
+
+.about img {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    justify-self: center;
+    margin-block-end: 5px;
+}
+
+.about h3 {
+    justify-self: center;
+    font-weight: lighter;
+}
+
+
+@media (width > 650px) {
+
+
+    .app {
+        display: grid
+    }
+
+    .about {
+        justify-self: center;
+        max-width: 700px;
+        grid-template-columns: 20px repeat(3, auto) 20px;
+        grid-template-areas:
+            ". header header header ."
+            ". p1 p1 img1 ."
+            ". . . name1 ."
+            ". . h2 h2 ."
+            ". img2 p2 p2 ."
+            ". name2 . . ."
+        ;
+        margin-block: 30px;
+        column-gap: 20px;
+        font-size: 0.875rem;
+        line-height: 1.4em;
+        align-items: center;
+    }
+
+    .about-us-header {
+        grid-area: header;
+        font-size: 1.8rem;
+    }
+
+    .welcome-p {
+        grid-area: p1;
+    }
+
+    .atar-img {
+        grid-area: img1;
+    }
+
+    .atar-name {
+        grid-area: name1;
+    }
+
+    .mark-img {
+        grid-area: img2;
+    }
+
+    .mark-name {
+        grid-area: name2;
+    }
+
+    .mission-header {
+        grid-area: h2;
+        margin-block-start: 20px;
+    }
+
+    .mission-p {
+        grid-area: p2;
+    }
+
+    .about img {
+        width: 200px;
+        height: 200px;
+        justify-self: start;
+    }
+}
