@@ -1,17 +1,18 @@
 .app-header {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
     padding: 1em;
 }
 
-nav a {
-    padding: 0.4em 0.6em;
-    /* margin: .5em; */
+.app-header logo {
+    font-size: 1.3rem;
+    color: var(--logo-color1);
+    padding-inline-start: 0.5em
 }
 
-nav a:last-child {
-    padding-inline-end: 0;
+nav a {
+    padding: 0.4em 0.6em;
 }
 
 nav a:hover {
@@ -20,8 +21,7 @@ nav a:hover {
 }
 
 nav a.active {
-    color: var(--mail-color4);
-    font-weight: bold;
+    color: var(--logo-color1);
 }
 
 @media (width > 650px) {

@@ -1,6 +1,12 @@
 :root {
     --main-bg-color: #f6f8fc;
 
+    /* Logo colors */
+    --logo-color1: #4285f4;
+    --logo-color2: #ea4336;
+    --logo-color3: #fbbd05;
+    --logo-color4: #34a853;
+
     /* Desktop mail */
     --mail-color1: #eaf1fb;
     --mail-color11: #f2f6fc;
