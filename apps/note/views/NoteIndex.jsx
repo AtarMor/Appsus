@@ -87,7 +87,7 @@ export function NoteIndex() {
         </div>
         {!notes ? (
           <div className="loading flex justify-center">
-            <img src="/assets/img/loading.gif" alt="loading" />
+            <img src="assets/img/loading.gif" alt="loading" />
           </div>
         ) : (
           <NoteList
