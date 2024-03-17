@@ -8,6 +8,7 @@ export function MailEdit({ onCloseMailEdit, isNew = false }) {
     const [mailToEdit, setMailToEdit] = useState(mailService.getEmptyMail())
     const { mailId } = useParams()
     const timeoutRef = useRef(null)
+    const isSent = useRef(false)
     const [timer, setTimer] = useState(0)
 
     useEffect(() => {
@@ -22,7 +23,7 @@ export function MailEdit({ onCloseMailEdit, isNew = false }) {
 
     useEffect(() => {
         timeoutRef.current = setTimeout(() => {
-            if (mailToEdit.id) mailService.save(mailToEdit)
+            if (mailToEdit.id && !isSent.current) mailService.save(mailToEdit)
             setTimer(timer + 1)
         }, 5000)
         return () => {
@@ -45,11 +46,13 @@ export function MailEdit({ onCloseMailEdit, isNew = false }) {
 
     function onSendMail(ev) {
         ev.preventDefault()
+        isSent.current = true
 
         mailService.save({ ...mailToEdit, sentAt: Date.now() })
-            .then(() => {
+            .then((savedMail) => {
+                setMailToEdit(savedMail)
                 onCloseMailEdit()
-                showSuccessMsg('Mail sended successfully')
+                showSuccessMsg('Mail sent successfully')
             })
             .catch(err => {
                 console.log('Had issues sending mail', err)

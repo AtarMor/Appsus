@@ -78,7 +78,7 @@ export function MailIndex() {
 
     function onCloseMailEdit() {
         setIsMailEdit(false)
-        showSuccessMsg('Your draft mail was saved')
+        showSuccessMsg('A draft was saved')
     }
 
     function onMailSelect(mailId) {
